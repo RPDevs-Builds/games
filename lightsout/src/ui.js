@@ -195,26 +195,26 @@ export class LightsOutUI {
   }
 
   updateModeUI() {
-    if (this.currentMode === 'campaign') {
-      this.levelSelectorContainer.style.display = 'flex';
-      this.sizeSelector.parentElement.style.display = 'none';
-      this.diffSelector.parentElement.style.display = 'none';
-      this.btnShare.style.display = 'none';
-    } else if (this.currentMode === 'daily') {
-      this.levelSelectorContainer.style.display = 'none';
-      this.sizeSelector.parentElement.style.display = 'none';
-      this.diffSelector.parentElement.style.display = 'none';
-      this.btnShare.style.display = 'inline-flex';
-    } else if (this.currentMode === 'custom') {
-      this.levelSelectorContainer.style.display = 'none';
-      this.sizeSelector.parentElement.style.display = 'flex';
-      this.diffSelector.parentElement.style.display = 'none';
-      this.btnShare.style.display = 'inline-flex';
-    } else {
-      this.levelSelectorContainer.style.display = 'none';
-      this.sizeSelector.parentElement.style.display = 'flex';
-      this.diffSelector.parentElement.style.display = 'flex';
-      this.btnShare.style.display = 'inline-flex';
+    const isCampaign = this.currentMode === 'campaign';
+    const isDaily = this.currentMode === 'daily';
+    const isCustom = this.currentMode === 'custom';
+
+    if (this.levelSelectorContainer) {
+      this.levelSelectorContainer.style.display = isCampaign ? 'flex' : 'none';
+    }
+    if (this.sizeSelector && this.sizeSelector.parentElement) {
+      this.sizeSelector.parentElement.style.display = (isCampaign || isDaily) ? 'none' : 'flex';
+    }
+    if (this.diffSelector && this.diffSelector.parentElement) {
+      this.diffSelector.parentElement.style.display = (isCampaign || isDaily || isCustom) ? 'none' : 'flex';
+    }
+    if (this.btnShare) {
+      const parent = this.btnShare.parentElement;
+      if (parent && parent.classList.contains('select-wrapper')) {
+        parent.style.display = isCampaign ? 'none' : 'flex';
+      } else {
+        this.btnShare.style.display = isCampaign ? 'none' : 'inline-flex';
+      }
     }
   }
 

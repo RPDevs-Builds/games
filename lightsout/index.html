@@ -70,13 +70,18 @@
     <!-- Configuration Selectors -->
     <div class="control-bar">
       <div class="selector-group">
-        <select id="mode-selector" class="styled-select" aria-label="Game Mode">
-          <option value="random">🎲 Random</option>
-          <option value="daily">📅 Daily</option>
-          <option value="campaign">⭐ Campaign</option>
-          <option value="custom">🛠️ Editor</option>
-        </select>
-        <div>
+        <div class="select-wrapper">
+          <select id="mode-selector" class="styled-select" aria-label="Game Mode">
+            <option value="random">🎲 Random</option>
+            <option value="daily">📅 Daily</option>
+            <option value="campaign">⭐ Campaign</option>
+            <option value="custom">🛠️ Editor</option>
+          </select>
+        </div>
+        <div id="campaign-level-container" class="select-wrapper" style="display: none;">
+          <select id="campaign-level-select" class="styled-select" aria-label="Campaign Level"></select>
+        </div>
+        <div class="select-wrapper">
           <select id="size-selector" class="styled-select" aria-label="Grid Size">
             <option value="3x3">3×3 Grid</option>
             <option value="4x4">4×4 Grid</option>
@@ -84,26 +89,26 @@
             <option value="6x6">6×6 Expert</option>
           </select>
         </div>
-        <div>
+        <div class="select-wrapper">
           <select id="difficulty-selector" class="styled-select" aria-label="Difficulty">
             <option value="easy">Easy (4)</option>
             <option value="medium" selected>Medium (8)</option>
             <option value="hard">Hard (14)</option>
           </select>
         </div>
-        <div>
+        <div class="select-wrapper">
           <select id="target-selector" class="styled-select" aria-label="Target Goal">
             <option value="off" selected>Goal: Lights Out</option>
             <option value="on">Goal: Lit-Out</option>
           </select>
         </div>
-        <button id="btn-wrap" class="styled-select" style="font-size: 0.75rem;" title="Toggle Torus Wrap-around topology">🌐 Wrap: Off</button>
+        <div class="select-wrapper">
+          <button id="btn-wrap" class="styled-select" title="Toggle Torus Wrap-around topology">🌐 Wrap: Off</button>
+        </div>
+        <div class="select-wrapper">
+          <button id="btn-share" class="styled-select" title="Share current board puzzle URL">🔗 Share</button>
+        </div>
       </div>
-      <div id="campaign-level-container" class="selector-group" style="display: none;">
-        <select id="campaign-level-select" class="styled-select" aria-label="Campaign Level"></select>
-
-      </div>
-      <button id="btn-share" class="icon-btn" title="Share current board puzzle URL">🔗 Share</button>
     </div>
 
     <!-- Interactive Grid Well -->

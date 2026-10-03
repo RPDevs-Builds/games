@@ -232,32 +232,60 @@ body {
 /* Control Bar */
 .control-bar {
   display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  align-items: center;
-  justify-content: space-between;
+  width: 100%;
 }
 
 .selector-group {
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
   gap: 6px;
-  align-items: center;
+  width: 100%;
+}
+
+@media (min-width: 600px) {
+  .selector-group {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.select-wrapper {
+  display: flex;
+  width: 100%;
+  min-width: 0;
 }
 
 .styled-select {
+  width: 100%;
+  min-width: 0;
+  height: 36px;
   background: #1a1e27;
   color: var(--text-main);
   border: 1px solid #363d4e;
   border-radius: var(--radius-sm);
-  padding: 5px 8px;
+  padding: 4px 8px;
   font-size: 0.75rem;
   font-family: var(--font-sans);
   cursor: pointer;
   outline: none;
+  box-sizing: border-box;
+  text-align: center;
+  text-align-last: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  transition: border-color 0.2s, background-color 0.2s;
 }
 
-.styled-select:focus-visible {
+.styled-select:focus-visible,
+.styled-select:hover {
   border-color: var(--accent-gold);
+}
+
+button.styled-select {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  line-height: normal;
 }
 
 /* Game Grid Well */
@@ -639,13 +667,15 @@ kbd {
     padding-top: 4px;
   }
 
-  .mode-selectors {
-    gap: 4px;
+  .selector-group {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 5px;
   }
 
-  .mode-select {
-    padding: 5px 6px;
+  .styled-select {
+    padding: 3px 6px;
     font-size: 0.72rem;
+    height: 34px;
   }
 
   .lights-grid {
