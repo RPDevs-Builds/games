@@ -56,9 +56,9 @@ This catalog tracks all games in the RPDevs Games base, their release status, pl
 
 ---
 
-## 📦 Automated Release Packages
+## 📦 Automated Release Packages (`dist/`)
 
-Pre-built web distribution zip archives ready for instant upload to [itch.io](https://itch.io) or static hosting are located in [`/mnt/sharedroot/projects/games/dist/`](./dist):
+### 1. Web & itch.io Standalone Archives (`dist/`)
 - `dist/lightsout_web_release.zip`
 - `dist/snake_web_release.zip`
 - `dist/simon_web_release.zip`
@@ -66,6 +66,34 @@ Pre-built web distribution zip archives ready for instant upload to [itch.io](ht
 - `dist/2048_web_release.zip`
 - `dist/dotsandboxes_web_release.zip`
 - `dist/arcade_portal_release.zip` (The full arcade suite)
+
+### 2. Standalone Android APKs (`dist/apk/`)
+- `dist/apk/lightsout.apk`
+- `dist/apk/snake.apk`
+- `dist/apk/simon.apk`
+- `dist/apk/minesweeper.apk`
+- `dist/apk/2048.apk`
+- `dist/apk/dotsandboxes.apk`
+- `dist/apk/portal.apk` (All 6 games in master arcade container)
+
+### 3. Native Linux Desktop Bundles (`dist/desktop/`)
+- Portable Archives (`.tar.gz`):
+  - `dist/desktop/rpdevs-lightsout-linux-x86_64.tar.gz`
+  - `dist/desktop/rpdevs-snake-linux-x86_64.tar.gz`
+  - `dist/desktop/rpdevs-simon-linux-x86_64.tar.gz`
+  - `dist/desktop/rpdevs-minesweeper-linux-x86_64.tar.gz`
+  - `dist/desktop/rpdevs-2048-linux-x86_64.tar.gz`
+  - `dist/desktop/rpdevs-dotsandboxes-linux-x86_64.tar.gz`
+  - `dist/desktop/rpdevs-arcade-linux-x86_64.tar.gz`
+- Standard Debian Packages (`.deb`):
+  - `dist/desktop/rpdevs-lightsout_1.0.0_amd64.deb`
+  - `dist/desktop/rpdevs-snake_1.0.0_amd64.deb`
+  - `dist/desktop/rpdevs-simon_1.0.0_amd64.deb`
+  - `dist/desktop/rpdevs-minesweeper_1.0.0_amd64.deb`
+  - `dist/desktop/rpdevs-2048_1.0.0_amd64.deb`
+  - `dist/desktop/rpdevs-dotsandboxes_1.0.0_amd64.deb`
+  - `dist/desktop/rpdevs-arcade_1.0.0_amd64.deb`
+
 
 
 Run `/home/llmuser/projects/.scripts/shell/package_games.sh all` at any time to re-bundle all packages.

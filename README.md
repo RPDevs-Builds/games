@@ -16,9 +16,13 @@ All games in this repository follow strict cross-platform design tenets:
    - **Modern Web**: Drop onto any static host (GitHub Pages, Netlify, Cloudflare Pages, S3).
    - **Progressive Web App (PWA)**: Full offline service worker caching and Web App Manifests (`manifest.json`) across the entire suite.
    - **Game Distribution Portals**: Self-contained zip packages for [itch.io](https://itch.io) in `dist/`.
+   - **Native Android APKs**: Direct SDK builds (zero Gradle/npm bloat) signed and aligned in `dist/apk/`.
+   - **Native Linux Desktop**: Standalone WebKitGTK desktop packages (`.tar.gz` and `.deb`) in `dist/desktop/`.
    - **Terminal / CLI**: Direct console-playable versions for SSH sessions and headless servers.
-3. **Automated itch.io / Web Packaging**:
-   - Run `/home/llmuser/projects/.scripts/shell/package_games.sh all` to instantly build standalone release zips in `dist/`.
+3. **Packaging & Distribution Scripts**:
+   - Web / itch.io: `/home/llmuser/projects/.scripts/shell/package_games.sh all`
+   - Android APKs: `/home/llmuser/projects/.scripts/shell/build_android_apk.sh all`
+   - Linux Desktop: `/home/llmuser/projects/.scripts/shell/build_desktop_app.sh all`
 4. **CI/CD Deployment**:
    - Automatic GitHub Pages publishing via `.github/workflows/deploy.yml`.
 
@@ -28,13 +32,13 @@ All games in this repository follow strict cross-platform design tenets:
 
 | Game | Directory | Type | Rules | Status | Platforms |
 | :--- | :--- | :--- | :--- | :--- | :--- |
-| **Master Arcade** | [`/`](./) | Central Cabinet Launcher | - | 🟢 Production | Web, PWA |
-| **Lights Out** | [`lightsout/`](./lightsout) | Binary Logic / 90s Handheld | [`RULES.md`](./lightsout/RULES.md) | 🟢 Production | Web, PWA, Terminal CLI |
-| **Retro Snake** | [`snake/`](./snake) | Nokia 3310 Arcade | [`RULES.md`](./snake/RULES.md) | 🟢 Production | Web, PWA, Terminal CLI |
-| **Simon** | [`simon/`](./simon) | 1978 Handheld Memory | [`RULES.md`](./simon/RULES.md) | 🟢 Production | Web, PWA, Terminal CLI |
-| **Minesweeper** | [`minesweeper/`](./minesweeper) | Windows 95 Deduction | [`RULES.md`](./minesweeper/RULES.md) | 🟢 Production | Web, PWA, Terminal CLI |
-| **2048** | [`2048/`](./2048) | Sliding Number Puzzle | [`RULES.md`](./2048/RULES.md) | 🟢 Production | Web, PWA, Terminal CLI |
-| **Dots & Boxes** | [`dotsandboxes/`](./dotsandboxes) | Combinatorial Strategy | [`RULES.md`](./dotsandboxes/RULES.md) | 🟢 Production | Web, PWA, Terminal CLI |
+| **Master Arcade** | [`/`](./) | Central Cabinet Launcher | - | 🟢 Production | Web, PWA, Android, Desktop |
+| **Lights Out** | [`lightsout/`](./lightsout) | Binary Logic / 90s Handheld | [`RULES.md`](./lightsout/RULES.md) | 🟢 Production | Web, PWA, CLI, Android, Desktop |
+| **Retro Snake** | [`snake/`](./snake) | Nokia 3310 Arcade | [`RULES.md`](./snake/RULES.md) | 🟢 Production | Web, PWA, CLI, Android, Desktop |
+| **Simon** | [`simon/`](./simon) | 1978 Handheld Memory | [`RULES.md`](./simon/RULES.md) | 🟢 Production | Web, PWA, CLI, Android, Desktop |
+| **Minesweeper** | [`minesweeper/`](./minesweeper) | Windows 95 Deduction | [`RULES.md`](./minesweeper/RULES.md) | 🟢 Production | Web, PWA, CLI, Android, Desktop |
+| **2048** | [`2048/`](./2048) | Sliding Number Puzzle | [`RULES.md`](./2048/RULES.md) | 🟢 Production | Web, PWA, CLI, Android, Desktop |
+| **Dots & Boxes** | [`dotsandboxes/`](./dotsandboxes) | Combinatorial Strategy | [`RULES.md`](./dotsandboxes/RULES.md) | 🟢 Production | Web, PWA, CLI, Android, Desktop |
 
 ---
 
@@ -63,4 +67,27 @@ python3 /mnt/sharedroot/projects/games/minesweeper/test/test_minesweeper.py
 python3 /mnt/sharedroot/projects/games/2048/test/test_2048.py
 python3 /mnt/sharedroot/projects/games/dotsandboxes/test/test_dotsandboxes.py
 ```
+
+### 📱 Build Native Android APKs
+Direct SDK compilation with zero Gradle or npm overhead:
+```bash
+# Build a single game APK
+/home/llmuser/projects/.scripts/shell/build_android_apk.sh dotsandboxes
+
+# Build the complete suite + master arcade hub APKs
+/home/llmuser/projects/.scripts/shell/build_android_apk.sh all
+```
+Output files are written to `dist/apk/` (e.g. `dist/apk/portal.apk`).
+
+### 🖥️ Build Standalone Linux Desktop Apps
+Direct WebKitGTK desktop bundles (portable tarballs and standard `.deb` packages):
+```bash
+# Build a single game desktop bundle
+/home/llmuser/projects/.scripts/shell/build_desktop_app.sh lightsout
+
+# Build all games + master arcade hub desktop packages
+/home/llmuser/projects/.scripts/shell/build_desktop_app.sh all
+```
+Output files are written to `dist/desktop/` (e.g. `rpdevs-lightsout_1.0.0_amd64.deb`).
+
 
