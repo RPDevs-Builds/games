@@ -66,6 +66,37 @@ export class SnakeUI {
       this.audio.muted = !this.audio.muted;
       e.target.textContent = this.audio.muted ? '🔇 Sound' : '🔊 Sound';
     };
+
+    // Touch swipe gesture controls on LCD screen
+    let touchStartX = 0;
+    let touchStartY = 0;
+    const screenEl = document.querySelector('.lcd-screen');
+    if (screenEl) {
+      screenEl.addEventListener('touchstart', (e) => {
+        if (e.touches && e.touches[0]) {
+          touchStartX = e.touches[0].clientX;
+          touchStartY = e.touches[0].clientY;
+        }
+      }, { passive: true });
+
+      screenEl.addEventListener('touchend', (e) => {
+        if (!e.changedTouches || !e.changedTouches[0]) return;
+        const dx = e.changedTouches[0].clientX - touchStartX;
+        const dy = e.changedTouches[0].clientY - touchStartY;
+        const minSwipe = 20;
+        if (Math.abs(dx) > Math.abs(dy)) {
+          if (Math.abs(dx) >= minSwipe) {
+            const dir = dx > 0 ? DIRECTION.RIGHT : DIRECTION.LEFT;
+            if (this.engine.setDirection(dir)) this.audio.playTurn();
+          }
+        } else {
+          if (Math.abs(dy) >= minSwipe) {
+            const dir = dy > 0 ? DIRECTION.DOWN : DIRECTION.UP;
+            if (this.engine.setDirection(dir)) this.audio.playTurn();
+          }
+        }
+      }, { passive: true });
+    }
   }
 
   start() {

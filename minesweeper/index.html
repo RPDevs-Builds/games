@@ -26,15 +26,17 @@
     </div>
 
     <!-- Minefield -->
-    <div id="minefield" class="minefield"></div>
+    <div class="minefield-container">
+      <div id="minefield" class="minefield"></div>
+    </div>
 
     <div class="difficulty-bar">
-      <select id="select-diff" style="font-size: 0.75rem;">
-        <option value="beginner" selected>Beginner (9x9, 10)</option>
-        <option value="intermediate">Intermediate (16x16, 40)</option>
-        <option value="expert">Expert (16x30, 99)</option>
+      <select id="select-diff" class="styled-diff">
+        <option value="beginner" selected>Beginner (9x9)</option>
+        <option value="intermediate">Intermediate (16x16)</option>
+        <option value="expert">Expert (16x30)</option>
       </select>
-      <button id="btn-flag-mode" style="font-size: 0.75rem; cursor: pointer;">🚩 Flag: OFF</button>
+      <button id="btn-flag-mode" class="styled-flag-btn">🚩 Flag: OFF</button>
     </div>
   </div>
 

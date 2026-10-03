@@ -71,13 +71,16 @@ export class MinesweeperUI {
 
   render() {
     this.boardEl.innerHTML = '';
-    this.boardEl.style.gridTemplateRows = `repeat(${this.engine.rows}, 24px)`;
-    this.boardEl.style.gridTemplateColumns = `repeat(${this.engine.cols}, 24px)`;
+    const cellSize = this.engine.cols <= 9 ? 30 : (this.engine.cols <= 16 ? 24 : 22);
+    this.boardEl.style.gridTemplateRows = `repeat(${this.engine.rows}, ${cellSize}px)`;
+    this.boardEl.style.gridTemplateColumns = `repeat(${this.engine.cols}, ${cellSize}px)`;
 
     for (let r = 0; r < this.engine.rows; r++) {
       for (let c = 0; c < this.engine.cols; c++) {
         const btn = document.createElement('button');
         btn.className = 'cell-btn';
+        btn.style.width = cellSize + 'px';
+        btn.style.height = cellSize + 'px';
         btn.dataset.r = r;
         btn.dataset.c = c;
 

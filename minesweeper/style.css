@@ -34,6 +34,7 @@ body {
   display: flex;
   flex-direction: column;
   gap: 6px;
+  max-width: 100%;
 }
 
 .win-titlebar {
@@ -100,13 +101,24 @@ body {
   border-color: var(--win-dark) var(--win-light) var(--win-light) var(--win-dark);
 }
 
-/* Minefield Grid */
-.minefield {
+/* Minefield Container & Grid */
+.minefield-container {
   border: 3px solid;
   border-color: var(--win-dark) var(--win-light) var(--win-light) var(--win-dark);
+  background: #7b7b7b;
+  max-width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
+  display: flex;
+  justify-content: center;
+}
+
+.minefield {
   display: grid;
   gap: 0;
   background: #7b7b7b;
+  margin: 0 auto;
 }
 
 .cell-btn {
@@ -123,6 +135,7 @@ body {
   cursor: pointer;
   outline: none;
   font-family: var(--font-mono);
+  box-sizing: border-box;
 }
 
 .cell-btn.revealed {
@@ -146,7 +159,51 @@ body {
 
 .difficulty-bar {
   display: flex;
+  gap: 6px;
   justify-content: space-between;
+  align-items: center;
   margin-top: 4px;
   font-size: 0.75rem;
+}
+
+.styled-diff {
+  flex: 1;
+  background: var(--win-bg);
+  border: 2px solid;
+  border-color: var(--win-light) var(--win-dark) var(--win-dark) var(--win-light);
+  font-family: inherit;
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 4px 6px;
+  outline: none;
+  cursor: pointer;
+}
+
+.styled-flag-btn {
+  background: var(--win-bg);
+  border: 2px solid;
+  border-color: var(--win-light) var(--win-dark) var(--win-dark) var(--win-light);
+  font-family: inherit;
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 4px 8px;
+  cursor: pointer;
+  outline: none;
+  white-space: nowrap;
+}
+
+.styled-flag-btn:active,
+.styled-diff:active {
+  border-color: var(--win-dark) var(--win-light) var(--win-light) var(--win-dark);
+}
+
+@media (max-width: 480px) {
+  body {
+    padding: max(12px, env(safe-area-inset-top, 12px)) 6px 16px;
+  }
+  .win-window {
+    width: 100%;
+    max-width: 100%;
+    padding: 4px;
+  }
 }

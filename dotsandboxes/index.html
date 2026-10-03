@@ -41,25 +41,21 @@
 
     <!-- Controls Selector -->
     <div class="controls-bar">
-      <div style="display: flex; gap: 6px;">
-        <select id="select-mode" class="styled-select" aria-label="Game Mode">
-          <option value="ai" selected>🤖 Vs Computer</option>
-          <option value="pvp">👥 2-Player Local</option>
-        </select>
-        <select id="select-diff" class="styled-select" aria-label="AI Difficulty">
-          <option value="easy">Easy</option>
-          <option value="medium" selected>Medium</option>
-          <option value="hard">Hard (Chain)</option>
-        </select>
-      </div>
-      <div>
-        <select id="select-size" class="styled-select" aria-label="Grid Size">
-          <option value="2x2">2×2 (3×3 Dots)</option>
-          <option value="3x3" selected>3×3 (4×4 Dots)</option>
-          <option value="4x4">4×4 (5×5 Dots)</option>
-          <option value="5x5">5×5 (6×6 Dots)</option>
-        </select>
-      </div>
+      <select id="select-mode" class="styled-select" aria-label="Game Mode">
+        <option value="ai" selected>🤖 Vs CPU</option>
+        <option value="pvp">👥 2-Player</option>
+      </select>
+      <select id="select-diff" class="styled-select" aria-label="AI Difficulty">
+        <option value="easy">Easy</option>
+        <option value="medium" selected>Medium</option>
+        <option value="hard">Hard (Chain)</option>
+      </select>
+      <select id="select-size" class="styled-select" aria-label="Grid Size">
+        <option value="2x2">2×2 (3×3 Dots)</option>
+        <option value="3x3" selected>3×3 (4×4 Dots)</option>
+        <option value="4x4">4×4 (5×5 Dots)</option>
+        <option value="5x5">5×5 (6×6 Dots)</option>
+      </select>
     </div>
 
     <!-- Interactive Blueprint Arena -->

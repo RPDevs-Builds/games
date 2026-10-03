@@ -28,11 +28,12 @@
 }
 
 body {
-  background: var(--bg-gradient);
+  background-color: #081322;
   background-image: 
+    radial-gradient(circle at 50% 25%, #102542 0%, #081322 100%),
     linear-gradient(var(--blueprint-grid) 1px, transparent 1px),
     linear-gradient(90deg, var(--blueprint-grid) 1px, transparent 1px);
-  background-size: 20px 20px;
+  background-size: 100% 100%, 20px 20px, 20px 20px;
   color: var(--text-main);
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   min-height: 100vh;
@@ -40,7 +41,7 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
-  padding: 20px 16px 40px;
+  padding: max(16px, env(safe-area-inset-top, 16px)) 16px 30px;
 }
 
 .game-shell {
@@ -157,21 +158,30 @@ body {
 
 /* Controls Bar */
 .controls-bar {
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
   gap: 8px;
-  justify-content: space-between;
+  width: 100%;
 }
 
 .styled-select {
+  width: 100%;
+  min-width: 0;
   background: #112239;
   border: 1px solid var(--border-color);
   color: #fff;
-  padding: 6px 10px;
+  padding: 6px 4px;
   border-radius: 6px;
-  font-size: 0.8rem;
+  font-size: 0.75rem;
+  font-weight: 600;
   cursor: pointer;
   outline: none;
+  box-sizing: border-box;
+  text-align: center;
+  text-align-last: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .styled-select:focus {
@@ -304,7 +314,7 @@ body {
 
 @media (max-width: 480px) {
   body {
-    padding: 8px 6px 20px;
+    padding: max(18px, env(safe-area-inset-top, 18px)) 10px 24px;
   }
   .game-shell {
     gap: 10px;
