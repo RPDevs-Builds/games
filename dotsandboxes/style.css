@@ -301,3 +301,32 @@ body {
   border-color: var(--p1-color);
   color: #fff;
 }
+
+@media (max-width: 480px) {
+  body {
+    padding: 8px 6px 20px;
+  }
+  .game-shell {
+    gap: 10px;
+  }
+  .game-title {
+    font-size: 1.15rem;
+  }
+  .board-arena {
+    padding: 10px;
+    border-radius: 12px;
+  }
+  .scoreboard {
+    gap: 8px;
+  }
+  .player-card {
+    padding: 8px 10px;
+  }
+  .player-score {
+    font-size: 1.4rem;
+  }
+  .action-btn {
+    padding: 6px 12px;
+    font-size: 0.78rem;
+  }
+}

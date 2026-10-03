@@ -115,7 +115,10 @@ class ArcadePortal {
       card.innerHTML = `
         <div class="card-header">
           <span class="card-icon">${game.icon}</span>
-          <span class="year-badge">${game.year}</span>
+          <div class="card-meta">
+            <a href="${game.rulesUrl}" class="mobile-rules-btn" title="Rules">📖</a>
+            <span class="year-badge">${game.year}</span>
+          </div>
         </div>
         <div class="card-body">
           <h2 class="game-title">${game.title}</h2>
@@ -125,7 +128,7 @@ class ArcadePortal {
           </div>
         </div>
         <div class="card-footer">
-          <a href="${game.rulesUrl}" class="rules-link" title="Read Rules">📖 Rules</a>
+          <a href="${game.rulesUrl}" class="rules-link desktop-only" title="Read Rules">📖 Rules</a>
           <a href="${game.url}" class="launch-btn">PLAY NOW 🎮</a>
         </div>
       `;

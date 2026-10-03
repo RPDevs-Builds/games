@@ -260,6 +260,24 @@ body {
   text-decoration: underline;
 }
 
+.mobile-rules-btn {
+  display: none;
+  font-size: 0.85rem;
+  text-decoration: none;
+  background: rgba(255, 255, 255, 0.08);
+  padding: 2px 6px;
+  border-radius: 4px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.mobile-rules-btn:hover {
+  background: rgba(255, 255, 255, 0.16);
+}
+
+.desktop-only {
+  display: inline-block;
+}
+
 /* Footer */
 .portal-footer {
   margin-top: 24px;
@@ -269,4 +287,154 @@ body {
   display: flex;
   flex-direction: column;
   gap: 6px;
+}
+
+/* ==========================================================================
+   Mobile & Small Screen Optimizations (e.g. Galaxy A54, iPhones, Pixel)
+   ========================================================================== */
+@media (max-width: 640px) {
+  body {
+    padding: 10px 8px 24px;
+  }
+
+  .portal-container {
+    gap: 10px;
+  }
+
+  /* Compact Marquee Header */
+  .arcade-marquee {
+    padding: 10px 12px;
+    border-width: 2px;
+    border-radius: 12px;
+  }
+
+  .marquee-glow {
+    font-size: 1.25rem;
+    letter-spacing: 1px;
+    gap: 6px;
+  }
+
+  .marquee-subtitle {
+    font-size: 0.62rem;
+    letter-spacing: 0.5px;
+    margin-top: 3px;
+  }
+
+  .coin-badge {
+    font-size: 0.62rem;
+    padding: 2px 6px;
+    margin-top: 4px;
+  }
+
+  /* Streamlined Filter & Search */
+  .filter-bar {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 8px;
+  }
+
+  .filter-buttons {
+    overflow-x: auto;
+    white-space: nowrap;
+    padding-bottom: 2px;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    gap: 6px;
+  }
+
+  .filter-buttons::-webkit-scrollbar {
+    display: none;
+  }
+
+  .filter-btn {
+    flex-shrink: 0;
+    padding: 5px 10px;
+    font-size: 0.72rem;
+  }
+
+  .search-input {
+    width: 100%;
+    padding: 7px 12px;
+    font-size: 0.8rem;
+  }
+
+  /* 2-Column High-Density Game Tiles */
+  .games-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+  }
+
+  .game-card {
+    border-radius: 10px;
+    border-width: 1.5px;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4);
+  }
+
+  .card-header {
+    padding: 8px 10px 4px;
+  }
+
+  .card-icon {
+    font-size: 1.6rem;
+  }
+
+  .card-meta {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+
+  .mobile-rules-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.75rem;
+    padding: 2px 4px;
+  }
+
+  .year-badge {
+    font-size: 0.6rem;
+    padding: 1px 4px;
+  }
+
+  .card-body {
+    padding: 0 10px 6px;
+  }
+
+  .game-title {
+    font-size: 0.95rem;
+    margin-bottom: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  /* Hide long body text on mobile to ensure all 6 games populate without massive scrolling */
+  .game-desc,
+  .card-tags,
+  .desktop-only {
+    display: none;
+  }
+
+  .card-footer {
+    padding: 6px 10px 10px;
+    background: transparent;
+    border-top: none;
+  }
+
+  .launch-btn {
+    width: 100%;
+    justify-content: center;
+    padding: 7px 8px;
+    font-size: 0.78rem;
+    font-weight: 800;
+    border-radius: 6px;
+    gap: 4px;
+  }
+
+  .portal-footer {
+    margin-top: 14px;
+    font-size: 0.68rem;
+    gap: 4px;
+  }
 }

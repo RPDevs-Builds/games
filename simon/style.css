@@ -34,8 +34,8 @@ body {
 }
 
 .simon-disc {
-  width: 360px;
-  height: 360px;
+  width: clamp(280px, 86vw, 360px);
+  height: clamp(280px, 86vw, 360px);
   background: var(--simon-casing);
   border: 8px solid #000;
   border-radius: 50%;

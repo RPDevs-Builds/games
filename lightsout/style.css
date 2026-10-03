@@ -568,3 +568,122 @@ kbd {
   padding: 1px 5px;
   font-size: 0.7rem;
 }
+
+/* ==========================================================================
+   Mobile & Small Screen Optimizations (e.g. Galaxy A54, iPhones)
+   ========================================================================== */
+@media (max-width: 520px) {
+  body {
+    padding: 8px 6px 16px;
+  }
+
+  .app-header {
+    margin-bottom: 8px;
+  }
+
+  .brand-title {
+    font-size: 1rem;
+    letter-spacing: 0.5px;
+  }
+
+  .brand-badge {
+    display: none;
+  }
+
+  .quick-actions {
+    gap: 4px;
+  }
+
+  .quick-actions .btn-text {
+    display: none;
+  }
+
+  .icon-btn {
+    padding: 5px 8px;
+    font-size: 0.85rem;
+  }
+
+  .handheld-console {
+    padding: 12px 12px 16px;
+    border-width: 3px;
+    border-radius: 16px;
+    gap: 10px;
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.6);
+  }
+
+  .console-model-badge {
+    font-size: 0.55rem;
+    letter-spacing: 0.5px;
+  }
+
+  .status-panel {
+    padding: 8px 10px;
+    border-radius: 8px;
+  }
+
+  .status-metrics {
+    gap: 10px;
+  }
+
+  .status-metric .metric-val {
+    font-size: 1.15rem;
+  }
+
+  .status-metric .metric-label {
+    font-size: 0.6rem;
+  }
+
+  .status-message {
+    font-size: 0.72rem;
+    margin-top: 4px;
+    padding-top: 4px;
+  }
+
+  .mode-selectors {
+    gap: 4px;
+  }
+
+  .mode-select {
+    padding: 5px 6px;
+    font-size: 0.72rem;
+  }
+
+  .lights-grid {
+    gap: 6px;
+  }
+
+  .light-btn {
+    width: clamp(44px, 13.5vw, 60px);
+    height: clamp(44px, 13.5vw, 60px);
+    border-radius: 10px;
+  }
+
+  .console-actions {
+    gap: 6px;
+  }
+
+  .action-btn {
+    padding: 7px 4px;
+    font-size: 0.72rem;
+    border-radius: 6px;
+  }
+
+  .action-icon {
+    font-size: 0.95rem;
+  }
+
+  .secondary-actions {
+    margin-top: 4px;
+    gap: 4px;
+  }
+
+  .sec-btn {
+    padding: 5px 8px;
+    font-size: 0.72rem;
+  }
+
+  .app-footer {
+    margin-top: 10px;
+    font-size: 0.65rem;
+  }
+}
