@@ -11,7 +11,7 @@ const GAMES_DATA = [
     category: 'logic',
     desc: 'The iconic Tiger Electronics handheld logic puzzle with built-in GF(2) Gaussian elimination solver, daily seed challenges, and retro audio.',
     tags: ['GF(2) Solver', 'PWA Offline', 'Terminal CLI', 'Handheld'],
-    url: './lightsout/',
+    url: './lightsout/index.html',
     rulesUrl: './lightsout/RULES.md'
   },
   {
@@ -22,7 +22,7 @@ const GAMES_DATA = [
     category: 'retro',
     desc: 'Classic Nokia 3310 green LCD monochrome snake. Reflexes, speed progression, piezoelectric sound synthesis, and touch D-pad.',
     tags: ['Nokia 3310', 'Reflexes', 'PWA Offline', 'Terminal CLI'],
-    url: './snake/',
+    url: './snake/index.html',
     rulesUrl: './snake/RULES.md'
   },
   {
@@ -33,7 +33,7 @@ const GAMES_DATA = [
     category: 'handheld',
     desc: 'Authentic 1978 Milton Bradley handheld electronic memory game with exact historical harmonic pitches (209Hz to 415Hz) and strict mode.',
     tags: ['1978 Classic', 'Acoustic Synthesis', 'Memory', 'PWA Offline'],
-    url: './simon/',
+    url: './simon/index.html',
     rulesUrl: './simon/RULES.md'
   },
   {
@@ -44,7 +44,7 @@ const GAMES_DATA = [
     category: 'logic',
     desc: 'Windows 95/98 classic with authentic grey bevels, digital LED timer, smiley face button, and guaranteed first-click safety.',
     tags: ['Windows 95', 'Deductive Logic', 'PWA Offline', 'Terminal CLI'],
-    url: './minesweeper/',
+    url: './minesweeper/index.html',
     rulesUrl: './minesweeper/RULES.md'
   },
   {
@@ -55,7 +55,7 @@ const GAMES_DATA = [
     category: 'logic',
     desc: 'Mathematical sliding number puzzle with smooth touch gestures, merge harmonics, undo support, and endless mode.',
     tags: ['Math Puzzle', 'Touch Gestures', 'PWA Offline', 'Terminal CLI'],
-    url: './2048/',
+    url: './2048/index.html',
     rulesUrl: './2048/RULES.md'
   },
   {
@@ -66,7 +66,7 @@ const GAMES_DATA = [
     category: 'logic',
     desc: 'Édouard Lucas 1889 mathematical strategy game with 3-tier AI (chain capture & double-cross), blueprint styling, and 2-player pass-and-play.',
     tags: ['Lucas 1889', 'Combinatorial Math', 'AI Opponent', 'PWA Offline', 'Terminal CLI'],
-    url: './dotsandboxes/',
+    url: './dotsandboxes/index.html',
     rulesUrl: './dotsandboxes/RULES.md'
   }
 ];
