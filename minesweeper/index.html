@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <title>Minesweeper - Windows 95 Edition</title>
+  <link rel="manifest" href="manifest.json">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="win-window">
+    <div class="win-titlebar">
+      <span>💣 Minesweeper</span>
+      <span style="font-size: 0.75rem; cursor: pointer;">✕</span>
+    </div>
+    <div class="win-menubar">
+      <span class="menu-item">Game</span>
+      <span class="menu-item">Help</span>
+    </div>
+
+    <!-- Dashboard -->
+    <div class="win-dashboard">
+      <div id="display-mines" class="digit-display">010</div>
+      <button id="btn-face" class="face-btn">🙂</button>
+      <div id="display-timer" class="digit-display">000</div>
+    </div>
+
+    <!-- Minefield -->
+    <div id="minefield" class="minefield"></div>
+
+    <div class="difficulty-bar">
+      <select id="select-diff" style="font-size: 0.75rem;">
+        <option value="beginner" selected>Beginner (9x9, 10)</option>
+        <option value="intermediate">Intermediate (16x16, 40)</option>
+        <option value="expert">Expert (16x30, 99)</option>
+      </select>
+      <button id="btn-flag-mode" style="font-size: 0.75rem; cursor: pointer;">🚩 Flag: OFF</button>
+    </div>
+  </div>
+
+  <script type="module">
+    import { MinesweeperUI } from './src/ui.js';
+    window.addEventListener('DOMContentLoaded', () => new MinesweeperUI());
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('./sw.js').catch(() => {});
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <title>RPDevs Retro Arcade - Multi-Platform Classic Games</title>
+  <meta name="description" content="A curated suite of zero-dependency retro handheld, logic, and arcade games engineered for multi-platform distribution and offline play.">
+  <link rel="manifest" href="manifest.json">
+  <link rel="stylesheet" href="portal.css">
+</head>
+<body>
+  <div class="portal-container">
+    <!-- Marquee Banner -->
+    <header class="arcade-marquee">
+      <h1 class="marquee-glow">
+        <span>🕹️</span> RPDevs Retro Arcade <span>🕹️</span>
+      </h1>
+      <p class="marquee-subtitle">ZERO DEPENDENCIES • 100% OFFLINE PWA • CROSS-PLATFORM</p>
+      <div class="coin-badge">★ FREE PLAY • INSERT COIN TO PLAY ★</div>
+    </header>
+
+    <!-- Filters & Search -->
+    <div class="filter-bar">
+      <div class="filter-buttons">
+        <button class="filter-btn active" data-filter="all">All Games (6)</button>
+        <button class="filter-btn" data-filter="logic">Logic & Puzzles</button>
+        <button class="filter-btn" data-filter="handheld">Handheld</button>
+        <button class="filter-btn" data-filter="retro">Arcade</button>
+      </div>
+      <input type="text" id="search-input" class="search-input" placeholder="Search games...">
+    </div>
+
+    <!-- Games Grid -->
+    <main id="games-grid" class="games-grid">
+      <!-- Populated dynamically by portal.js -->
+    </main>
+
+    <!-- Portal Footer -->
+    <footer class="portal-footer">
+      <div>RPDevs Games Base • Cross-Platform Web, Mobile, & Terminal Architecture</div>
+      <div>Zero Build Steps • Vanilla ES6 Modules & Web Audio API • 100% Offline</div>
+    </footer>
+  </div>
+
+  <script src="portal.js"></script>
+  <script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('./sw.js').catch(() => {});
+    }
+  </script>
+</body>
+</html>

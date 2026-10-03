@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <title>Dots and Boxes - La Pipopipette (1889)</title>
+  <meta name="description" content="Classic 1889 Dots and Boxes combinatorial strategy game with smart AI, blueprint aesthetic, and offline PWA support.">
+  <link rel="manifest" href="manifest.json">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="game-shell">
+    <!-- Header -->
+    <header class="header-bar">
+      <div class="title-group">
+        <h1 class="game-title">Dots & Boxes</h1>
+        <span class="vintage-badge">LUCAS 1889</span>
+      </div>
+      <div>
+        <button id="btn-sound" class="icon-btn">🔊 Sound</button>
+      </div>
+    </header>
+
+    <!-- Scoreboard -->
+    <section class="scoreboard">
+      <div id="card-p1" class="player-card card-p1 active-turn">
+        <div class="player-info">
+          <span class="player-name">Player 1</span>
+          <span class="turn-pill">Blue</span>
+        </div>
+        <div id="score-p1" class="player-score">0</div>
+      </div>
+      <div id="card-p2" class="player-card card-p2">
+        <div class="player-info">
+          <span id="name-p2" class="player-name">CPU / AI</span>
+          <span class="turn-pill">Coral</span>
+        </div>
+        <div id="score-p2" class="player-score">0</div>
+      </div>
+    </section>
+
+    <!-- Controls Selector -->
+    <div class="controls-bar">
+      <div style="display: flex; gap: 6px;">
+        <select id="select-mode" class="styled-select" aria-label="Game Mode">
+          <option value="ai" selected>🤖 Vs Computer</option>
+          <option value="pvp">👥 2-Player Local</option>
+        </select>
+        <select id="select-diff" class="styled-select" aria-label="AI Difficulty">
+          <option value="easy">Easy</option>
+          <option value="medium" selected>Medium</option>
+          <option value="hard">Hard (Chain)</option>
+        </select>
+      </div>
+      <div>
+        <select id="select-size" class="styled-select" aria-label="Grid Size">
+          <option value="2x2">2×2 (3×3 Dots)</option>
+          <option value="3x3" selected>3×3 (4×4 Dots)</option>
+          <option value="4x4">4×4 (5×5 Dots)</option>
+          <option value="5x5">5×5 (6×6 Dots)</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- Interactive Blueprint Arena -->
+    <main class="board-arena">
+      <svg id="svg-board" xmlns="http://www.w3.org/2000/svg" role="grid" aria-label="Dots and Boxes Grid"></svg>
+    </main>
+
+    <!-- Status Banner -->
+    <div id="status-banner" class="status-banner" role="status">Player 1 draws first.</div>
+
+    <!-- Actions -->
+    <div class="action-row">
+      <button id="btn-undo" class="action-btn">↩️ Undo</button>
+      <button id="btn-restart" class="action-btn btn-primary">🔄 New Game</button>
+    </div>
+  </div>
+
+  <script type="module">
+    import { DotsAndBoxesUI } from './src/ui.js';
+    window.addEventListener('DOMContentLoaded', () => new DotsAndBoxesUI());
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('./sw.js').catch(() => {});
+    }
+  </script>
+</body>
+</html>

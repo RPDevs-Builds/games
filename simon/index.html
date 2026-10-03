@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <title>Simon - 1978 Handheld Classic</title>
+  <link rel="manifest" href="manifest.json">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="simon-disc">
+    <div class="quadrant-grid">
+      <button id="pad-green" class="simon-pad pad-green" aria-label="Green (Q)"></button>
+      <button id="pad-red" class="simon-pad pad-red" aria-label="Red (W)"></button>
+      <button id="pad-yellow" class="simon-pad pad-yellow" aria-label="Yellow (A)"></button>
+      <button id="pad-blue" class="simon-pad pad-blue" aria-label="Blue (S)"></button>
+    </div>
+
+    <!-- Center Hub -->
+    <div class="center-hub">
+      <div class="simon-logo">SIMON</div>
+      <div id="count-display" class="led-counter">--</div>
+      <div class="hub-controls">
+        <button id="btn-start" class="hub-btn">START</button>
+        <button id="btn-strict" class="hub-btn">STRICT</button>
+        <button id="btn-sound" class="hub-btn">🔊</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="status-msg" class="status-bar">PRESS START TO PLAY</div>
+
+  <script type="module">
+    import { SimonUI } from './src/ui.js';
+    window.addEventListener('DOMContentLoaded', () => new SimonUI());
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('./sw.js').catch(() => {});
+    }
+  </script>
+</body>
+</html>

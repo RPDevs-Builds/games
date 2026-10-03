@@ -1,0 +1,8 @@
+{
+  "name": "Minesweeper - Windows 95 Edition",
+  "short_name": "Minesweeper",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#008080",
+  "theme_color": "#008080"
+}

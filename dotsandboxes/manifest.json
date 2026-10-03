@@ -1,0 +1,8 @@
+{
+  "name": "Dots and Boxes - La Pipopipette (1889)",
+  "short_name": "DotsBoxes",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#081322",
+  "theme_color": "#00f0ff"
+}

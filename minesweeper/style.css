@@ -1,0 +1,152 @@
+/* Authentic Windows 95/98 Minesweeper Styling */
+:root {
+  --win-bg: #c0c0c0;
+  --win-light: #ffffff;
+  --win-dark: #808080;
+  --win-darkest: #000000;
+  --font-mono: 'Courier New', monospace;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  user-select: none;
+}
+
+body {
+  background: #008080; /* Classic Windows 95 Teal */
+  font-family: 'Tahoma', -apple-system, BlinkMacSystemFont, sans-serif;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+}
+
+.win-window {
+  background: var(--win-bg);
+  border: 3px solid;
+  border-color: var(--win-light) var(--win-dark) var(--win-dark) var(--win-light);
+  box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.4);
+  padding: 6px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.win-titlebar {
+  background: #000080;
+  color: #fff;
+  padding: 3px 6px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.win-menubar {
+  display: flex;
+  gap: 12px;
+  padding: 2px 4px;
+  font-size: 0.8rem;
+  border-bottom: 1px solid var(--win-dark);
+}
+
+.menu-item {
+  cursor: pointer;
+}
+
+/* Inset Header Bar */
+.win-dashboard {
+  border: 3px solid;
+  border-color: var(--win-dark) var(--win-light) var(--win-light) var(--win-dark);
+  padding: 6px 8px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.digit-display {
+  background: #000;
+  color: #ff0000;
+  font-family: var(--font-mono);
+  font-size: 1.5rem;
+  font-weight: 900;
+  letter-spacing: 2px;
+  padding: 2px 4px;
+  border: 1px solid var(--win-dark);
+  min-width: 60px;
+  text-align: center;
+}
+
+.face-btn {
+  background: var(--win-bg);
+  border: 2px solid;
+  border-color: var(--win-light) var(--win-dark) var(--win-dark) var(--win-light);
+  font-size: 1.3rem;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  outline: none;
+}
+
+.face-btn:active {
+  border-color: var(--win-dark) var(--win-light) var(--win-light) var(--win-dark);
+}
+
+/* Minefield Grid */
+.minefield {
+  border: 3px solid;
+  border-color: var(--win-dark) var(--win-light) var(--win-light) var(--win-dark);
+  display: grid;
+  gap: 0;
+  background: #7b7b7b;
+}
+
+.cell-btn {
+  width: 24px;
+  height: 24px;
+  border: 2px solid;
+  border-color: var(--win-light) var(--win-dark) var(--win-dark) var(--win-light);
+  background: var(--win-bg);
+  font-weight: 900;
+  font-size: 0.85rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  outline: none;
+  font-family: var(--font-mono);
+}
+
+.cell-btn.revealed {
+  border: 1px solid #7b7b7b;
+  background: #c0c0c0;
+}
+
+.cell-btn.exploded {
+  background: #ff0000;
+}
+
+/* Classic Numbers */
+.n-1 { color: #0000ff; }
+.n-2 { color: #008000; }
+.n-3 { color: #ff0000; }
+.n-4 { color: #000080; }
+.n-5 { color: #800000; }
+.n-6 { color: #008080; }
+.n-7 { color: #000000; }
+.n-8 { color: #808080; }
+
+.difficulty-bar {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 4px;
+  font-size: 0.75rem;
+}

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <title>2048 - Classic Number Sliding Game</title>
+  <link rel="manifest" href="manifest.json">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="game-container">
+    <div class="header-row">
+      <div class="game-title">2048</div>
+      <div class="scores-container">
+        <div class="score-box">
+          <span class="score-label">SCORE</span>
+          <span id="score-val" class="score-val">0</span>
+        </div>
+        <div class="score-box">
+          <span class="score-label">BEST</span>
+          <span id="best-val" class="score-val">0</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="controls-row">
+      <div style="font-size: 0.85rem; color: #776e65;">Join numbers & reach <strong>2048!</strong></div>
+      <div style="display: flex; gap: 6px;">
+        <button id="btn-undo" class="btn" style="padding: 6px 10px;">↩️ Undo</button>
+        <button id="btn-new" class="btn" style="padding: 6px 12px;">New Game</button>
+      </div>
+    </div>
+
+    <!-- Board -->
+    <div style="position: relative;">
+      <div id="grid" class="grid-container"></div>
+      <div id="overlay" class="game-overlay" style="display: none;">
+        <div id="overlay-msg">GAME OVER</div>
+        <div style="display: flex; gap: 8px;">
+          <button id="btn-continue" class="btn" style="display: none;">Keep Going</button>
+          <button onclick="document.getElementById('btn-new').click()" class="btn">Try Again</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script type="module">
+    import { Game2048UI } from './src/ui.js';
+    window.addEventListener('DOMContentLoaded', () => new Game2048UI());
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('./sw.js').catch(() => {});
+    }
+  </script>
+</body>
+</html>

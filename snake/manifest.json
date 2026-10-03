@@ -1,0 +1,8 @@
+{
+  "name": "Retro Snake - Nokia 3310 Edition",
+  "short_name": "Snake",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#2b333e",
+  "theme_color": "#879b35"
+}

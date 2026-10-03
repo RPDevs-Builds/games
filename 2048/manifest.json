@@ -1,0 +1,8 @@
+{
+  "name": "2048 - Classic Number Sliding Game",
+  "short_name": "2048",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#faf8ef",
+  "theme_color": "#bbada0"
+}

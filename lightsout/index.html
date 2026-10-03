@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <title>Lights Out - 90s Handheld Classic & GF(2) Solver</title>
+  <meta name="description" content="Play the iconic 1995 handheld logic puzzle Lights Out. Extinguish all lights with pure logic, campaign levels, custom editor, and a built-in GF(2) Gaussian elimination solver.">
+  <meta name="theme-color" content="#1e2430">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <link rel="manifest" href="manifest.json">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="theme-retro">
+
+  <!-- Application Header -->
+  <header class="app-header">
+    <div class="brand-title">
+      <span>💡 Lights Out</span>
+      <span class="brand-badge">1995 CLASSIC</span>
+    </div>
+    <div class="quick-actions">
+      <button id="btn-audio" class="icon-btn" title="Toggle Sound">🔊 <span class="btn-text">Mute</span></button>
+      <button id="btn-theme" class="icon-btn" title="Toggle Theme">🕹️ <span class="btn-text">Retro</span></button>
+      <button id="btn-stats" class="icon-btn" title="Player Stats">📊 <span class="btn-text">Stats</span></button>
+      <button id="btn-rules" class="icon-btn" title="How to Play">❓ <span class="btn-text">Rules</span></button>
+    </div>
+  </header>
+
+  <!-- Handheld Console Device -->
+  <main class="handheld-console">
+    <!-- Console Bezel Top -->
+    <div class="console-bezel">
+      <div class="console-speaker-grille" aria-hidden="true">
+        <span class="speaker-dot"></span>
+        <span class="speaker-dot"></span>
+        <span class="speaker-dot"></span>
+        <span class="speaker-dot"></span>
+        <span class="speaker-dot"></span>
+      </div>
+      <div class="console-model-badge">MODEL LO-9500 • GF(2) CO-PROCESSOR</div>
+      <div class="console-speaker-grille" aria-hidden="true">
+        <span class="speaker-dot"></span>
+        <span class="speaker-dot"></span>
+        <span class="speaker-dot"></span>
+        <span class="speaker-dot"></span>
+        <span class="speaker-dot"></span>
+      </div>
+    </div>
+
+    <!-- LCD Scoreboard Display -->
+    <section class="lcd-dashboard">
+      <div class="lcd-stats-row">
+        <div class="stat-box">
+          <span class="stat-label">Moves</span>
+          <span id="stat-moves" class="stat-value">0</span>
+        </div>
+        <div class="stat-box">
+          <span class="stat-label">Time</span>
+          <span id="stat-timer" class="stat-value">00:00</span>
+        </div>
+        <div class="stat-box">
+          <span class="stat-label">Lit</span>
+          <span id="stat-remaining" class="stat-value">0</span>
+        </div>
+      </div>
+      <div id="status-banner" class="status-banner" role="status">Initializing handheld...</div>
+    </section>
+
+    <!-- Configuration Selectors -->
+    <div class="control-bar">
+      <div class="selector-group">
+        <select id="mode-selector" class="styled-select" aria-label="Game Mode">
+          <option value="random">🎲 Random</option>
+          <option value="daily">📅 Daily</option>
+          <option value="campaign">⭐ Campaign</option>
+          <option value="custom">🛠️ Editor</option>
+        </select>
+        <div>
+          <select id="size-selector" class="styled-select" aria-label="Grid Size">
+            <option value="3x3">3×3 Grid</option>
+            <option value="4x4">4×4 Grid</option>
+            <option value="5x5" selected>5×5 Classic</option>
+            <option value="6x6">6×6 Expert</option>
+          </select>
+        </div>
+        <div>
+          <select id="difficulty-selector" class="styled-select" aria-label="Difficulty">
+            <option value="easy">Easy (4)</option>
+            <option value="medium" selected>Medium (8)</option>
+            <option value="hard">Hard (14)</option>
+          </select>
+        </div>
+        <div>
+          <select id="target-selector" class="styled-select" aria-label="Target Goal">
+            <option value="off" selected>Goal: Lights Out</option>
+            <option value="on">Goal: Lit-Out</option>
+          </select>
+        </div>
+        <button id="btn-wrap" class="styled-select" style="font-size: 0.75rem;" title="Toggle Torus Wrap-around topology">🌐 Wrap: Off</button>
+      </div>
+      <div id="campaign-level-container" class="selector-group" style="display: none;">
+        <select id="campaign-level-select" class="styled-select" aria-label="Campaign Level"></select>
+
+      </div>
+      <button id="btn-share" class="icon-btn" title="Share current board puzzle URL">🔗 Share</button>
+    </div>
+
+    <!-- Interactive Grid Well -->
+    <div class="grid-well">
+      <div id="game-board" class="game-board" role="grid" aria-label="Lights Out Game Grid">
+        <!-- Rendered dynamically by ui.js -->
+      </div>
+    </div>
+
+    <!-- Console Bottom Action Buttons -->
+    <div class="console-actions">
+      <button id="btn-new" class="action-btn btn-primary" title="Scramble a new solvable puzzle">
+        <span>🔄</span> New
+      </button>
+      <button id="btn-hint" class="action-btn" title="Show optimal next move (H)">
+        <span>💡</span> Hint
+      </button>
+      <button id="btn-solve" class="action-btn" title="Run AI Gaussian elimination auto-solve">
+        <span>🤖</span> Solve
+      </button>
+      <button id="btn-undo" class="action-btn" title="Undo last move (U)">
+        <span>↩️</span> Undo
+      </button>
+      <button id="btn-reset" class="action-btn" title="Reset puzzle to beginning (R)">
+        <span>⏪</span> Reset
+      </button>
+    </div>
+  </main>
+
+  <!-- Keyboard Controls Footer Hint -->
+  <footer class="app-footer">
+    <div class="keyboard-hint">
+      <span>Keys:</span>
+      <kbd>Arrows</kbd> / <kbd>WASD</kbd> Navigate &nbsp;|&nbsp;
+      <kbd>Space</kbd> Toggle &nbsp;|&nbsp;
+      <kbd>H</kbd> Hint &nbsp;|&nbsp;
+      <kbd>U</kbd> Undo &nbsp;|&nbsp;
+      <kbd>N</kbd> New
+    </div>
+    <div>Tiger Electronics 1995 • Multi-Platform Zero-Dependency Engine</div>
+  </footer>
+
+  <!-- Modal: How to Play & Rules -->
+  <div id="modal-rules" class="modal">
+    <div class="modal-backdrop"></div>
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3 class="modal-title">📖 Rules & Light Chasing Strategy</h3>
+        <button class="modal-close-btn modal-close">&times;</button>
+      </div>
+      <div class="modal-body">
+        <h4>The Objective</h4>
+        <p>Turn <strong>ALL lights OFF</strong> in the fewest moves possible.</p>
+
+        <h4>The Toggle Rule</h4>
+        <p>Pressing any light toggles its state (ON $\leftrightarrow$ OFF) and also flips all 4 directly adjacent (orthogonal) neighbors (Up, Down, Left, Right).</p>
+
+        <h4>Golden Rules of Lights Out</h4>
+        <ul>
+          <li><strong>Order Does Not Matter:</strong> Pressing A then B gives the exact same result as B then A.</li>
+          <li><strong>Never Press Twice:</strong> Pressing a button twice returns it to its starting state ($1 \oplus 1 = 0$). An optimal solution only presses any button at most once.</li>
+        </ul>
+
+        <h4>The "Light Chasing" Strategy</h4>
+        <ol>
+          <li>Work top to bottom! For every light ON in <strong>Row 1</strong>, press the button directly below it in <strong>Row 2</strong>. Row 1 is now dark!</li>
+          <li>For every light ON in <strong>Row 2</strong>, press the button below it in <strong>Row 3</strong>.</li>
+          <li>Repeat for Rows 3 and 4. Now only lights in <strong>Row 5</strong> remain.</li>
+          <li>If Row 5 is solved, you won! Otherwise, press the corresponding buttons in Row 1 using the 7 known Tiger patterns and chase down again.</li>
+        </ol>
+
+        <h4>Mathematical Engine</h4>
+        <p>This implementation features a complete <strong>$GF(2)$ Gaussian Elimination</strong> solver. The 5×5 toggle matrix has rank 23 and a 2D null space, meaning exactly 25% of random boards are solvable. All puzzles generated here are mathematically guaranteed solvable!</p>
+      </div>
+      <div class="modal-footer">
+        <button class="action-btn btn-primary modal-close" style="padding: 8px 18px;">Got It!</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal: Player Stats -->
+  <div id="modal-stats" class="modal">
+    <div class="modal-backdrop"></div>
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3 class="modal-title">📊 Career Statistics</h3>
+        <button class="modal-close-btn modal-close">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="win-stats-grid">
+          <div class="stat-box">
+            <span class="stat-label">Played</span>
+            <span id="stat-total-games" class="stat-value">0</span>
+          </div>
+          <div class="stat-box">
+            <span class="stat-label">Won</span>
+            <span id="stat-total-won" class="stat-value">0</span>
+          </div>
+          <div class="stat-box">
+            <span class="stat-label">Win Rate</span>
+            <span id="stat-win-rate" class="stat-value">0%</span>
+          </div>
+        </div>
+        <div style="display: flex; justify-content: space-around; padding: 10px 0;">
+          <div>Total Moves: <strong id="stat-total-moves-all" style="color: var(--accent-gold)">0</strong></div>
+          <div>Hints Used: <strong id="stat-hints-used" style="color: var(--accent-cyan)">0</strong></div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="action-btn modal-close" style="padding: 8px 18px;">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal: Victory Fanfare -->
+  <div id="modal-win" class="modal">
+    <div class="modal-backdrop"></div>
+    <div class="modal-card">
+      <div class="modal-body win-content">
+        <div class="win-badge">🏆</div>
+        <h2 class="win-title">LIGHTS OUT!</h2>
+        <p>You extinguished every single light on the board!</p>
+        <div class="win-stats-grid">
+          <div class="stat-box">
+            <span class="stat-label">Moves Taken</span>
+            <span id="win-moves" class="stat-value">0</span>
+          </div>
+          <div class="stat-box">
+            <span class="stat-label">Time Elapsed</span>
+            <span id="win-time" class="stat-value">00:00</span>
+          </div>
+          <div class="stat-box">
+            <span class="stat-label">Best Record</span>
+            <span id="win-best" class="stat-value" style="font-size: 1rem;">-</span>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer" style="justify-content: center;">
+        <button id="btn-win-again" class="action-btn" style="padding: 10px 20px;">Play Again</button>
+        <button id="btn-next-level" class="action-btn btn-primary" style="padding: 10px 20px;">Next Level ⏩</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Entry Script -->
+  <script type="module">
+    import { LightsOutUI } from './src/ui.js';
+    window.addEventListener('DOMContentLoaded', () => {
+      window.gameApp = new LightsOutUI();
+    });
+
+    // Register Service Worker for offline PWA support
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('./sw.js').catch(err => {
+          console.warn('SW registration skipped or failed:', err);
+        });
+      });
+    }
+  </script>
+</body>
+</html>

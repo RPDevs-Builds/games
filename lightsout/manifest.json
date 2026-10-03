@@ -1,0 +1,19 @@
+{
+  "name": "Lights Out - 1995 Handheld Classic",
+  "short_name": "LightsOut",
+  "description": "Authentic 1995 handheld logic puzzle with GF(2) solver, retro audio, and campaign levels.",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#11141c",
+  "theme_color": "#1e2430",
+  "categories": ["games", "puzzle"],
+  "icons": [
+    {
+      "src": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%231e2430'/%3E%3Crect x='15' y='15' width='70' height='70' rx='10' fill='%23ffb86c' filter='drop-shadow(0 0 8px %23ffb86c)'/%3E%3Ccircle cx='50' cy='50' r='20' fill='%23fff' opacity='0.9'/%3E%3C/svg%3E",
+      "sizes": "192x192 512x512",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

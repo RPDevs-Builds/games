@@ -1,0 +1,9 @@
+{
+  "name": "RPDevs Retro Arcade",
+  "short_name": "RetroArcade",
+  "description": "Suite of classic retro handheld, arcade, and logic games playable 100% offline.",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#090b10",
+  "theme_color": "#00f0ff"
+}
