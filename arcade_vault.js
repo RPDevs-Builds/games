@@ -5,7 +5,7 @@
 
 export const ACHIEVEMENTS = [
   { id: 'arcade_initiate', title: 'Arcade Initiate', icon: '🎟️', desc: 'Play your first game in the RPDevs Retro Arcade.' },
-  { id: 'grandmaster', title: 'Grandmaster of the Arcade', icon: '👑', desc: 'Play at least once across all 15 classic arcade games.' },
+  { id: 'grandmaster', title: 'Grandmaster of the Arcade', icon: '👑', desc: 'Play at least once across all 16 classic arcade games.' },
   { id: 'lightsout_apprentice', title: 'Illuminator', icon: '💡', desc: 'Solve your first Lights Out puzzle.' },
   { id: 'lightsout_expert', title: 'Master of GF(2)', icon: '⚡', desc: 'Solve a 5×5 or larger Lights Out puzzle.' },
   { id: 'snake_charmer', title: 'Snake Charmer', icon: '🐍', desc: 'Reach a score of at least 10 in Retro Snake.' },
@@ -42,7 +42,12 @@ export const ACHIEVEMENTS = [
   { id: 'invaders_ufo_hunter', title: 'Mystery Raider', icon: '🛸', desc: 'Shoot down a Mystery Flying Saucer in Space Invaders.' },
   { id: 'invaders_wave_clear', title: 'Fleet Annihilator', icon: '🏆', desc: 'Completely clear a wave of 55 aliens in Space Invaders.' },
   { id: 'invaders_score_3000', title: 'Earth Defender', icon: '⭐', desc: 'Score 3,000+ points in Space Invaders.' },
-  { id: 'invaders_bunker_master', title: 'Iron Fortress', icon: '🛡️', desc: 'Clear a wave with all 4 bunkers surviving in Space Invaders.' }
+  { id: 'invaders_bunker_master', title: 'Iron Fortress', icon: '🛡️', desc: 'Clear a wave with all 4 bunkers surviving in Space Invaders.' },
+  { id: 'frogger_first_home', title: 'First Hop Home', icon: '🐸', desc: 'Safely guide your first frog into a home dock in Frogger.' },
+  { id: 'frogger_fly_catcher', title: 'Fly Catcher', icon: '🪰', desc: 'Catch a bonus insect in an open home dock in Frogger.' },
+  { id: 'frogger_turtle_rider', title: 'Submarine Navigator', icon: '🐢', desc: 'Ride diving turtles without drowning in Frogger.' },
+  { id: 'frogger_round_clear', title: 'River Crossing Champion', icon: '🏆', desc: 'Fill all 5 home docks to conquer a round in Frogger.' },
+  { id: 'frogger_score_2000', title: 'Master Amphibian', icon: '⭐', desc: 'Score 2,000+ points in Frogger.' }
 ];
 
 export class ArcadeVault {
@@ -105,7 +110,8 @@ export class ArcadeVault {
         mazechaser: 0,
         asteroids: 0,
         wordle: 0,
-        spaceinvaders: 0
+        spaceinvaders: 0,
+        frogger: 0
       },
       gamesWon: {
         lightsout: 0,
@@ -122,7 +128,8 @@ export class ArcadeVault {
         mazechaser: 0,
         asteroids: 0,
         wordle: 0,
-        spaceinvaders: 0
+        spaceinvaders: 0,
+        frogger: 0
       },
       stats: {},
       highScores: {},
@@ -223,6 +230,8 @@ export class ArcadeVault {
       if (score >= 5000) this.unlock('asteroids_score_5000');
     } else if (gameId === 'spaceinvaders') {
       if (score >= 3000) this.unlock('invaders_score_3000');
+    } else if (gameId === 'frogger') {
+      if (score >= 2000) this.unlock('frogger_score_2000');
     }
 
     this.saveState();
@@ -262,7 +271,7 @@ export class ArcadeVault {
   }
 
   checkArcadeWideAchievements() {
-    const required = ['lightsout', 'snake', 'simon', 'minesweeper', 'game2048', 'dotsandboxes', 'sokoban', 'connectfour', 'breakout', 'pong', 'fallingblocks', 'mazechaser', 'asteroids', 'wordle', 'spaceinvaders'];
+    const required = ['lightsout', 'snake', 'simon', 'minesweeper', 'game2048', 'dotsandboxes', 'sokoban', 'connectfour', 'breakout', 'pong', 'fallingblocks', 'mazechaser', 'asteroids', 'wordle', 'spaceinvaders', 'frogger'];
     const allPlayed = required.every(id => (this.state.gamesPlayed[id] || 0) > 0);
     if (allPlayed) {
       this.unlock('grandmaster');

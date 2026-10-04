@@ -170,6 +170,17 @@ const GAMES_DATA = [
     tags: ['Taito 1978', 'Marching Fleet', 'Destructible Bunkers', 'UFO Saucer', 'PWA Offline', 'Terminal CLI'],
     url: './spaceinvaders/index.html',
     rulesUrl: './spaceinvaders/RULES.md'
+  },
+  {
+    id: 'frogger',
+    title: 'Frogger',
+    year: '1981',
+    icon: '🐸',
+    category: 'retro',
+    desc: 'The iconic 1981 Konami arcade navigation classic. Guide frogs across a 5-lane speeding highway and a perilous river with floating logs, diving turtles, and bonus fly docks.',
+    tags: ['Konami 1981', 'Highway Traffic', 'River Drift', 'Diving Turtles', 'PWA Offline', 'Terminal CLI'],
+    url: './frogger/index.html',
+    rulesUrl: './frogger/RULES.md'
   }
 ];
 

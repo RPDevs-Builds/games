@@ -126,6 +126,14 @@ This catalog tracks all games in the RPDevs Games base, their release status, pl
 - **Features**: 5x11 marching alien fleet with 2-frame animation and dynamic stepping tempo speed curve, single active laser restriction, destructible 4-bunker pixel erosion, mystery saucer UFO spawner, 4-tone descending bass pulse audio synthesis.
 - **Platforms**: Web, PWA, Terminal CLI, itch.io, Mobile.
 
+### 16. Frogger (`frogger/`)
+- **Genre**: Obstacle Avoidance & River Navigation Arcade Classic
+- **Inspiration**: Konami / Sega (1981)
+- **Base Directory**: [`/mnt/sharedroot/projects/games/frogger/`](./frogger)
+- **Rules**: [`RULES.md`](./frogger/RULES.md)
+- **Features**: 14 rows x 11 cols grid navigation, 5 lanes of directional highway traffic (bulldozers, race cars, trucks), 5 river lanes with log drifting and diving turtles, 5 goal dock bays, timed fly insect bonus spawner, 60-second countdown bar, authentic Web Audio retro sound synthesizer.
+- **Platforms**: Web, PWA, Terminal CLI, itch.io, Mobile.
+
 ---
 
 ## 📦 Automated Release Packages (`dist/`)
