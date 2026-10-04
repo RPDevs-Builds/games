@@ -134,6 +134,14 @@ This catalog tracks all games in the RPDevs Games base, their release status, pl
 - **Features**: 14 rows x 11 cols grid navigation, 5 lanes of directional highway traffic (bulldozers, race cars, trucks), 5 river lanes with log drifting and diving turtles, 5 goal dock bays, timed fly insect bonus spawner, 60-second countdown bar, authentic Web Audio retro sound synthesizer.
 - **Platforms**: Web, PWA, Terminal CLI, itch.io, Mobile.
 
+### 17. Othello / Reversi (`othello/`)
+- **Genre**: Deterministic Flanking Strategy / 8×8 Tabletop Classic
+- **Inspiration**: Lewis Waterman (1883) / Goro Hasegawa (1971)
+- **Base Directory**: [`/mnt/sharedroot/projects/games/othello/`](./othello)
+- **Rules**: [`RULES.md`](./othello/RULES.md)
+- **Features**: 8×8 tactical green felt board, 3-tier Minimax AI with Alpha-Beta pruning, corner-weight heuristic matrices, 2-player local pass-and-play, tactile disc placement/flip audio synthesis.
+- **Platforms**: Web, PWA, Terminal CLI, itch.io, Mobile.
+
 ---
 
 ## 📦 Automated Release Packages (`dist/`)

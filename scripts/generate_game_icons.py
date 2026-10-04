@@ -27,13 +27,14 @@ ACCENT_COLORS = {
     "wordle": "#538d4e",
     "spaceinvaders": "#00ff66",
     "frogger": "#00ff66",
+    "othello": "#0e6b38",
     "portal": "#a855f7"
 }
 
 TARGETS = [
     "lightsout", "snake", "simon", "minesweeper", "2048", "dotsandboxes",
     "sokoban", "connectfour", "breakout", "pong", "fallingblocks", "mazechaser",
-    "asteroids", "wordle", "spaceinvaders", "frogger", "portal"
+    "asteroids", "wordle", "spaceinvaders", "frogger", "othello", "portal"
 ]
 
 
@@ -174,6 +175,14 @@ def render_icon(target, size=512):
         r(160, 110, 182, 140, fill='#00ff66')
         r(68, 136, 96, 150, fill='#00ff66')
         r(160, 136, 188, 150, fill='#00ff66')
+    elif target == 'othello':
+        # Green Felt Grid background
+        r(70, 60, 186, 176, fill='#0e6b38')
+        # 4 center discs
+        draw.ellipse([int(80 * scale), int(70 * scale), int(120 * scale), int(110 * scale)], fill='#ffffff', outline='#cccccc')
+        draw.ellipse([int(136 * scale), int(70 * scale), int(176 * scale), int(110 * scale)], fill='#111111', outline='#333333')
+        draw.ellipse([int(80 * scale), int(126 * scale), int(120 * scale), int(166 * scale)], fill='#111111', outline='#333333')
+        draw.ellipse([int(136 * scale), int(126 * scale), int(176 * scale), int(166 * scale)], fill='#ffffff', outline='#cccccc')
     else:  # Portal
         r(85, 75, 171, 141, fill='#a855f7')
         draw.ellipse([int(100 * scale), int(80 * scale), int(156 * scale), int(136 * scale)], fill='#ffd700')

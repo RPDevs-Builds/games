@@ -61,6 +61,7 @@ get_app_name() {
         wordle)       echo "Wordle" ;;
         spaceinvaders) echo "Space Invaders 1978" ;;
         frogger)      echo "Frogger 1981" ;;
+        othello)      echo "Othello (Reversi)" ;;
         portal)       echo "RPDevs Retro Arcade" ;;
         *)            echo "$1" ;;
     esac
@@ -84,6 +85,7 @@ get_pkg_slug() {
         wordle)       echo "wordle" ;;
         spaceinvaders) echo "spaceinvaders" ;;
         frogger)      echo "frogger" ;;
+        othello)      echo "othello" ;;
         portal)       echo "arcade" ;;
         *)            echo "$1" ;;
     esac
@@ -107,6 +109,7 @@ get_window_dims() {
         wordle)       echo "520 780" ;;
         spaceinvaders) echo "520 740" ;;
         frogger)      echo "500 720" ;;
+        othello)      echo "600 760" ;;
         portal)       echo "1100 800" ;;
         *)            echo "800 600" ;;
     esac
@@ -130,6 +133,7 @@ get_accent_color() {
         wordle)       echo "#538d4e" ;;
         spaceinvaders) echo "#00ff66" ;;
         frogger)      echo "#00ff66" ;;
+        othello)      echo "#0e6b38" ;;
         portal)       echo "#a855f7" ;;
         *)            echo "#10b981" ;;
     esac
@@ -472,7 +476,7 @@ log_info "Packaging Engine     : WebKitGTK 4.1 + Python 3 + GTK3"
 log_info "Distribution Output  : ${DIST_DIR}"
 echo ""
 
-ALL_GAMES=("lightsout" "snake" "simon" "minesweeper" "2048" "dotsandboxes" "sokoban" "connectfour" "breakout" "pong" "fallingblocks" "mazechaser" "asteroids" "wordle" "spaceinvaders" "frogger")
+ALL_GAMES=("lightsout" "snake" "simon" "minesweeper" "2048" "dotsandboxes" "sokoban" "connectfour" "breakout" "pong" "fallingblocks" "mazechaser" "asteroids" "wordle" "spaceinvaders" "frogger" "othello")
 
 if [[ "${TARGET}" == "all" ]]; then
     for game in "${ALL_GAMES[@]}"; do

@@ -1,0 +1,268 @@
+/* ==========================================================================
+   RPDevs Othello / Reversi Retro Felt Styling
+   ========================================================================== */
+
+:root {
+  --felt-green: #0e6b38;
+  --felt-border: #094725;
+  --wood-rim: #2d1e14;
+  --disc-black: #1a1a1a;
+  --disc-white: #f5f5f5;
+  --accent-gold: #e3a018;
+  --bg-dark: #0a0e14;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: radial-gradient(circle at 50% 20%, #151a24 0%, #080a0e 100%);
+  color: #f0f6fc;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  user-select: none;
+}
+
+.othello-container {
+  width: 100%;
+  max-width: 520px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+/* Header */
+.console-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #11151e;
+  border: 2px solid #212634;
+  border-radius: 12px;
+  padding: 10px 16px;
+}
+
+.title-group {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.console-title {
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: #fff;
+  letter-spacing: 0.5px;
+}
+
+.badge-year {
+  font-size: 0.65rem;
+  font-family: monospace;
+  background: rgba(227, 160, 24, 0.2);
+  color: var(--accent-gold);
+  border: 1px solid rgba(227, 160, 24, 0.4);
+  padding: 2px 6px;
+  border-radius: 4px;
+}
+
+.header-actions {
+  display: flex;
+  gap: 6px;
+}
+
+.icon-btn {
+  background: #1a202c;
+  border: 1px solid #2d3748;
+  color: #c9d1d9;
+  padding: 6px 10px;
+  border-radius: 6px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.icon-btn:hover {
+  background: #2d3748;
+  color: #fff;
+}
+
+/* Score Dashboard */
+.scoreboard {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 10px;
+  background: #11151e;
+  border: 2px solid #212634;
+  border-radius: 12px;
+  padding: 12px 14px;
+  align-items: center;
+}
+
+.score-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: #161b26;
+  border: 1px solid #242c3d;
+  border-radius: 8px;
+  padding: 8px;
+}
+
+.score-label {
+  font-size: 0.65rem;
+  font-weight: 700;
+  color: #8b949e;
+  text-transform: uppercase;
+}
+
+.score-val {
+  font-size: 1.5rem;
+  font-weight: 900;
+  font-family: monospace;
+}
+
+.score-box.black-box .score-val { color: #f0f6fc; }
+.score-box.white-box .score-val { color: #00f0ff; }
+
+.turn-box {
+  display: flex;
+  justify-content: center;
+}
+
+.turn-badge {
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 8px 12px;
+  border-radius: 20px;
+  text-align: center;
+  width: 100%;
+}
+
+.turn-badge.black-turn {
+  background: #21262d;
+  color: #fff;
+  border: 1px solid #30363d;
+}
+
+.turn-badge.white-turn {
+  background: #00f0ff;
+  color: #000;
+  font-weight: 800;
+}
+
+.turn-badge.game-over-turn {
+  background: #ff0055;
+  color: #fff;
+}
+
+/* Status Banner */
+.status-banner {
+  display: none;
+  background: linear-gradient(90deg, #e3a018, #ff9900);
+  color: #000;
+  font-weight: 800;
+  text-align: center;
+  padding: 10px;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  animation: pulse 1s infinite alternate;
+}
+
+@keyframes pulse {
+  from { opacity: 0.9; transform: scale(0.99); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+/* Controls Bar */
+.controls-bar {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.styled-select {
+  flex: 1;
+  background: #11151e;
+  border: 1px solid #242c3d;
+  color: #f0f6fc;
+  padding: 8px 10px;
+  border-radius: 8px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+/* Board Outer Bezel */
+.board-bezel {
+  background: var(--wood-rim);
+  border: 6px solid #4a3322;
+  border-radius: 16px;
+  padding: 10px;
+  box-shadow: 
+    0 16px 40px rgba(0, 0, 0, 0.8),
+    inset 0 2px 6px rgba(255, 255, 255, 0.1);
+}
+
+.othello-board {
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  grid-template-rows: repeat(8, 1fr);
+  gap: 2px;
+  background: var(--felt-border);
+  border: 2px solid var(--felt-border);
+  border-radius: 8px;
+  aspect-ratio: 1 / 1;
+  width: 100%;
+}
+
+.othello-cell {
+  background: var(--felt-green);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+.othello-cell:hover {
+  background: #117840;
+}
+
+/* Discs */
+.disc {
+  width: 82%;
+  height: 82%;
+  border-radius: 50%;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.6);
+  transition: transform 0.25s ease, background 0.25s ease;
+}
+
+.disc.black-disc {
+  background: radial-gradient(circle at 35% 35%, #404040 0%, #151515 80%);
+  border: 2px solid #000;
+}
+
+.disc.white-disc {
+  background: radial-gradient(circle at 35% 35%, #ffffff 0%, #dcdcdc 80%);
+  border: 2px solid #b0b0b0;
+}
+
+/* Hint Dot */
+.hint-dot {
+  width: 24%;
+  height: 24%;
+  border-radius: 50%;
+  background: rgba(0, 240, 255, 0.45);
+  box-shadow: 0 0 6px rgba(0, 240, 255, 0.6);
+  pointer-events: none;
+}

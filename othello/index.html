@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <title>Othello (Reversi) - 1883 Classic Strategy</title>
+  <meta name="description" content="Authentic Othello / Reversi board game featuring 8x8 tactical disk flipping, Minimax AI with Alpha-Beta pruning, Pass & Play mode, and tactile Web Audio.">
+  <link rel="manifest" href="manifest.json">
+  <link rel="stylesheet" href="crt.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="othello-container">
+    <!-- Header -->
+    <header class="console-header">
+      <div class="title-group">
+        <h1 class="console-title">⚪ OTHELLO ⚫</h1>
+        <span class="badge-year">1883 / 1971</span>
+      </div>
+      <div class="header-actions">
+        <button id="btn-portal" class="icon-btn" title="Back to Master Arcade">🏛️ Arcade</button>
+        <button id="btn-vault" class="icon-btn" title="Vault & Achievements">🏆 Vault</button>
+        <button id="btn-sound" class="icon-btn">🔊 Sound</button>
+        <button id="btn-crt" class="icon-btn">📺 CRT</button>
+      </div>
+    </header>
+
+    <!-- Scoreboard -->
+    <section class="scoreboard">
+      <div class="score-box black-box">
+        <span class="score-label">Black (P1)</span>
+        <span id="score-black" class="score-val">2</span>
+      </div>
+      <div class="turn-box">
+        <span id="turn-badge" class="turn-badge black-turn">● Turn: Black</span>
+      </div>
+      <div class="score-box white-box">
+        <span class="score-label">White (CPU)</span>
+        <span id="score-white" class="score-val">2</span>
+      </div>
+    </section>
+
+    <div id="status-banner" class="status-banner"></div>
+
+    <!-- Controls Bar -->
+    <div class="controls-bar">
+      <select id="select-mode" class="styled-select" aria-label="Game Mode">
+        <option value="ai" selected>🤖 vs Computer</option>
+        <option value="pvp">👥 2 Players (Local)</option>
+      </select>
+      <select id="select-diff" class="styled-select" aria-label="AI Difficulty">
+        <option value="easy">Easy AI</option>
+        <option value="medium" selected>Medium AI</option>
+        <option value="hard">Hard AI (Deep)</option>
+      </select>
+      <button id="btn-hints" class="icon-btn">💡 Hints: ON</button>
+      <button id="btn-new" class="icon-btn" style="background: #238636; color: #fff;">🔄 New</button>
+    </div>
+
+    <!-- 8x8 Board -->
+    <div class="board-bezel">
+      <main id="board" class="othello-board" aria-label="Othello 8x8 Board"></main>
+    </div>
+  </div>
+
+  <script type="module">
+    import { OthelloUI } from './src/ui.js';
+    window.addEventListener('DOMContentLoaded', () => new OthelloUI());
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('./sw.js').catch(() => {});
+    }
+  </script>
+</body>
+</html>

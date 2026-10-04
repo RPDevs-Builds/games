@@ -47,7 +47,9 @@ export const ACHIEVEMENTS = [
   { id: 'frogger_fly_catcher', title: 'Fly Catcher', icon: '🪰', desc: 'Catch a bonus insect in an open home dock in Frogger.' },
   { id: 'frogger_turtle_rider', title: 'Submarine Navigator', icon: '🐢', desc: 'Ride diving turtles without drowning in Frogger.' },
   { id: 'frogger_round_clear', title: 'River Crossing Champion', icon: '🏆', desc: 'Fill all 5 home docks to conquer a round in Frogger.' },
-  { id: 'frogger_score_2000', title: 'Master Amphibian', icon: '⭐', desc: 'Score 2,000+ points in Frogger.' }
+  { id: 'frogger_score_2000', title: 'Master Amphibian', icon: '⭐', desc: 'Score 2,000+ points in Frogger.' },
+  { id: 'othello_first_flip', title: 'Flanking Strategist', icon: '⚪', desc: 'Play your first game of Othello (Reversi).' },
+  { id: 'othello_victor', title: 'Grand Reversal', icon: '👑', desc: 'Defeat the CPU opponent in a match of Othello.' }
 ];
 
 export class ArcadeVault {
@@ -111,7 +113,8 @@ export class ArcadeVault {
         asteroids: 0,
         wordle: 0,
         spaceinvaders: 0,
-        frogger: 0
+        frogger: 0,
+        othello: 0
       },
       gamesWon: {
         lightsout: 0,
@@ -129,7 +132,8 @@ export class ArcadeVault {
         asteroids: 0,
         wordle: 0,
         spaceinvaders: 0,
-        frogger: 0
+        frogger: 0,
+        othello: 0
       },
       stats: {},
       highScores: {},
@@ -320,7 +324,7 @@ export class ArcadeVault {
   goToArcade(currentGame = '') {
     // 1. If running inside Master Arcade portal or web environment with parent index.html
     const hasParentPortal = (currentGame && window.location.pathname.includes('/' + currentGame + '/')) ||
-                            window.location.pathname.match(/\/(frogger|asteroids|spaceinvaders|mazechaser|fallingblocks|snake|pong|breakout|dotsandboxes|lightsout|connectfour|sokoban|wordle|simon|minesweeper|game2048|2048)\//) ||
+                            window.location.pathname.match(/\/(frogger|asteroids|spaceinvaders|mazechaser|fallingblocks|snake|pong|breakout|dotsandboxes|lightsout|connectfour|sokoban|wordle|simon|minesweeper|game2048|2048|othello)\//) ||
                             (window.location.protocol !== 'file:' && window.location.pathname !== '/' && window.location.pathname !== '/index.html');
 
     if (hasParentPortal) {

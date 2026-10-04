@@ -182,6 +182,17 @@ const GAMES_DATA = [
     tags: ['Konami 1981', 'Highway Traffic', 'River Drift', 'Diving Turtles', 'PWA Offline', 'Terminal CLI'],
     url: './frogger/index.html',
     rulesUrl: './frogger/RULES.md'
+  },
+  {
+    id: 'othello',
+    title: 'Othello (Reversi)',
+    year: '1883',
+    icon: '⚪⚫',
+    category: 'logic',
+    desc: 'The classic 8×8 disk flipping strategy board game with 3-tier Minimax AI, corner-weight matrix heuristics, Pass & Play mode, and tactile Web Audio.',
+    tags: ['Lewis Waterman 1883', 'Minimax Alpha-Beta', 'Tactical Flips', 'PWA Offline', 'Terminal CLI'],
+    url: './othello/index.html',
+    rulesUrl: './othello/RULES.md'
   }
 ];
 
