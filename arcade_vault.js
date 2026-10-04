@@ -5,7 +5,7 @@
 
 export const ACHIEVEMENTS = [
   { id: 'arcade_initiate', title: 'Arcade Initiate', icon: '🎟️', desc: 'Play your first game in the RPDevs Retro Arcade.' },
-  { id: 'grandmaster', title: 'Grandmaster of the Arcade', icon: '👑', desc: 'Play at least once across all 13 classic arcade games.' },
+  { id: 'grandmaster', title: 'Grandmaster of the Arcade', icon: '👑', desc: 'Play at least once across all 14 classic arcade games.' },
   { id: 'lightsout_apprentice', title: 'Illuminator', icon: '💡', desc: 'Solve your first Lights Out puzzle.' },
   { id: 'lightsout_expert', title: 'Master of GF(2)', icon: '⚡', desc: 'Solve a 5×5 or larger Lights Out puzzle.' },
   { id: 'snake_charmer', title: 'Snake Charmer', icon: '🐍', desc: 'Reach a score of at least 10 in Retro Snake.' },
@@ -32,7 +32,12 @@ export const ACHIEVEMENTS = [
   { id: 'asteroids_wave_3', title: 'Deep Space Ace', icon: '🚀', desc: 'Reach Wave 3 in Asteroids.' },
   { id: 'asteroids_saucer_hunter', title: 'UFO Buster', icon: '🛸', desc: 'Shoot down an alien flying saucer in Asteroids.' },
   { id: 'asteroids_score_5000', title: 'Star Voyager', icon: '⭐', desc: 'Score 5,000+ points in Asteroids.' },
-  { id: 'asteroids_hyperspace', title: 'Quantum Leap', icon: '🌀', desc: 'Survive a hyperspace jump in Asteroids.' }
+  { id: 'asteroids_hyperspace', title: 'Quantum Leap', icon: '🌀', desc: 'Survive a hyperspace jump in Asteroids.' },
+  { id: 'wordle_first_win', title: 'Word Wizard', icon: '🔤', desc: 'Solve your first Wordle puzzle.' },
+  { id: 'wordle_streak_5', title: 'Lexical Streak', icon: '🔥', desc: 'Achieve a 5-game winning streak in Wordle.' },
+  { id: 'wordle_genius', title: 'Genius Guesser', icon: '🧠', desc: 'Guess the secret word in 2 tries or fewer.' },
+  { id: 'wordle_hard_mode', title: 'Hardcore Linguist', icon: '⚡', desc: 'Win a Wordle game in Hard Mode.' },
+  { id: 'wordle_clutch', title: 'Phew!', icon: '🎯', desc: 'Guess the secret word on the 6th and final attempt.' }
 ];
 
 export class ArcadeVault {
@@ -93,7 +98,8 @@ export class ArcadeVault {
         pong: 0,
         fallingblocks: 0,
         mazechaser: 0,
-        asteroids: 0
+        asteroids: 0,
+        wordle: 0
       },
       gamesWon: {
         lightsout: 0,
@@ -108,7 +114,8 @@ export class ArcadeVault {
         pong: 0,
         fallingblocks: 0,
         mazechaser: 0,
-        asteroids: 0
+        asteroids: 0,
+        wordle: 0
       },
       stats: {},
       highScores: {},
@@ -246,7 +253,7 @@ export class ArcadeVault {
   }
 
   checkArcadeWideAchievements() {
-    const required = ['lightsout', 'snake', 'simon', 'minesweeper', 'game2048', 'dotsandboxes', 'sokoban', 'connectfour', 'breakout', 'pong', 'fallingblocks', 'mazechaser', 'asteroids'];
+    const required = ['lightsout', 'snake', 'simon', 'minesweeper', 'game2048', 'dotsandboxes', 'sokoban', 'connectfour', 'breakout', 'pong', 'fallingblocks', 'mazechaser', 'asteroids', 'wordle'];
     const allPlayed = required.every(id => (this.state.gamesPlayed[id] || 0) > 0);
     if (allPlayed) {
       this.unlock('grandmaster');
@@ -526,3 +533,7 @@ export class ArcadeVault {
 
 // Global Singleton
 export const arcadeVault = new ArcadeVault();
+if (typeof window !== 'undefined') {
+  window.arcadeVault = arcadeVault;
+  window.ArcadeVault = ArcadeVault;
+}

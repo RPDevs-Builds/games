@@ -149,3 +149,7 @@ export class ArcadeGamepad {
 }
 
 export const arcadeGamepad = new ArcadeGamepad();
+if (typeof window !== 'undefined') {
+  window.arcadeGamepad = arcadeGamepad;
+  window.ArcadeGamepad = ArcadeGamepad;
+}

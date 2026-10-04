@@ -148,6 +148,17 @@ const GAMES_DATA = [
     tags: ['Atari 1979', 'Vector Physics', 'Procedural Splitting', 'Alien Saucers', 'PWA Offline', 'Terminal CLI'],
     url: './asteroids/index.html',
     rulesUrl: './asteroids/RULES.md'
+  },
+  {
+    id: 'wordle',
+    title: 'Wordle',
+    year: '2021',
+    icon: '🔤',
+    category: 'puzzle',
+    desc: 'The iconic modern word deduction puzzle (1955 Jotto / 2021 Wordle). 3D flip tiles, 100% offline dictionary, Daily Seed and Practice modes, Hard Mode, and shareable scorecards.',
+    tags: ['Word Deduction', 'Daily Seed', '3D Flip Tiles', 'Hard Mode', 'PWA Offline', 'Terminal CLI'],
+    url: './wordle/index.html',
+    rulesUrl: './wordle/RULES.md'
   }
 ];
 

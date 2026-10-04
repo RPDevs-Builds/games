@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <title>Wordle - Deduction Word Guess (1955 Jotto / 2021 Wordle)</title>
+  <meta name="description" content="Authentic offline Wordle deduction puzzle with 3D flip tiles, Daily and Practice modes, Hard Mode, stats, and Web Audio.">
+  <link rel="manifest" href="manifest.json">
+  <link rel="stylesheet" href="crt.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="arcade-cabinet">
+    <!-- Header -->
+    <header class="cabinet-header">
+      <div class="header-left">
+        <a href="../index.html" class="nav-btn" aria-label="Arcade Vault" title="Return to Arcade Vault">🏛️</a>
+        <div class="mode-select-wrap">
+          <select id="mode-selector" class="mode-select" aria-label="Game Mode">
+            <option value="daily">Daily Seed</option>
+            <option value="practice">Practice Mode</option>
+          </select>
+        </div>
+        <label class="toggle-wrap" title="Hard Mode: Revealed hints must be used in subsequent guesses">
+          <input type="checkbox" id="hardmode-checkbox">
+          <span class="toggle-label">Hard</span>
+        </label>
+      </div>
+
+      <div class="title-group">
+        <h1 class="cabinet-title">🔤 WORDLE</h1>
+        <span class="badge-year">2021</span>
+      </div>
+
+      <div class="header-right">
+        <button id="help-btn" class="icon-btn" aria-label="How to Play" title="How to Play">❓</button>
+        <button id="stats-btn" class="icon-btn" aria-label="Statistics" title="Statistics">📊</button>
+        <button id="mute-btn" class="icon-btn" aria-label="Toggle Sound" title="Sound">🔊</button>
+        <button id="btn-crt" class="icon-btn" aria-label="Toggle CRT Scanlines" title="CRT Scanlines">📺</button>
+      </div>
+    </header>
+
+    <!-- Floating Toast Notification -->
+    <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+    <!-- Main Game Board Well -->
+    <main class="game-area">
+      <div id="grid-container" class="grid-container" aria-label="Wordle 6 by 5 Letter Grid">
+        <!-- 6 rows x 5 tiles generated dynamically -->
+      </div>
+    </main>
+
+    <!-- Virtual On-Screen QWERTY Keyboard -->
+    <footer class="keyboard-area">
+      <div id="keyboard-container" class="keyboard-container" aria-label="Virtual Keyboard">
+        <!-- Keyboard rows generated dynamically -->
+      </div>
+    </footer>
+  </div>
+
+  <!-- Help / How to Play Modal -->
+  <div id="help-modal" class="modal" role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="help-title">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 id="help-title">HOW TO PLAY</h2>
+        <button class="close-modal" aria-label="Close">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p>Guess the <strong>WORDLE</strong> in 6 attempts.</p>
+        <p>Each guess must be a valid 5-letter word. Hit the <strong>ENTER</strong> button to submit.</p>
+        <p>After each guess, the color of the tiles will change to show how close your guess was to the word.</p>
+
+        <hr class="modal-divider">
+
+        <h3>Examples</h3>
+        <div class="example-row">
+          <div class="tile correct">W</div>
+          <div class="tile">E</div>
+          <div class="tile">A</div>
+          <div class="tile">R</div>
+          <div class="tile">Y</div>
+        </div>
+        <p class="example-desc"><strong>W</strong> is in the word and in the correct spot.</p>
+
+        <div class="example-row">
+          <div class="tile">P</div>
+          <div class="tile present">I</div>
+          <div class="tile">L</div>
+          <div class="tile">L</div>
+          <div class="tile">S</div>
+        </div>
+        <p class="example-desc"><strong>I</strong> is in the word but in the wrong spot.</p>
+
+        <div class="example-row">
+          <div class="tile">V</div>
+          <div class="tile">A</div>
+          <div class="tile">G</div>
+          <div class="tile absent">U</div>
+          <div class="tile">E</div>
+        </div>
+        <p class="example-desc"><strong>U</strong> is not in the secret word in any spot.</p>
+
+        <hr class="modal-divider">
+
+        <h3>Game Modes</h3>
+        <p><strong>Daily Seed:</strong> Everyone gets the exact same word based on today's calendar date!</p>
+        <p><strong>Practice Mode:</strong> Endless free play with unlimited randomized words.</p>
+        <p><strong>Hard Mode:</strong> Any revealed green letter must be reused in the exact same position, and any yellow letter must appear in subsequent guesses.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Stats Modal -->
+  <div id="stats-modal" class="modal" role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="stats-title">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 id="stats-title">STATISTICS</h2>
+        <button class="close-modal" aria-label="Close">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div id="stats-view"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Game Over / Victory Modal -->
+  <div id="gameover-modal" class="modal" role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="gameover-title">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 id="gameover-title">VICTORY!</h2>
+        <button class="close-modal" aria-label="Close">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p id="gameover-subtitle" class="gameover-sub"></p>
+        <div id="gameover-word" class="revealed-word"></div>
+        <div id="gameover-stats-view"></div>
+        <div class="modal-actions">
+          <button id="share-btn" class="btn-primary">Share Scorecard 📋</button>
+          <button id="play-again-btn" class="btn-secondary">Play Again 🔄</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Core Scripts -->
+  <script type="module" src="arcade_vault.js"></script>
+  <script type="module" src="crt.js"></script>
+  <script type="module" src="gamepad.js"></script>
+  <script src="words.js"></script>
+  <script src="src/engine.js"></script>
+  <script src="src/audio.js"></script>
+  <script src="src/ui.js"></script>
+  <script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('sw.js').catch(() => {});
+    }
+  </script>
+</body>
+</html>

@@ -27,3 +27,7 @@ export class RetroCRT {
 }
 
 export const retroCRT = new RetroCRT();
+if (typeof window !== 'undefined') {
+  window.retroCRT = retroCRT;
+  window.RetroCRT = RetroCRT;
+}

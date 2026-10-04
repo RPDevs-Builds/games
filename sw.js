@@ -2,7 +2,7 @@
  * Master Arcade Suite Service Worker
  */
 
-const CACHE_NAME = 'rpdevs-arcade-suite-v7';
+const CACHE_NAME = 'rpdevs-arcade-suite-v8';
 const ASSETS = [
   './',
   './index.html',
@@ -38,7 +38,9 @@ const ASSETS = [
   './mazechaser/index.html',
   './mazechaser/style.css',
   './asteroids/index.html',
-  './asteroids/style.css'
+  './asteroids/style.css',
+  './wordle/index.html',
+  './wordle/style.css'
 ];
 
 self.addEventListener('install', (e) => {
