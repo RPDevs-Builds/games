@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <title>Missile Command - 1980 Vector Arcade Classic</title>
+  <meta name="description" content="Classic 1980 Atari Missile Command ballistic missile defense with flak blast physics, 6 cities, 3 silos, and Web Audio synthesis.">
+  <link rel="manifest" href="manifest.json">
+  <link rel="stylesheet" href="crt.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="mc-container">
+    <!-- Header -->
+    <header class="console-header">
+      <div class="title-group">
+        <h1 class="console-title">🚀 MISSILE COMMAND 💥</h1>
+        <span class="badge-year">1980</span>
+      </div>
+      <div class="header-actions">
+        <button id="btn-portal" class="icon-btn" title="Back to Master Arcade">🏛️ Arcade</button>
+        <button id="btn-vault" class="icon-btn" title="Vault & Career Stats">🏆 Vault</button>
+        <button id="btn-sound" class="icon-btn">🔊 Sound</button>
+        <button id="btn-crt" class="icon-btn">📺 CRT</button>
+      </div>
+    </header>
+
+    <!-- Scoreboard Dashboard -->
+    <section class="scoreboard">
+      <div class="stat-box">
+        <span class="stat-label">Score</span>
+        <span id="score-val" class="stat-val">0</span>
+      </div>
+      <div class="stat-box">
+        <span class="stat-label">Wave</span>
+        <span id="wave-val" class="stat-val">1</span>
+      </div>
+      <div class="stat-box">
+        <span class="stat-label">Alpha (A)</span>
+        <span id="ammo-alpha" class="stat-val ammo-val">10</span>
+      </div>
+      <div class="stat-box">
+        <span class="stat-label">Delta (S)</span>
+        <span id="ammo-delta" class="stat-val ammo-val">10</span>
+      </div>
+      <div class="stat-box">
+        <span class="stat-label">Omega (D)</span>
+        <span id="ammo-omega" class="stat-val ammo-val">10</span>
+      </div>
+    </section>
+
+    <!-- Canvas Arena -->
+    <div class="arena-bezel">
+      <canvas id="game-canvas" width="800" height="600" aria-label="Missile Command Radar Screen"></canvas>
+
+      <div id="game-overlay" class="game-overlay">
+        <h2 id="overlay-title" class="overlay-title">THE END</h2>
+        <p id="overlay-msg" class="overlay-msg"></p>
+        <button id="btn-restart" class="action-btn">PLAY AGAIN 🔄</button>
+      </div>
+    </div>
+
+    <footer class="help-footer">
+      <span>🎯 Aim: Mouse / Touch / Analog Stick • Fire: Left Click / Tap / A-S-D Keys / Gamepad Buttons</span>
+    </footer>
+  </div>
+
+  <script type="module">
+    import { MissileCommandUI } from './src/ui.js';
+    window.addEventListener('DOMContentLoaded', () => new MissileCommandUI());
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('./sw.js').catch(() => {});
+    }
+  </script>
+</body>
+</html>

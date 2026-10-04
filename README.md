@@ -33,7 +33,7 @@ All games in this repository follow strict cross-platform design tenets:
 
 | Game | Directory | Type | Rules | Status | Platforms |
 | :--- | :--- | :--- | :--- | :--- | :--- |
-| **Master Arcade** | [`/`](./) | Central Cabinet Launcher (17 Games) | - | 🟢 Production | Web, PWA, Android, Desktop |
+| **Master Arcade** | [`/`](./) | Central Cabinet Launcher (18 Games) | - | 🟢 Production | Web, PWA, Android, Desktop |
 | **Lights Out** | [`lightsout/`](./lightsout) | Binary Logic / 90s Handheld (1995) | [`RULES.md`](./lightsout/RULES.md) | 🟢 Production | Web, PWA, CLI, Android, Desktop |
 | **Retro Snake** | [`snake/`](./snake) | Nokia 3310 Arcade (1997) | [`RULES.md`](./snake/RULES.md) | 🟢 Production | Web, PWA, CLI, Android, Desktop |
 | **Simon** | [`simon/`](./simon) | Handheld Memory (1978) | [`RULES.md`](./simon/RULES.md) | 🟢 Production | Web, PWA, CLI, Android, Desktop |
@@ -51,6 +51,7 @@ All games in this repository follow strict cross-platform design tenets:
 | **Space Invaders** | [`spaceinvaders/`](./spaceinvaders) | Marching Fleet Arcade Classic (1978) | [`RULES.md`](./spaceinvaders/RULES.md) | 🟢 Production | Web, PWA, CLI, Android, Desktop |
 | **Frogger** | [`frogger/`](./frogger) | Highway & River Navigation Classic (1981) | [`RULES.md`](./frogger/RULES.md) | 🟢 Production | Web, PWA, CLI, Android, Desktop |
 | **Othello** | [`othello/`](./othello) | Strategic 8×8 Reversi (1883/1971) | [`RULES.md`](./othello/RULES.md) | 🟢 Production | Web, PWA, CLI, Android, Desktop |
+| **Missile Command** | [`missilecommand/`](./missilecommand) | Ballistic Trajectory Defense (1980) | [`RULES.md`](./missilecommand/RULES.md) | 🟢 Production | Web, PWA, CLI, Android, Desktop |
 
 ---
 
@@ -80,8 +81,9 @@ Open `http://localhost:8080/` in your browser.
 - Space Invaders: `python3 /mnt/sharedroot/projects/games/spaceinvaders/spaceinvaders_cli.py`
 - Frogger: `python3 /mnt/sharedroot/projects/games/frogger/frogger_cli.py`
 - Othello: `python3 /mnt/sharedroot/projects/games/othello/cli/othello_cli.py`
+- Missile Command: `python3 /mnt/sharedroot/projects/games/missilecommand/cli/missilecommand_cli.py`
 
-### Run All Unit Test Suites (119 Tests Across 17 Games)
+### Run All Unit Test Suites (122 Tests Across 18 Games)
 ```bash
 for d in */test; do python3 -m unittest discover -s "$d"; done
 ```

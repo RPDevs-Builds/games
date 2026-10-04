@@ -142,6 +142,14 @@ This catalog tracks all games in the RPDevs Games base, their release status, pl
 - **Features**: 8×8 tactical green felt board, 3-tier Minimax AI with Alpha-Beta pruning, corner-weight heuristic matrices, 2-player local pass-and-play, tactile disc placement/flip audio synthesis.
 - **Platforms**: Web, PWA, Terminal CLI, itch.io, Mobile.
 
+### 18. Missile Command (`missilecommand/`)
+- **Genre**: Ballistic Trajectory Defense / 1980 Vector Arcade Classic
+- **Inspiration**: Atari / Dave Theurer (1980)
+- **Base Directory**: [`/mnt/sharedroot/projects/games/missilecommand/`](./missilecommand)
+- **Rules**: [`RULES.md`](./missilecommand/RULES.md)
+- **Features**: 6 cities, 3 independent missile silos (Alpha, Delta, Omega), incoming ICBM ballistic trails, MIRV cluster splitting, expanding flak blast explosion physics, analog gamepad/crosshair controls.
+- **Platforms**: Web, PWA, Terminal CLI, itch.io, Mobile.
+
 ---
 
 ## 📦 Automated Release Packages (`dist/`)

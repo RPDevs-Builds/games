@@ -127,6 +127,7 @@ get_app_name() {
         spaceinvaders) echo "Space Invaders 1978" ;;
         frogger)      echo "Frogger 1981" ;;
         othello)      echo "Othello (Reversi)" ;;
+        missilecommand) echo "Missile Command" ;;
         portal)       echo "RPDevs Arcade" ;;
         *)            echo "$1" ;;
     esac
@@ -151,6 +152,7 @@ get_pkg_name() {
         spaceinvaders) echo "spaceinvaders" ;;
         frogger)      echo "frogger" ;;
         othello)      echo "othello" ;;
+        missilecommand) echo "missilecommand" ;;
         portal)       echo "arcade" ;;
         *)            echo "$1" ;;
     esac
@@ -175,6 +177,7 @@ get_accent_color() {
         spaceinvaders) echo "#00ff66" ;;
         frogger)      echo "#00ff66" ;;
         othello)      echo "#0e6b38" ;;
+        missilecommand) echo "#ff0055" ;;
         portal)       echo "#a855f7" ;;
         *)            echo "#10b981" ;;
     esac
@@ -635,7 +638,7 @@ log_info "Build Tools Version  : $(basename "${BUILD_TOOLS_DIR}")"
 log_info "Distribution Output  : ${DIST_DIR}"
 echo ""
 
-ALL_GAMES=("lightsout" "snake" "simon" "minesweeper" "2048" "dotsandboxes" "sokoban" "connectfour" "breakout" "pong" "fallingblocks" "mazechaser" "asteroids" "wordle" "spaceinvaders" "frogger" "othello")
+ALL_GAMES=("lightsout" "snake" "simon" "minesweeper" "2048" "dotsandboxes" "sokoban" "connectfour" "breakout" "pong" "fallingblocks" "mazechaser" "asteroids" "wordle" "spaceinvaders" "frogger" "othello" "missilecommand")
 
 if [[ "${TARGET}" == "all" ]]; then
     for game in "${ALL_GAMES[@]}"; do

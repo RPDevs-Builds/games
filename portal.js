@@ -193,6 +193,17 @@ const GAMES_DATA = [
     tags: ['Lewis Waterman 1883', 'Minimax Alpha-Beta', 'Tactical Flips', 'PWA Offline', 'Terminal CLI'],
     url: './othello/index.html',
     rulesUrl: './othello/RULES.md'
+  },
+  {
+    id: 'missilecommand',
+    title: 'Missile Command',
+    year: '1980',
+    icon: '🚀💥',
+    category: 'retro',
+    desc: 'The landmark 1980 Atari planetary ballistic defense classic. Defend 6 cities across 3 missile silos against incoming ICBMs, MIRV clusters, and expanding flak fireballs.',
+    tags: ['Atari 1980', 'Dave Theurer', 'Ballistic Defense', 'Flak Physics', 'PWA Offline', 'Terminal CLI'],
+    url: './missilecommand/index.html',
+    rulesUrl: './missilecommand/RULES.md'
   }
 ];
 

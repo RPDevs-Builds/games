@@ -28,13 +28,14 @@ ACCENT_COLORS = {
     "spaceinvaders": "#00ff66",
     "frogger": "#00ff66",
     "othello": "#0e6b38",
+    "missilecommand": "#ff0055",
     "portal": "#a855f7"
 }
 
 TARGETS = [
     "lightsout", "snake", "simon", "minesweeper", "2048", "dotsandboxes",
     "sokoban", "connectfour", "breakout", "pong", "fallingblocks", "mazechaser",
-    "asteroids", "wordle", "spaceinvaders", "frogger", "othello", "portal"
+    "asteroids", "wordle", "spaceinvaders", "frogger", "othello", "missilecommand", "portal"
 ]
 
 
@@ -183,6 +184,14 @@ def render_icon(target, size=512):
         draw.ellipse([int(136 * scale), int(70 * scale), int(176 * scale), int(110 * scale)], fill='#111111', outline='#333333')
         draw.ellipse([int(80 * scale), int(126 * scale), int(120 * scale), int(166 * scale)], fill='#111111', outline='#333333')
         draw.ellipse([int(136 * scale), int(126 * scale), int(176 * scale), int(166 * scale)], fill='#ffffff', outline='#cccccc')
+    elif target == 'missilecommand':
+        # Flak blast explosions
+        draw.ellipse([int(85 * scale), int(75 * scale), int(171 * scale), int(161 * scale)], fill='#ff0055', outline='#ffe600', width=int(3 * scale))
+        draw.ellipse([int(105 * scale), int(95 * scale), int(151 * scale), int(141 * scale)], fill='#ffe600')
+        # Incoming trajectory line
+        draw.line([int(50 * scale), int(40 * scale), int(128 * scale), int(118 * scale)], fill='#ffffff', width=int(3 * scale))
+        # Silo ground
+        r(70, 180, 186, 195, fill='#3b82f6')
     else:  # Portal
         r(85, 75, 171, 141, fill='#a855f7')
         draw.ellipse([int(100 * scale), int(80 * scale), int(156 * scale), int(136 * scale)], fill='#ffd700')
