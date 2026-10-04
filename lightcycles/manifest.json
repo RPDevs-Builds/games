@@ -1,0 +1,22 @@
+{
+  "name": "Tron Light Cycles - Retro Arcade",
+  "short_name": "LightCycles",
+  "description": "1982 cyber grid arena combat. Leave solid neon light trails, cut off opponents, boost, and survive.",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "orientation": "landscape-primary",
+  "background_color": "#050811",
+  "theme_color": "#00f0ff",
+  "icons": [
+    {
+      "src": "icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

@@ -63,6 +63,7 @@ get_app_name() {
         frogger)      echo "Frogger 1981" ;;
         othello)      echo "Othello (Reversi)" ;;
         missilecommand) echo "Missile Command" ;;
+        lightcycles)  echo "Tron Light Cycles" ;;
         portal)       echo "RPDevs Retro Arcade" ;;
         *)            echo "$1" ;;
     esac
@@ -88,6 +89,7 @@ get_pkg_slug() {
         frogger)      echo "frogger" ;;
         othello)      echo "othello" ;;
         missilecommand) echo "missilecommand" ;;
+        lightcycles)  echo "lightcycles" ;;
         portal)       echo "arcade" ;;
         *)            echo "$1" ;;
     esac
@@ -113,6 +115,7 @@ get_window_dims() {
         frogger)      echo "500 720" ;;
         othello)      echo "600 760" ;;
         missilecommand) echo "840 680" ;;
+        lightcycles)  echo "840 680" ;;
         portal)       echo "1100 800" ;;
         *)            echo "800 600" ;;
     esac
@@ -138,6 +141,7 @@ get_accent_color() {
         frogger)      echo "#00ff66" ;;
         othello)      echo "#0e6b38" ;;
         missilecommand) echo "#ff0055" ;;
+        lightcycles)  echo "#00f0ff" ;;
         portal)       echo "#a855f7" ;;
         *)            echo "#10b981" ;;
     esac
@@ -480,7 +484,7 @@ log_info "Packaging Engine     : WebKitGTK 4.1 + Python 3 + GTK3"
 log_info "Distribution Output  : ${DIST_DIR}"
 echo ""
 
-ALL_GAMES=("lightsout" "snake" "simon" "minesweeper" "2048" "dotsandboxes" "sokoban" "connectfour" "breakout" "pong" "fallingblocks" "mazechaser" "asteroids" "wordle" "spaceinvaders" "frogger" "othello" "missilecommand")
+ALL_GAMES=("lightsout" "snake" "simon" "minesweeper" "2048" "dotsandboxes" "sokoban" "connectfour" "breakout" "pong" "fallingblocks" "mazechaser" "asteroids" "wordle" "spaceinvaders" "frogger" "othello" "missilecommand" "lightcycles")
 
 if [[ "${TARGET}" == "all" ]]; then
     for game in "${ALL_GAMES[@]}"; do

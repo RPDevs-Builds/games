@@ -29,13 +29,15 @@ ACCENT_COLORS = {
     "frogger": "#00ff66",
     "othello": "#0e6b38",
     "missilecommand": "#ff0055",
+    "lightcycles": "#00f0ff",
     "portal": "#a855f7"
 }
 
 TARGETS = [
     "lightsout", "snake", "simon", "minesweeper", "2048", "dotsandboxes",
     "sokoban", "connectfour", "breakout", "pong", "fallingblocks", "mazechaser",
-    "asteroids", "wordle", "spaceinvaders", "frogger", "othello", "missilecommand", "portal"
+    "asteroids", "wordle", "spaceinvaders", "frogger", "othello", "missilecommand",
+    "lightcycles", "portal"
 ]
 
 
@@ -192,6 +194,15 @@ def render_icon(target, size=512):
         draw.line([int(50 * scale), int(40 * scale), int(128 * scale), int(118 * scale)], fill='#ffffff', width=int(3 * scale))
         # Silo ground
         r(70, 180, 186, 195, fill='#3b82f6')
+    elif target == 'lightcycles':
+        # Neon cyan trail & cycle
+        draw.line([int(60 * scale), int(160 * scale), int(60 * scale), int(90 * scale)], fill='#00f0ff', width=int(6 * scale))
+        draw.line([int(60 * scale), int(90 * scale), int(140 * scale), int(90 * scale)], fill='#00f0ff', width=int(6 * scale))
+        draw.ellipse([int(136 * scale), int(84 * scale), int(150 * scale), int(96 * scale)], fill='#ffffff')
+        # Orange opponent trail
+        draw.line([int(196 * scale), int(80 * scale), int(196 * scale), int(150 * scale)], fill='#ff7700', width=int(6 * scale))
+        draw.line([int(196 * scale), int(150 * scale), int(110 * scale), int(150 * scale)], fill='#ff7700', width=int(6 * scale))
+        draw.ellipse([int(104 * scale), int(144 * scale), int(118 * scale), int(156 * scale)], fill='#ffffff')
     else:  # Portal
         r(85, 75, 171, 141, fill='#a855f7')
         draw.ellipse([int(100 * scale), int(80 * scale), int(156 * scale), int(136 * scale)], fill='#ffd700')

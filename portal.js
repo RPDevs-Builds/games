@@ -204,6 +204,17 @@ const GAMES_DATA = [
     tags: ['Atari 1980', 'Dave Theurer', 'Ballistic Defense', 'Flak Physics', 'PWA Offline', 'Terminal CLI'],
     url: './missilecommand/index.html',
     rulesUrl: './missilecommand/RULES.md'
+  },
+  {
+    id: 'lightcycles',
+    title: 'Tron Light Cycles',
+    year: '1982',
+    icon: '🏍️⚡',
+    category: 'retro',
+    desc: 'The legendary 1982 cyber arena duel. Steer high-velocity light cycles leaving solid neon walls, cut off opponents, boost, and force de-rez collisions.',
+    tags: ['Tron 1982', 'Cyber Grid', 'Light Trails', 'Flood-Fill AI', 'PWA Offline', 'Terminal CLI'],
+    url: './lightcycles/index.html',
+    rulesUrl: './lightcycles/RULES.md'
   }
 ];
 

@@ -150,6 +150,14 @@ This catalog tracks all games in the RPDevs Games base, their release status, pl
 - **Features**: 6 cities, 3 independent missile silos (Alpha, Delta, Omega), incoming ICBM ballistic trails, MIRV cluster splitting, expanding flak blast explosion physics, analog gamepad/crosshair controls.
 - **Platforms**: Web, PWA, Terminal CLI, itch.io, Mobile.
 
+### 19. Tron Light Cycles (`lightcycles/`)
+- **Genre**: High-Velocity Cyber Grid Arena / 1982 Arcade Classic
+- **Inspiration**: Bally Midway (1982)
+- **Base Directory**: [`/mnt/sharedroot/projects/games/lightcycles/`](./lightcycles)
+- **Rules**: [`RULES.md`](./lightcycles/RULES.md)
+- **Features**: 100×75 arena grid, solid trailing neon walls, rechargeable turbo boost capacitor, 3-tier flood-fill spatial AI, 2-player local pass-and-play, engine hum and de-rez Web Audio synthesis.
+- **Platforms**: Web, PWA, Terminal CLI, itch.io, Mobile.
+
 ---
 
 ## 📦 Automated Release Packages (`dist/`)

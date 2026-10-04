@@ -50,7 +50,9 @@ export const ACHIEVEMENTS = [
   { id: 'othello_first_flip', title: 'Flanking Strategist', icon: '⚪', desc: 'Play your first game of Othello (Reversi).' },
   { id: 'othello_victor', title: 'Grand Reversal', icon: '👑', desc: 'Defeat the CPU opponent in a match of Othello.' },
   { id: 'missile_cadet', title: 'Planetary Defense Cadet', icon: '🚀', desc: 'Play your first round of Missile Command.' },
-  { id: 'missile_defender', title: 'Strategic Interceptor', icon: '💥', desc: 'Score 5,000+ points defending the planet in Missile Command.' }
+  { id: 'missile_defender', title: 'Strategic Interceptor', icon: '💥', desc: 'Score 5,000+ points defending the planet in Missile Command.' },
+  { id: 'cycle_cadet', title: 'Grid Runner', icon: '🏍️', desc: 'Enter the cyber grid in Tron Light Cycles.' },
+  { id: 'cycle_survivor', title: 'Master of the Grid', icon: '⚡', desc: 'Defeat the CPU opponent in Tron Light Cycles.' }
 ];
 
 export class ArcadeVault {
@@ -116,7 +118,8 @@ export class ArcadeVault {
         spaceinvaders: 0,
         frogger: 0,
         othello: 0,
-        missilecommand: 0
+        missilecommand: 0,
+        lightcycles: 0
       },
       gamesWon: {
         lightsout: 0,
@@ -136,7 +139,8 @@ export class ArcadeVault {
         spaceinvaders: 0,
         frogger: 0,
         othello: 0,
-        missilecommand: 0
+        missilecommand: 0,
+        lightcycles: 0
       },
       stats: {},
       highScores: {},
@@ -174,6 +178,13 @@ export class ArcadeVault {
     }
     this.state.gamesPlayed[gameId]++;
     this.unlock('arcade_initiate');
+    if (gameId === 'missilecommand') {
+      this.unlock('missile_cadet');
+    } else if (gameId === 'lightcycles') {
+      this.unlock('cycle_cadet');
+    } else if (gameId === 'othello') {
+      this.unlock('othello_first_flip');
+    }
     this.checkArcadeWideAchievements();
     this.saveState();
   }
@@ -212,6 +223,10 @@ export class ArcadeVault {
       this.unlock('connect_champion');
     } else if (gameId === 'breakout') {
       this.unlock('breakout_champion');
+    } else if (gameId === 'othello') {
+      this.unlock('othello_victor');
+    } else if (gameId === 'lightcycles') {
+      this.unlock('cycle_survivor');
     }
 
     this.checkArcadeWideAchievements();
@@ -327,7 +342,7 @@ export class ArcadeVault {
   goToArcade(currentGame = '') {
     // 1. If running inside Master Arcade portal or web environment with parent index.html
     const hasParentPortal = (currentGame && window.location.pathname.includes('/' + currentGame + '/')) ||
-                            window.location.pathname.match(/\/(frogger|asteroids|spaceinvaders|mazechaser|fallingblocks|snake|pong|breakout|dotsandboxes|lightsout|connectfour|sokoban|wordle|simon|minesweeper|game2048|2048|othello|missilecommand)\//) ||
+                            window.location.pathname.match(/\/(frogger|asteroids|spaceinvaders|mazechaser|fallingblocks|snake|pong|breakout|dotsandboxes|lightsout|connectfour|sokoban|wordle|simon|minesweeper|game2048|2048|othello|missilecommand|lightcycles)\//) ||
                             (window.location.protocol !== 'file:' && window.location.pathname !== '/' && window.location.pathname !== '/index.html');
 
     if (hasParentPortal) {

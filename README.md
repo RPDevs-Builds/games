@@ -33,7 +33,7 @@ All games in this repository follow strict cross-platform design tenets:
 
 | Game | Directory | Type | Rules | Status | Platforms |
 | :--- | :--- | :--- | :--- | :--- | :--- |
-| **Master Arcade** | [`/`](./) | Central Cabinet Launcher (18 Games) | - | 🟢 Production | Web, PWA, Android, Desktop |
+| **Master Arcade** | [`/`](./) | Central Cabinet Launcher (19 Games) | - | 🟢 Production | Web, PWA, Android, Desktop |
 | **Lights Out** | [`lightsout/`](./lightsout) | Binary Logic / 90s Handheld (1995) | [`RULES.md`](./lightsout/RULES.md) | 🟢 Production | Web, PWA, CLI, Android, Desktop |
 | **Retro Snake** | [`snake/`](./snake) | Nokia 3310 Arcade (1997) | [`RULES.md`](./snake/RULES.md) | 🟢 Production | Web, PWA, CLI, Android, Desktop |
 | **Simon** | [`simon/`](./simon) | Handheld Memory (1978) | [`RULES.md`](./simon/RULES.md) | 🟢 Production | Web, PWA, CLI, Android, Desktop |
@@ -52,6 +52,7 @@ All games in this repository follow strict cross-platform design tenets:
 | **Frogger** | [`frogger/`](./frogger) | Highway & River Navigation Classic (1981) | [`RULES.md`](./frogger/RULES.md) | 🟢 Production | Web, PWA, CLI, Android, Desktop |
 | **Othello** | [`othello/`](./othello) | Strategic 8×8 Reversi (1883/1971) | [`RULES.md`](./othello/RULES.md) | 🟢 Production | Web, PWA, CLI, Android, Desktop |
 | **Missile Command** | [`missilecommand/`](./missilecommand) | Ballistic Trajectory Defense (1980) | [`RULES.md`](./missilecommand/RULES.md) | 🟢 Production | Web, PWA, CLI, Android, Desktop |
+| **Tron Light Cycles** | [`lightcycles/`](./lightcycles) | Cyber Grid Arena Duel (1982) | [`RULES.md`](./lightcycles/RULES.md) | 🟢 Production | Web, PWA, CLI, Android, Desktop |
 
 ---
 

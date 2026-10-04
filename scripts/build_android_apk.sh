@@ -128,6 +128,7 @@ get_app_name() {
         frogger)      echo "Frogger 1981" ;;
         othello)      echo "Othello (Reversi)" ;;
         missilecommand) echo "Missile Command" ;;
+        lightcycles)  echo "Tron Light Cycles" ;;
         portal)       echo "RPDevs Arcade" ;;
         *)            echo "$1" ;;
     esac
@@ -153,6 +154,7 @@ get_pkg_name() {
         frogger)      echo "frogger" ;;
         othello)      echo "othello" ;;
         missilecommand) echo "missilecommand" ;;
+        lightcycles)  echo "lightcycles" ;;
         portal)       echo "arcade" ;;
         *)            echo "$1" ;;
     esac
@@ -178,6 +180,7 @@ get_accent_color() {
         frogger)      echo "#00ff66" ;;
         othello)      echo "#0e6b38" ;;
         missilecommand) echo "#ff0055" ;;
+        lightcycles)  echo "#00f0ff" ;;
         portal)       echo "#a855f7" ;;
         *)            echo "#10b981" ;;
     esac
@@ -638,7 +641,7 @@ log_info "Build Tools Version  : $(basename "${BUILD_TOOLS_DIR}")"
 log_info "Distribution Output  : ${DIST_DIR}"
 echo ""
 
-ALL_GAMES=("lightsout" "snake" "simon" "minesweeper" "2048" "dotsandboxes" "sokoban" "connectfour" "breakout" "pong" "fallingblocks" "mazechaser" "asteroids" "wordle" "spaceinvaders" "frogger" "othello" "missilecommand")
+ALL_GAMES=("lightsout" "snake" "simon" "minesweeper" "2048" "dotsandboxes" "sokoban" "connectfour" "breakout" "pong" "fallingblocks" "mazechaser" "asteroids" "wordle" "spaceinvaders" "frogger" "othello" "missilecommand" "lightcycles")
 
 if [[ "${TARGET}" == "all" ]]; then
     for game in "${ALL_GAMES[@]}"; do

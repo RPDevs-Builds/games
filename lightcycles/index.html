@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <title>Tron Light Cycles - 1982 Cyber Arcade Classic</title>
+  <meta name="description" content="Classic 1982 Bally Midway Tron Light Cycles arena battle with solid neon trails, boost speedups, predictive flood-fill AI, and local 2-Player mode.">
+  <link rel="manifest" href="manifest.json">
+  <link rel="stylesheet" href="crt.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="cycle-container">
+    <!-- Header -->
+    <header class="console-header">
+      <div class="title-group">
+        <h1 class="console-title">🏍️ TRON LIGHT CYCLES ⚡</h1>
+        <span class="badge-year">1982</span>
+      </div>
+      <div class="header-actions">
+        <button id="btn-portal" class="icon-btn" title="Back to Master Arcade">🏛️ Arcade</button>
+        <button id="btn-vault" class="icon-btn" title="Vault & Career Stats">🏆 Vault</button>
+        <button id="btn-sound" class="icon-btn">🔊 Sound</button>
+        <button id="btn-crt" class="icon-btn">📺 CRT</button>
+      </div>
+    </header>
+
+    <!-- Scoreboard Dashboard -->
+    <section class="scoreboard">
+      <div class="stat-box">
+        <span class="stat-label">P1 (Blue)</span>
+        <span id="score-p1" class="stat-val p1-val">0</span>
+      </div>
+      <div class="stat-box" style="padding: 2px;">
+        <select id="select-mode" class="styled-select" aria-label="Game Mode">
+          <option value="ai" selected>🤖 vs Computer</option>
+          <option value="pvp">👥 2 Players (Local)</option>
+        </select>
+      </div>
+      <div class="stat-box">
+        <span class="stat-label">P2 (Orange)</span>
+        <span id="score-p2" class="stat-val p2-val">0</span>
+      </div>
+    </section>
+
+    <!-- Boost Bars -->
+    <div class="boost-panel">
+      <div class="boost-bar-wrap">
+        <span class="boost-label">P1 Turbo Boost (Shift/Space)</span>
+        <div class="boost-track"><div id="boost-p1-bar" class="boost-fill p1-boost"></div></div>
+      </div>
+      <div class="boost-bar-wrap">
+        <span class="boost-label">P2 Turbo Boost</span>
+        <div class="boost-track"><div id="boost-p2-bar" class="boost-fill p2-boost"></div></div>
+      </div>
+    </div>
+
+    <!-- Canvas Arena -->
+    <div class="arena-bezel">
+      <canvas id="game-canvas" width="800" height="600" aria-label="Tron Light Cycles Arena"></canvas>
+
+      <div id="game-overlay" class="game-overlay">
+        <h2 id="overlay-title" class="overlay-title">DE-REZ!</h2>
+        <p id="overlay-msg" class="overlay-msg"></p>
+        <button id="btn-restart" class="action-btn">NEW ROUND 🔄</button>
+      </div>
+    </div>
+
+    <!-- Touch Mobile D-Pad -->
+    <div class="touch-dpad">
+      <div></div>
+      <button id="btn-up" class="dpad-btn">▲</button>
+      <div></div>
+      <button id="btn-left" class="dpad-btn">◀</button>
+      <button id="btn-down" class="dpad-btn">▼</button>
+      <button id="btn-right" class="dpad-btn">▶</button>
+    </div>
+  </div>
+
+  <script type="module">
+    import { LightCyclesUI } from './src/ui.js';
+    window.addEventListener('DOMContentLoaded', () => new LightCyclesUI());
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('./sw.js').catch(() => {});
+    }
+  </script>
+</body>
+</html>
