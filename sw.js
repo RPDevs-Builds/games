@@ -2,7 +2,7 @@
  * Master Arcade Suite Service Worker
  */
 
-const CACHE_NAME = 'rpdevs-arcade-suite-v3';
+const CACHE_NAME = 'rpdevs-arcade-suite-v4';
 const ASSETS = [
   './',
   './index.html',
@@ -30,7 +30,9 @@ const ASSETS = [
   './connectfour/index.html',
   './connectfour/style.css',
   './breakout/index.html',
-  './breakout/style.css'
+  './breakout/style.css',
+  './pong/index.html',
+  './pong/style.css'
 ];
 
 self.addEventListener('install', (e) => {

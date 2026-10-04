@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <title>Pong - 1972 Atari Arcade Classic</title>
+  <meta name="description" content="Authentic 1972 Atari Pong paddle tennis with 2D physics, predictive AI, 2-player local mode, and Web Audio.">
+  <link rel="manifest" href="manifest.json">
+  <link rel="stylesheet" href="crt.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="arcade-cabinet">
+    <!-- Header -->
+    <header class="cabinet-header">
+      <div class="title-group">
+        <h1 class="cabinet-title">🏓 PONG</h1>
+        <span class="badge-year">1972</span>
+      </div>
+      <div class="header-actions">
+        <button id="btn-sound" class="icon-btn">🔊 Sound</button>
+        <button id="btn-crt" class="icon-btn">📺 CRT</button>
+      </div>
+    </header>
+
+    <!-- Configuration & Mode Selectors -->
+    <div class="config-bar">
+      <select id="select-mode" class="arcade-select" aria-label="Game Mode">
+        <option value="1p">1-Player (vs CPU)</option>
+        <option value="2p">2-Player (Local)</option>
+      </select>
+      <select id="select-diff" class="arcade-select" aria-label="Difficulty">
+        <option value="easy">Easy AI</option>
+        <option value="medium" selected>Medium AI</option>
+        <option value="impossible">Impossible AI</option>
+      </select>
+    </div>
+
+    <!-- Scoreboard Dashboard -->
+    <section class="metrics-panel">
+      <div class="metric-box">
+        <span class="metric-label">PLAYER 1</span>
+        <span id="stat-score-p1" class="metric-val">0</span>
+      </div>
+      <div class="metric-box vs-box">
+        <span class="vs-text">VS</span>
+      </div>
+      <div class="metric-box">
+        <span id="label-p2" class="metric-label">CPU (AI)</span>
+        <span id="stat-score-p2" class="metric-val">0</span>
+      </div>
+    </section>
+
+    <!-- Canvas Arcade Arena -->
+    <main class="arena-well">
+      <div class="canvas-wrapper">
+        <canvas id="pong-canvas"></canvas>
+        <div id="game-overlay" class="game-overlay" style="display: none;">
+          <div id="overlay-msg" class="overlay-title">GAME OVER</div>
+          <div class="overlay-actions">
+            <button id="btn-play-again" onclick="document.getElementById('btn-restart').click()" class="btn-primary">Play Again ➔</button>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- Control Actions Bar -->
+    <div class="actions-row">
+      <button id="btn-serve" class="action-btn btn-highlight">🏓 Serve (Space)</button>
+      <button id="btn-restart" class="action-btn">🔄 Reset (R)</button>
+    </div>
+
+    <!-- Virtual Touch Keypad for Mobile -->
+    <div class="touch-bar">
+      <button id="btn-up" class="pad-btn" aria-label="Paddle Up">▲ UP</button>
+      <button id="btn-down" class="pad-btn" aria-label="Paddle Down">DOWN ▼</button>
+    </div>
+  </div>
+
+  <script type="module">
+    import { PongUI } from './src/ui.js';
+    window.addEventListener('DOMContentLoaded', () => new PongUI());
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('./sw.js').catch(() => {});
+    }
+  </script>
+</body>
+</html>

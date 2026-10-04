@@ -5,7 +5,7 @@
 
 export const ACHIEVEMENTS = [
   { id: 'arcade_initiate', title: 'Arcade Initiate', icon: '🎟️', desc: 'Play your first game in the RPDevs Retro Arcade.' },
-  { id: 'grandmaster', title: 'Grandmaster of the Arcade', icon: '👑', desc: 'Play at least once across all 9 classic arcade games.' },
+  { id: 'grandmaster', title: 'Grandmaster of the Arcade', icon: '👑', desc: 'Play at least once across all 10 classic arcade games.' },
   { id: 'lightsout_apprentice', title: 'Illuminator', icon: '💡', desc: 'Solve your first Lights Out puzzle.' },
   { id: 'lightsout_expert', title: 'Master of GF(2)', icon: '⚡', desc: 'Solve a 5×5 or larger Lights Out puzzle.' },
   { id: 'snake_charmer', title: 'Snake Charmer', icon: '🐍', desc: 'Reach a score of at least 10 in Retro Snake.' },
@@ -19,7 +19,9 @@ export const ACHIEVEMENTS = [
   { id: 'warehouse_manager', title: 'Warehouse Foreman', icon: '👷', desc: 'Solve a Sokoban box-pushing puzzle.' },
   { id: 'connect_champion', title: 'Vertical Tactician', icon: '🟡', desc: 'Beat the Connect Four AI opponent.' },
   { id: 'brick_breaker', title: 'Demolition Specialist', icon: '🧱', desc: 'Score 50+ points in Breakout.' },
-  { id: 'breakout_champion', title: 'Breakout Champion', icon: '🏆', desc: 'Clear all bricks and achieve victory in Breakout.' }
+  { id: 'breakout_champion', title: 'Breakout Champion', icon: '🏆', desc: 'Clear all bricks and achieve victory in Breakout.' },
+  { id: 'pong_paddle', title: 'Table Tennis Prodigy', icon: '🏓', desc: 'Win a match of Pong against the CPU.' },
+  { id: 'pong_shutout', title: 'Clean Sweep', icon: '⭐', desc: 'Achieve a shutout victory in Pong without conceding a point.' }
 ];
 
 export class ArcadeVault {
@@ -76,7 +78,8 @@ export class ArcadeVault {
         dotsandboxes: 0,
         sokoban: 0,
         connectfour: 0,
-        breakout: 0
+        breakout: 0,
+        pong: 0
       },
       gamesWon: {
         lightsout: 0,
@@ -87,7 +90,8 @@ export class ArcadeVault {
         dotsandboxes: 0,
         sokoban: 0,
         connectfour: 0,
-        breakout: 0
+        breakout: 0,
+        pong: 0
       },
       highScores: {},
       unlockedAchievements: {}
@@ -199,7 +203,7 @@ export class ArcadeVault {
   }
 
   checkArcadeWideAchievements() {
-    const required = ['lightsout', 'snake', 'simon', 'minesweeper', 'game2048', 'dotsandboxes', 'sokoban', 'connectfour', 'breakout'];
+    const required = ['lightsout', 'snake', 'simon', 'minesweeper', 'game2048', 'dotsandboxes', 'sokoban', 'connectfour', 'breakout', 'pong'];
     const allPlayed = required.every(id => (this.state.gamesPlayed[id] || 0) > 0);
     if (allPlayed) {
       this.unlock('grandmaster');

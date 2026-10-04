@@ -15,6 +15,10 @@ export class ArcadeGamepad {
     this.bindEvents();
   }
 
+  init() {
+    // Already bound via constructor
+  }
+
   bindEvents() {
     window.addEventListener('gamepadconnected', (e) => {
       this.controllers[e.gamepad.index] = e.gamepad;

@@ -104,6 +104,17 @@ const GAMES_DATA = [
     tags: ['Atari 1976', 'Paddle Physics', 'Retro Audio', 'PWA Offline', 'Terminal CLI'],
     url: './breakout/index.html',
     rulesUrl: './breakout/RULES.md'
+  },
+  {
+    id: 'pong',
+    title: 'Pong',
+    year: '1972',
+    icon: '🏓',
+    category: 'retro',
+    desc: 'The original 1972 Atari paddle tennis arcade classic. 2D deflection physics, 1P vs predictive AI, 2-player local mode, and authentic square-wave audio.',
+    tags: ['Atari 1972', 'Paddle Physics', 'Local 2P', 'PWA Offline', 'Terminal CLI'],
+    url: './pong/index.html',
+    rulesUrl: './pong/RULES.md'
   }
 ];
 
@@ -117,6 +128,7 @@ class ArcadePortal {
 
     this.bindEvents();
     this.bindArcadeControls();
+    this.initAttractMode();
     this.render();
   }
 
@@ -193,6 +205,85 @@ class ArcadePortal {
       `;
       this.gridEl.appendChild(card);
     });
+  }
+
+  initAttractMode() {
+    this.idleTimer = null;
+    this.attractActive = false;
+    this.attractEl = null;
+
+    const resetIdle = () => {
+      if (this.attractActive) {
+        this.exitAttractMode();
+      }
+      clearTimeout(this.idleTimer);
+      this.idleTimer = setTimeout(() => this.enterAttractMode(), 45000); // 45 seconds idle
+    };
+
+    ['mousemove', 'mousedown', 'keydown', 'touchstart', 'scroll'].forEach(evt => {
+      window.addEventListener(evt, resetIdle, { passive: true });
+    });
+
+    this.idleTimer = setTimeout(() => this.enterAttractMode(), 45000);
+  }
+
+  enterAttractMode() {
+    if (this.attractActive) return;
+    this.attractActive = true;
+
+    this.attractEl = document.createElement('div');
+    this.attractEl.id = 'arcade-attract-overlay';
+    this.attractEl.className = 'arcade-attract-overlay';
+    this.attractEl.innerHTML = `
+      <div class="attract-cabinet-frame">
+        <div class="attract-marquee">
+          <div class="marquee-neon">★ RPDevs RETRO ARCADE ★</div>
+          <div class="marquee-subtitle">10 ZERO-DEPENDENCY CLASSIC HITS</div>
+        </div>
+        <div class="attract-featured">
+          <div id="attract-game-icon" class="attract-icon">🏓</div>
+          <div id="attract-game-title" class="attract-title">PONG (1972)</div>
+          <div id="attract-game-tag" class="attract-tag">THE REVOLUTION THAT STARTED IT ALL</div>
+        </div>
+        <div class="attract-coin-slot">
+          <div class="insert-coin-blink">★ INSERT COIN OR TAP TO PLAY ★</div>
+          <div class="attract-credits">FREE PLAY • CREDITS: 99</div>
+        </div>
+      </div>
+    `;
+
+    document.body.appendChild(this.attractEl);
+
+    // Cycle through all games in attract mode every 3 seconds
+    let idx = 0;
+    this.attractInterval = setInterval(() => {
+      if (!this.attractActive) return;
+      idx = (idx + 1) % GAMES_DATA.length;
+      const g = GAMES_DATA[idx];
+      const iconEl = document.getElementById('attract-game-icon');
+      const titleEl = document.getElementById('attract-game-title');
+      const tagEl = document.getElementById('attract-game-tag');
+      if (iconEl && titleEl && tagEl) {
+        iconEl.textContent = g.icon;
+        titleEl.textContent = `${g.title.toUpperCase()} (${g.year})`;
+        tagEl.textContent = g.tags[0] || g.desc;
+      }
+    }, 3000);
+
+    this.attractEl.onclick = () => this.exitAttractMode();
+  }
+
+  exitAttractMode() {
+    if (!this.attractActive) return;
+    this.attractActive = false;
+    clearInterval(this.attractInterval);
+    if (this.attractEl) {
+      this.attractEl.classList.add('fade-out');
+      setTimeout(() => {
+        if (this.attractEl) this.attractEl.remove();
+        this.attractEl = null;
+      }, 300);
+    }
   }
 }
 

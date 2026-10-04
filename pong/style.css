@@ -1,0 +1,299 @@
+/**
+ * Pong Retro 1972 Arcade Cabinet Styling
+ * Responsive, hardware-accelerated, and optimized for mobile screens.
+ */
+
+:root {
+  --bg-primary: #0a0d14;
+  --bg-panel: #141923;
+  --bg-well: #07090e;
+  --border-color: #273142;
+  --text-main: #f0f6fc;
+  --text-dim: #8b949e;
+  --accent-cyan: #00f0ff;
+  --accent-yellow: #ffe600;
+  --accent-red: #ff0055;
+  --accent-green: #10b981;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
+}
+
+body {
+  background-color: var(--bg-primary);
+  color: var(--text-main);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 8px;
+}
+
+.arcade-cabinet {
+  width: 100%;
+  max-width: 500px;
+  background-color: var(--bg-panel);
+  border: 1px solid var(--border-color);
+  border-radius: 14px;
+  padding: 12px;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.65), 0 0 20px rgba(0, 240, 255, 0.08);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* Header */
+.cabinet-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.title-group {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.cabinet-title {
+  font-size: 1.25rem;
+  font-weight: 900;
+  letter-spacing: 1px;
+  color: var(--text-main);
+}
+
+.badge-year {
+  background: rgba(0, 240, 255, 0.15);
+  color: var(--accent-cyan);
+  border: 1px solid rgba(0, 240, 255, 0.35);
+  font-size: 0.7rem;
+  font-weight: 700;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-family: monospace;
+}
+
+.header-actions {
+  display: flex;
+  gap: 6px;
+}
+
+.icon-btn {
+  background: #1e2638;
+  border: 1px solid var(--border-color);
+  color: var(--text-dim);
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.icon-btn.active, .icon-btn:hover {
+  border-color: var(--accent-cyan);
+  color: var(--accent-cyan);
+}
+
+/* Configuration Row */
+.config-bar {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+
+.arcade-select {
+  background: #111622;
+  border: 1px solid var(--border-color);
+  color: var(--text-main);
+  padding: 6px 10px;
+  border-radius: 6px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  outline: none;
+}
+
+.arcade-select:focus {
+  border-color: var(--accent-cyan);
+}
+
+/* Scoreboard */
+.metrics-panel {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  gap: 8px;
+  align-items: center;
+}
+
+.metric-box {
+  background: #0f131c;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  padding: 6px 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.metric-label {
+  font-size: 0.65rem;
+  font-weight: 700;
+  color: var(--text-dim);
+  letter-spacing: 0.5px;
+}
+
+.metric-val {
+  font-size: 1.4rem;
+  font-weight: 900;
+  color: var(--accent-cyan);
+  font-family: 'Courier New', Courier, monospace;
+}
+
+.vs-box {
+  background: transparent;
+  border: none;
+  padding: 0;
+}
+
+.vs-text {
+  font-size: 0.9rem;
+  font-weight: 900;
+  color: var(--accent-red);
+  letter-spacing: 1px;
+}
+
+/* Arena & Canvas */
+.arena-well {
+  background: var(--bg-well);
+  border: 2px solid var(--border-color);
+  border-radius: 10px;
+  overflow: hidden;
+  position: relative;
+  box-shadow: inset 0 4px 16px rgba(0, 0, 0, 0.8);
+}
+
+.canvas-wrapper {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 640 / 480;
+}
+
+#pong-canvas {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: contain;
+}
+
+/* Overlay */
+.game-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(10, 13, 20, 0.88);
+  backdrop-filter: blur(4px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+  z-index: 10;
+  animation: fadeIn 0.2s ease;
+}
+
+.overlay-title {
+  font-size: 1.3rem;
+  font-weight: 900;
+  letter-spacing: 1px;
+  color: var(--accent-yellow);
+  text-align: center;
+  text-shadow: 0 0 12px rgba(255, 230, 0, 0.4);
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, var(--accent-cyan), #00a6ff);
+  color: #07090e;
+  border: none;
+  padding: 10px 24px;
+  font-size: 0.95rem;
+  font-weight: 800;
+  border-radius: 8px;
+  cursor: pointer;
+  box-shadow: 0 4px 14px rgba(0, 240, 255, 0.4);
+}
+
+/* Action Controls Bar */
+.actions-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+
+.action-btn {
+  background: #1a2232;
+  border: 1px solid var(--border-color);
+  color: var(--text-main);
+  padding: 10px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 6px;
+}
+
+.action-btn:hover {
+  background: #232e44;
+}
+
+.action-btn.btn-highlight {
+  background: rgba(0, 240, 255, 0.12);
+  border-color: rgba(0, 240, 255, 0.4);
+  color: var(--accent-cyan);
+}
+
+/* Mobile Virtual Touch Keypad */
+.touch-bar {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  padding-top: 2px;
+}
+
+.pad-btn {
+  background: #161c28;
+  border: 1px solid var(--border-color);
+  color: #c9d1d9;
+  font-size: 1.05rem;
+  font-weight: 800;
+  padding: 14px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background 0.1s, transform 0.05s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+}
+
+.pad-btn:active {
+  background: #253046;
+  border-color: var(--accent-cyan);
+  color: var(--accent-cyan);
+  transform: translateY(2px);
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
