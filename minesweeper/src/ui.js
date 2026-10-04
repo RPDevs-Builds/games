@@ -1,5 +1,7 @@
 import { MinesweeperEngine } from './engine.js';
 import { MinesweeperAudio } from './audio.js';
+import { arcadeVault } from '../arcade_vault.js';
+import { retroCRT } from '../crt.js';
 
 export class MinesweeperUI {
   constructor() {
@@ -18,6 +20,7 @@ export class MinesweeperUI {
 
     this.bindEvents();
     this.render();
+    arcadeVault.recordPlay('minesweeper');
   }
 
   bindEvents() {
@@ -36,6 +39,17 @@ export class MinesweeperUI {
         this.flagModeBtn.textContent = this.flagMode ? '🚩 Flag: ON' : '🚩 Flag: OFF';
       };
     }
+
+    const menuSound = document.getElementById('menu-sound');
+    if (menuSound) {
+      menuSound.textContent = this.audio.muted ? '🔇 Sound' : '🔊 Sound';
+      menuSound.onclick = () => {
+        const muted = this.audio.toggleMute();
+        menuSound.textContent = muted ? '🔇 Sound' : '🔊 Sound';
+      };
+    }
+    const menuCrt = document.getElementById('menu-crt');
+    if (menuCrt) menuCrt.onclick = () => retroCRT.toggle();
   }
 
   startTimer() {
@@ -134,6 +148,7 @@ export class MinesweeperUI {
       this.audio.playWin();
       this.faceBtn.textContent = '😎';
       this.flagAllMines();
+      arcadeVault.recordWin('minesweeper', { difficulty: this.diffSelect ? this.diffSelect.value : 'beginner' });
     }
   }
 

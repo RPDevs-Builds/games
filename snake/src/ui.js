@@ -1,5 +1,8 @@
 import { SnakeEngine, DIRECTION } from './engine.js';
 import { SnakeAudio } from './audio.js';
+import { arcadeVault } from '../arcade_vault.js';
+import { arcadeGamepad } from '../gamepad.js';
+import { retroCRT } from '../crt.js';
 
 export class SnakeUI {
   constructor() {
@@ -62,10 +65,16 @@ export class SnakeUI {
     document.getElementById('btn-right').onclick = () => { if (this.engine.setDirection(DIRECTION.RIGHT)) this.audio.playTurn(); };
     document.getElementById('btn-pause').onclick = () => this.togglePause();
     document.getElementById('btn-restart').onclick = () => this.start();
-    document.getElementById('btn-sound').onclick = (e) => {
-      this.audio.muted = !this.audio.muted;
-      e.target.textContent = this.audio.muted ? '🔇 Sound' : '🔊 Sound';
-    };
+    const btnSound = document.getElementById('btn-sound');
+    if (btnSound) {
+      btnSound.textContent = this.audio.muted ? '🔇 Sound' : '🔊 Sound';
+      btnSound.onclick = (e) => {
+        const muted = this.audio.toggleMute();
+        e.target.textContent = muted ? '🔇 Sound' : '🔊 Sound';
+      };
+    }
+    const btnCrt = document.getElementById('btn-crt');
+    if (btnCrt) btnCrt.onclick = () => retroCRT.toggle();
 
     // Touch swipe gesture controls on LCD screen
     let touchStartX = 0;
@@ -107,6 +116,7 @@ export class SnakeUI {
     this.tickRate = 130;
     if (this.loopId) clearInterval(this.loopId);
     this.loopId = setInterval(() => this.update(), this.tickRate);
+    arcadeVault.recordPlay('snake');
   }
 
   togglePause() {
@@ -130,6 +140,7 @@ export class SnakeUI {
     if (res.event.startsWith('collision')) {
       clearInterval(this.loopId);
       this.audio.playGameOver();
+      arcadeVault.recordScore('snake', this.engine.score);
       if (this.engine.score > this.highScore) {
         this.highScore = this.engine.score;
         localStorage.setItem('snake_highscore', this.highScore);
@@ -140,6 +151,7 @@ export class SnakeUI {
     } else if (res.event === 'eat') {
       this.audio.playEat();
       this.scoreEl.textContent = res.score;
+      arcadeVault.recordScore('snake', res.score);
       // Progressive speed increase
       if (this.tickRate > 60) {
         this.tickRate = Math.max(60, this.tickRate - 3);

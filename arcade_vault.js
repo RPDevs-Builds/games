@@ -28,6 +28,22 @@ export class ArcadeVault {
     this.checkArcadeWideAchievements();
   }
 
+  isAudioMuted() {
+    try {
+      return localStorage.getItem('rpdevs_arcade_audio_muted') === 'true';
+    } catch {
+      return false;
+    }
+  }
+
+  setAudioMuted(muted) {
+    try {
+      localStorage.setItem('rpdevs_arcade_audio_muted', muted ? 'true' : 'false');
+    } catch {
+      // ignore
+    }
+  }
+
   loadState() {
     const defaults = {
       version: 1,

@@ -94,10 +94,15 @@ export class SokobanUI {
 
     document.getElementById('btn-undo').onclick = () => this.handleUndo();
     document.getElementById('btn-reset').onclick = () => this.resetLevel();
-    document.getElementById('btn-sound').onclick = (e) => {
-      this.audio.muted = !this.audio.muted;
-      e.target.textContent = this.audio.muted ? '🔇 Sound' : '🔊 Sound';
-    };
+    const btnSound = document.getElementById('btn-sound');
+    if (btnSound) {
+      btnSound.textContent = this.audio.muted ? '🔇 Sound' : '🔊 Sound';
+      btnSound.onclick = (e) => {
+        const muted = this.audio.toggleMute();
+        e.target.textContent = muted ? '🔇 Sound' : '🔊 Sound';
+      };
+    const btnCrt = document.getElementById('btn-crt');
+    if (btnCrt) btnCrt.onclick = () => retroCRT.toggle();
 
     if (this.btnDeadlock) {
       this.btnDeadlock.onclick = () => {

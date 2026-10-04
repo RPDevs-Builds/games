@@ -1,4 +1,4 @@
-const CACHE_NAME = '2048-cache-v1';
+const CACHE_NAME = '2048-cache-v2';
 const ASSETS = [
   './',
   './index.html',
@@ -6,7 +6,11 @@ const ASSETS = [
   './manifest.json',
   './src/engine.js',
   './src/audio.js',
-  './src/ui.js'
+  './src/ui.js',
+  './crt.css',
+  './crt.js',
+  './arcade_vault.js',
+  './gamepad.js'
 ];
 
 self.addEventListener('install', (e) => {

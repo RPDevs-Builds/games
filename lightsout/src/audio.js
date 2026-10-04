@@ -13,9 +13,14 @@ export class RetroAudio {
 
   loadSettings() {
     try {
-      const storedMute = localStorage.getItem('lightsout_audio_muted');
-      if (storedMute !== null) {
-        this.muted = storedMute === 'true';
+      const globalMute = localStorage.getItem('rpdevs_arcade_audio_muted');
+      if (globalMute !== null) {
+        this.muted = globalMute === 'true';
+      } else {
+        const storedMute = localStorage.getItem('lightsout_audio_muted');
+        if (storedMute !== null) {
+          this.muted = storedMute === 'true';
+        }
       }
     } catch {
       // LocalStorage fallback
@@ -25,6 +30,7 @@ export class RetroAudio {
   saveSettings() {
     try {
       localStorage.setItem('lightsout_audio_muted', this.muted);
+      localStorage.setItem('rpdevs_arcade_audio_muted', this.muted);
     } catch {
       // Ignore
     }

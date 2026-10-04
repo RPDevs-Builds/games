@@ -6,6 +6,9 @@
 import { LightsOutEngine } from './engine.js';
 import { RetroAudio } from './audio.js';
 import { GameStorage } from './storage.js';
+import { arcadeVault } from '../arcade_vault.js';
+import { arcadeGamepad } from '../gamepad.js';
+import { retroCRT } from '../crt.js';
 
 // Pre-defined campaign levels (guaranteed solvable puzzles with target par moves)
 const CAMPAIGN_LEVELS = [
@@ -44,6 +47,9 @@ export class LightsOutUI {
     this.bindEvents();
     this.applyTheme(this.storage.getTheme());
     this.checkUrlForPuzzle();
+    arcadeVault.recordPlay('lightsout');
+    const btnCrt = document.getElementById('btn-crt');
+    if (btnCrt) btnCrt.onclick = () => retroCRT.toggle();
   }
 
   cacheElements() {
@@ -436,6 +442,7 @@ export class LightsOutUI {
   handleVictory() {
     this.stopTimer();
     this.audio.playVictory();
+    arcadeVault.recordWin('lightsout', { size: Math.max(this.engine.rows, this.engine.cols) });
 
     const scoreKey = `${this.engine.rows}x${this.engine.cols}_${this.currentMode}`;
     const best = this.storage.recordWin(scoreKey, this.engine.moveCount, this.elapsedSeconds);

@@ -1,5 +1,7 @@
 import { SimonEngine } from './engine.js';
 import { SimonAudio } from './audio.js';
+import { arcadeVault } from '../arcade_vault.js';
+import { retroCRT } from '../crt.js';
 
 export class SimonUI {
   constructor() {
@@ -27,10 +29,13 @@ export class SimonUI {
       this.engine.strict = !this.engine.strict;
       this.btnStrict.style.background = this.engine.strict ? '#e74c3c' : '#30363d';
     };
+    this.btnSound.textContent = this.audio.muted ? '🔇' : '🔊';
     this.btnSound.onclick = () => {
-      this.audio.muted = !this.audio.muted;
-      this.btnSound.textContent = this.audio.muted ? '🔇' : '🔊';
+      const muted = this.audio.toggleMute();
+      this.btnSound.textContent = muted ? '🔇' : '🔊';
     };
+    const btnCrt = document.getElementById('btn-crt');
+    if (btnCrt) btnCrt.onclick = () => retroCRT.toggle();
 
     // Pad inputs
     Object.keys(this.pads).forEach(color => {
@@ -81,6 +86,7 @@ export class SimonUI {
     this.engine.start();
     this.counterEl.textContent = '01';
     this.playSequence();
+    arcadeVault.recordPlay('simon');
   }
 
   handlePlayerPress(color) {
@@ -93,11 +99,16 @@ export class SimonUI {
       const roundStr = res.nextRound.toString().padStart(2, '0');
       this.counterEl.textContent = roundStr;
       this.statusEl.textContent = 'GOOD! NEXT ROUND...';
+      arcadeVault.recordScore('simon', res.nextRound - 1);
+      if (this.engine.strict && (res.nextRound - 1) >= 15) {
+        arcadeVault.unlock('simon_genius');
+      }
       setTimeout(() => this.playSequence(), 800);
     } else if (res.status === 'error') {
       this.audio.playError();
       this.counterEl.textContent = '!!';
       this.statusEl.textContent = `MISTAKE! Final Score: ${res.round - 1}`;
+      arcadeVault.recordScore('simon', res.round - 1);
       if (this.engine.strict) {
         setTimeout(() => this.startGame(), 1500);
       }

@@ -1,5 +1,7 @@
 import { Game2048Engine } from './engine.js';
 import { Game2048Audio } from './audio.js';
+import { arcadeVault } from '../arcade_vault.js';
+import { retroCRT } from '../crt.js';
 
 export class Game2048UI {
   constructor() {
@@ -20,6 +22,7 @@ export class Game2048UI {
 
     this.bindEvents();
     this.render();
+    arcadeVault.recordPlay('game2048');
   }
 
   bindEvents() {
@@ -31,6 +34,17 @@ export class Game2048UI {
         this.overlayEl.style.display = 'none';
       };
     }
+
+    const btnSound = document.getElementById('btn-sound');
+    if (btnSound) {
+      btnSound.textContent = this.audio.muted ? '🔇' : '🔊';
+      btnSound.onclick = () => {
+        const muted = this.audio.toggleMute();
+        btnSound.textContent = muted ? '🔇' : '🔊';
+      };
+    }
+    const btnCrt = document.getElementById('btn-crt');
+    if (btnCrt) btnCrt.onclick = () => retroCRT.toggle();
 
     // Keyboard
     window.addEventListener('keydown', (e) => {
@@ -99,10 +113,14 @@ export class Game2048UI {
 
     this.render();
 
+    const maxTile = Math.max(...this.engine.grid.flat());
+    arcadeVault.recordScore('game2048', maxTile);
+
     if (res.won) {
       this.overlayMsg.textContent = 'YOU WIN!';
       this.btnContinue.style.display = 'inline-block';
       this.overlayEl.style.display = 'flex';
+      arcadeVault.recordWin('game2048', maxTile);
     } else if (res.gameOver) {
       this.overlayMsg.textContent = 'GAME OVER!';
       this.btnContinue.style.display = 'none';
@@ -121,6 +139,7 @@ export class Game2048UI {
     this.engine.reset();
     this.overlayEl.style.display = 'none';
     this.render();
+    arcadeVault.recordPlay('game2048');
   }
 
   render() {

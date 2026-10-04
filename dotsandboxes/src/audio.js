@@ -7,6 +7,21 @@ export class DotsAudio {
   constructor() {
     this.ctx = null;
     this.muted = false;
+    try {
+      this.muted = localStorage.getItem('rpdevs_arcade_audio_muted') === 'true';
+    } catch {
+      this.muted = false;
+    }
+  }
+
+  toggleMute() {
+    this.muted = !this.muted;
+    try {
+      localStorage.setItem('rpdevs_arcade_audio_muted', this.muted);
+    } catch {
+      // ignore
+    }
+    return this.muted;
   }
 
   ensureContext() {

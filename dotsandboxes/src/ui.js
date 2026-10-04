@@ -1,5 +1,7 @@
 import { DotsAndBoxesEngine } from './engine.js';
 import { DotsAudio } from './audio.js';
+import { arcadeVault } from '../arcade_vault.js';
+import { retroCRT } from '../crt.js';
 
 export class DotsAndBoxesUI {
   constructor() {
@@ -24,15 +26,19 @@ export class DotsAndBoxesUI {
     this.isAiTurn = false;
     this.bindEvents();
     this.render();
+    arcadeVault.recordPlay('dotsandboxes');
   }
 
   bindEvents() {
     this.btnRestart.onclick = () => this.startNewGame();
     this.btnUndo.onclick = () => this.handleUndo();
+    this.btnSound.textContent = this.audio.muted ? '🔇 Sound' : '🔊 Sound';
     this.btnSound.onclick = () => {
-      this.audio.muted = !this.audio.muted;
-      this.btnSound.textContent = this.audio.muted ? '🔇 Sound' : '🔊 Sound';
+      const muted = this.audio.toggleMute();
+      this.btnSound.textContent = muted ? '🔇 Sound' : '🔊 Sound';
     };
+    const btnCrt = document.getElementById('btn-crt');
+    if (btnCrt) btnCrt.onclick = () => retroCRT.toggle();
 
     this.sizeSelect.onchange = (e) => {
       const [r, c] = e.target.value.split('x').map(Number);
@@ -264,6 +270,7 @@ export class DotsAndBoxesUI {
 
     if (p1 > p2) {
       this.setStatus(`🎉 PLAYER 1 WINS! (${p1} to ${p2})`);
+      arcadeVault.recordWin('dotsandboxes');
     } else if (p2 > p1) {
       const winnerName = this.modeSelect.value === 'ai' ? 'CPU' : 'PLAYER 2';
       this.setStatus(`🏆 ${winnerName} WINS! (${p2} to ${p1})`);
