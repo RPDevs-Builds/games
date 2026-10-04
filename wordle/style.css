@@ -189,10 +189,12 @@ body {
   display: grid;
   grid-template-rows: repeat(6, 1fr);
   gap: 6px;
-  width: 100%;
-  max-width: 350px;
-  height: 100%;
+  width: 330px;
+  max-width: calc(100% - 16px);
+  aspect-ratio: 5 / 6;
+  height: auto;
   max-height: 420px;
+  margin: 0 auto;
   perspective: 1000px;
 }
 
@@ -200,6 +202,7 @@ body {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
   gap: 6px;
+  width: 100%;
 }
 
 .grid-row.shake {
@@ -617,7 +620,7 @@ body {
   .toggle-wrap .toggle-label {
     display: none;
   }
-  .grid-container { max-width: 320px; gap: 4px; }
+  .grid-container { width: 310px; max-width: calc(100% - 12px); gap: 4px; }
   .grid-row { gap: 4px; }
   .tile { font-size: 1.5rem; }
   .key-btn { height: 48px; font-size: 0.95rem; }
