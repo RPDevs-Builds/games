@@ -1,0 +1,10 @@
+{
+  "name": "Breakout 1976",
+  "short_name": "Breakout",
+  "description": "Authentic 1976 Breakout paddle arcade classic with 2D angular physics.",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#0a0d14",
+  "theme_color": "#00f0ff",
+  "orientation": "portrait"
+}

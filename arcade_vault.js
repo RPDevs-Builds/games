@@ -5,7 +5,7 @@
 
 export const ACHIEVEMENTS = [
   { id: 'arcade_initiate', title: 'Arcade Initiate', icon: '🎟️', desc: 'Play your first game in the RPDevs Retro Arcade.' },
-  { id: 'grandmaster', title: 'Grandmaster of the Arcade', icon: '👑', desc: 'Play at least once across all 8 classic arcade games.' },
+  { id: 'grandmaster', title: 'Grandmaster of the Arcade', icon: '👑', desc: 'Play at least once across all 9 classic arcade games.' },
   { id: 'lightsout_apprentice', title: 'Illuminator', icon: '💡', desc: 'Solve your first Lights Out puzzle.' },
   { id: 'lightsout_expert', title: 'Master of GF(2)', icon: '⚡', desc: 'Solve a 5×5 or larger Lights Out puzzle.' },
   { id: 'snake_charmer', title: 'Snake Charmer', icon: '🐍', desc: 'Reach a score of at least 10 in Retro Snake.' },
@@ -17,7 +17,9 @@ export const ACHIEVEMENTS = [
   { id: 'tile_combiner', title: 'Powers of Two', icon: '🔢', desc: 'Synthesize a 1024 or 2048 tile in 2048.' },
   { id: 'box_capturer', title: 'Combinatorial Strategist', icon: '📦', desc: 'Win a game of Dots & Boxes against CPU.' },
   { id: 'warehouse_manager', title: 'Warehouse Foreman', icon: '👷', desc: 'Solve a Sokoban box-pushing puzzle.' },
-  { id: 'connect_champion', title: 'Vertical Tactician', icon: '🟡', desc: 'Beat the Connect Four AI opponent.' }
+  { id: 'connect_champion', title: 'Vertical Tactician', icon: '🟡', desc: 'Beat the Connect Four AI opponent.' },
+  { id: 'brick_breaker', title: 'Demolition Specialist', icon: '🧱', desc: 'Score 50+ points in Breakout.' },
+  { id: 'breakout_champion', title: 'Breakout Champion', icon: '🏆', desc: 'Clear all bricks and achieve victory in Breakout.' }
 ];
 
 export class ArcadeVault {
@@ -44,6 +46,23 @@ export class ArcadeVault {
     }
   }
 
+  getMasterVolume() {
+    try {
+      const vol = localStorage.getItem('rpdevs_arcade_master_volume');
+      return vol !== null ? parseFloat(vol) : 0.25;
+    } catch {
+      return 0.25;
+    }
+  }
+
+  setMasterVolume(vol) {
+    try {
+      localStorage.setItem('rpdevs_arcade_master_volume', vol.toString());
+    } catch {
+      // ignore
+    }
+  }
+
   loadState() {
     const defaults = {
       version: 1,
@@ -56,7 +75,8 @@ export class ArcadeVault {
         game2048: 0,
         dotsandboxes: 0,
         sokoban: 0,
-        connectfour: 0
+        connectfour: 0,
+        breakout: 0
       },
       gamesWon: {
         lightsout: 0,
@@ -66,7 +86,8 @@ export class ArcadeVault {
         game2048: 0,
         dotsandboxes: 0,
         sokoban: 0,
-        connectfour: 0
+        connectfour: 0,
+        breakout: 0
       },
       highScores: {},
       unlockedAchievements: {}
@@ -139,6 +160,8 @@ export class ArcadeVault {
       this.unlock('warehouse_manager');
     } else if (gameId === 'connectfour') {
       this.unlock('connect_champion');
+    } else if (gameId === 'breakout') {
+      this.unlock('breakout_champion');
     }
 
     this.checkArcadeWideAchievements();
@@ -158,6 +181,8 @@ export class ArcadeVault {
       if (score >= 8) this.unlock('simon_adept');
     } else if (gameId === 'game2048') {
       if (score >= 1024) this.unlock('tile_combiner');
+    } else if (gameId === 'breakout') {
+      if (score >= 50) this.unlock('brick_breaker');
     }
 
     this.saveState();
@@ -174,7 +199,7 @@ export class ArcadeVault {
   }
 
   checkArcadeWideAchievements() {
-    const required = ['lightsout', 'snake', 'simon', 'minesweeper', 'game2048', 'dotsandboxes', 'sokoban', 'connectfour'];
+    const required = ['lightsout', 'snake', 'simon', 'minesweeper', 'game2048', 'dotsandboxes', 'sokoban', 'connectfour', 'breakout'];
     const allPlayed = required.every(id => (this.state.gamesPlayed[id] || 0) > 0);
     if (allPlayed) {
       this.unlock('grandmaster');
@@ -229,6 +254,14 @@ export class ArcadeVault {
       return false;
     }
     return false;
+  }
+
+  showModal() {
+    this.renderModal();
+  }
+
+  openPassportModal() {
+    this.renderModal();
   }
 
   renderModal() {
@@ -292,6 +325,14 @@ export class ArcadeVault {
           }).join('')}
         </div>
 
+        <div style="background: #0d121c; border: 1px solid #273142; border-radius: 8px; padding: 12px; margin-bottom: 16px;">
+          <div style="display: flex; justify-content: space-between; align-items: center; font-size: 0.85rem; font-weight: 700; color: #cbd5e1;">
+            <span>🔊 Master Audio Volume</span>
+            <span id="vault-vol-val" style="color: #00f0ff;">${Math.round(this.getMasterVolume() * 100)}%</span>
+          </div>
+          <input type="range" id="vault-vol-slider" min="0" max="100" value="${Math.round(this.getMasterVolume() * 100)}" style="width: 100%; accent-color: #00f0ff; margin-top: 8px; cursor: pointer;">
+        </div>
+
         <div class="vault-footer-actions">
           <button id="btn-export-vault" class="vault-btn">📥 Backup Passport</button>
           <label class="vault-btn">
@@ -308,6 +349,16 @@ export class ArcadeVault {
     modal.onclick = (e) => {
       if (e.target === modal) modal.remove();
     };
+
+    const volSlider = document.getElementById('vault-vol-slider');
+    const volVal = document.getElementById('vault-vol-val');
+    if (volSlider) {
+      volSlider.oninput = (e) => {
+        const val = parseInt(e.target.value, 10);
+        volVal.textContent = `${val}%`;
+        this.setMasterVolume(val / 100);
+      };
+    }
 
     document.getElementById('btn-export-vault').onclick = () => {
       const dataUri = 'data:application/json;charset=utf-8,' + encodeURIComponent(this.exportJSON());

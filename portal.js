@@ -93,6 +93,17 @@ const GAMES_DATA = [
     tags: ['Milton Bradley 1974', 'Minimax Alpha-Beta', 'Tactile Audio', 'PWA Offline', 'Terminal CLI'],
     url: './connectfour/index.html',
     rulesUrl: './connectfour/RULES.md'
+  },
+  {
+    id: 'breakout',
+    title: 'Breakout',
+    year: '1976',
+    icon: '🧱',
+    category: 'retro',
+    desc: 'Iconic 1976 Atari paddle arcade classic with 2D angular deflection, destructible colored brick layers, acoustic synthesis, and touch drag controls.',
+    tags: ['Atari 1976', 'Paddle Physics', 'Retro Audio', 'PWA Offline', 'Terminal CLI'],
+    url: './breakout/index.html',
+    rulesUrl: './breakout/RULES.md'
   }
 ];
 
