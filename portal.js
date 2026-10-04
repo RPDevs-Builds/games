@@ -126,6 +126,17 @@ const GAMES_DATA = [
     tags: ['Classic 1984', '7-Bag RNG', 'SRS Kicks', '8-Bit Audio', 'PWA Offline', 'Terminal CLI'],
     url: './fallingblocks/index.html',
     rulesUrl: './fallingblocks/RULES.md'
+  },
+  {
+    id: 'mazechaser',
+    title: 'Maze Chaser',
+    year: '1980',
+    icon: '🍒',
+    category: 'retro',
+    desc: 'The legendary 1980 arcade maze classic. Outsmart Blinky, Pinky, Inky, and Clyde with authentic algorithmic AI targeting, energizers, and fruit bonuses.',
+    tags: ['Namco 1980', '4 Ghost AI', 'Scatter/Chase', 'Chiptune Audio', 'PWA Offline', 'Terminal CLI'],
+    url: './mazechaser/index.html',
+    rulesUrl: './mazechaser/RULES.md'
   }
 ];
 

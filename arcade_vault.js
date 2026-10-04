@@ -24,7 +24,10 @@ export const ACHIEVEMENTS = [
   { id: 'pong_shutout', title: 'Clean Sweep', icon: '⭐', desc: 'Achieve a shutout victory in Pong without conceding a point.' },
   { id: 'blocks_tetris', title: 'Four-Line Triumph', icon: '🧱', desc: 'Clear 4 lines at once with a single piece in Falling Blocks.' },
   { id: 'blocks_century', title: 'Centurion Stacker', icon: '💯', desc: 'Clear 100 total lines in Falling Blocks.' },
-  { id: 'blocks_speed', title: 'Terminal Velocity', icon: '⚡', desc: 'Reach Level 10 in Falling Blocks.' }
+  { id: 'blocks_speed', title: 'Terminal Velocity', icon: '⚡', desc: 'Reach Level 10 in Falling Blocks.' },
+  { id: 'maze_ghost_hunter', title: 'Ghost Vanquisher', icon: '👻', desc: 'Eat all 4 ghosts on a single energizer in Maze Chaser.' },
+  { id: 'maze_fruit_lover', title: 'Fruit Connoisseur', icon: '🍒', desc: 'Eat a bonus fruit in Maze Chaser.' },
+  { id: 'maze_clear', title: 'Labyrinth Champion', icon: '🏆', desc: 'Clear all pellets and win a game of Maze Chaser.' }
 ];
 
 export class ArcadeVault {
@@ -83,7 +86,8 @@ export class ArcadeVault {
         connectfour: 0,
         breakout: 0,
         pong: 0,
-        fallingblocks: 0
+        fallingblocks: 0,
+        mazechaser: 0
       },
       gamesWon: {
         lightsout: 0,
@@ -96,7 +100,8 @@ export class ArcadeVault {
         connectfour: 0,
         breakout: 0,
         pong: 0,
-        fallingblocks: 0
+        fallingblocks: 0,
+        mazechaser: 0
       },
       stats: {},
       highScores: {},
@@ -224,7 +229,7 @@ export class ArcadeVault {
   }
 
   checkArcadeWideAchievements() {
-    const required = ['lightsout', 'snake', 'simon', 'minesweeper', 'game2048', 'dotsandboxes', 'sokoban', 'connectfour', 'breakout', 'pong', 'fallingblocks'];
+    const required = ['lightsout', 'snake', 'simon', 'minesweeper', 'game2048', 'dotsandboxes', 'sokoban', 'connectfour', 'breakout', 'pong', 'fallingblocks', 'mazechaser'];
     const allPlayed = required.every(id => (this.state.gamesPlayed[id] || 0) > 0);
     if (allPlayed) {
       this.unlock('grandmaster');
