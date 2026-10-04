@@ -4,7 +4,7 @@
  * responsive mobile controls, gamepad binding, and Arcade Vault synchronization.
  */
 
-import { SpaceInvadersEngine, WIDTH, HEIGHT } from './engine.js';
+import { SpaceInvadersEngine, WIDTH, HEIGHT, ALIEN_CONFIG } from './engine.js';
 import { SpaceInvadersAudio } from './audio.js';
 import { arcadeVault } from '../arcade_vault.js';
 import { retroCRT } from '../crt.js';
