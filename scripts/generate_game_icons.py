@@ -203,9 +203,29 @@ def render_icon(target, size=512):
         draw.line([int(196 * scale), int(80 * scale), int(196 * scale), int(150 * scale)], fill='#ff7700', width=int(6 * scale))
         draw.line([int(196 * scale), int(150 * scale), int(110 * scale), int(150 * scale)], fill='#ff7700', width=int(6 * scale))
         draw.ellipse([int(104 * scale), int(144 * scale), int(118 * scale), int(156 * scale)], fill='#ffffff')
-    else:  # Portal
-        r(85, 75, 171, 141, fill='#a855f7')
-        draw.ellipse([int(100 * scale), int(80 * scale), int(156 * scale), int(136 * scale)], fill='#ffd700')
+    else:  # Portal / Arcade Portal
+        # Arcade Cabinet Marquee roof
+        poly([(84, 76), (172, 76), (164, 96), (92, 96)], fill='#a855f7')
+        # Marquee glowing strip
+        r(94, 80, 162, 92, fill='#ffd700')
+        # Monitor bezel & CRT screen
+        r(92, 96, 164, 144, fill='#12131a', outline='#3b82f6', width=2)
+        r(98, 102, 158, 138, fill='#000000')
+        # Retro game screen pixels
+        r(122, 112, 134, 122, fill='#00ff66')
+        draw.ellipse([int(110 * scale), int(124 * scale), int(116 * scale), int(130 * scale)], fill='#ff0055')
+        draw.ellipse([int(140 * scale), int(124 * scale), int(146 * scale), int(130 * scale)], fill='#00f0ff')
+        # Control panel angled shelf
+        poly([(84, 144), (172, 144), (168, 164), (88, 164)], fill='#374151')
+        # Joystick & action buttons
+        draw.line([int(114 * scale), int(148 * scale), int(114 * scale), int(156 * scale)], fill='#9ca3af', width=int(3 * scale))
+        draw.ellipse([int(109 * scale), int(143 * scale), int(119 * scale), int(153 * scale)], fill='#ef4444')
+        draw.ellipse([int(134 * scale), int(148 * scale), int(142 * scale), int(156 * scale)], fill='#3b82f6')
+        draw.ellipse([int(146 * scale), int(146 * scale), int(154 * scale), int(154 * scale)], fill='#10b981')
+        # Lower cabinet body & coin door
+        r(90, 164, 166, 196, fill='#1f2937')
+        r(118, 172, 138, 190, fill='#111827', outline='#4b5563', width=2)
+        r(125, 176, 131, 180, fill='#f59e0b')
 
     return img
 

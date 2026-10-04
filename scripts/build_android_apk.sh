@@ -129,7 +129,7 @@ get_app_name() {
         othello)      echo "Othello (Reversi)" ;;
         missilecommand) echo "Missile Command" ;;
         lightcycles)  echo "Tron Light Cycles" ;;
-        portal)       echo "RPDevs Arcade" ;;
+        portal)       echo "Arcade Portal" ;;
         *)            echo "$1" ;;
     esac
 }
@@ -339,10 +339,28 @@ build_single_apk() {
 EOF
 
     # 3. Generate icon
-    generate_icon "${target}" "${build_dir}/res/mipmap-mdpi/ic_launcher.png"
-    cp "${build_dir}/res/mipmap-mdpi/ic_launcher.png" "${build_dir}/res/mipmap-hdpi/ic_launcher.png"
-    cp "${build_dir}/res/mipmap-mdpi/ic_launcher.png" "${build_dir}/res/mipmap-xhdpi/ic_launcher.png"
-    cp "${build_dir}/res/mipmap-mdpi/ic_launcher.png" "${build_dir}/res/mipmap-xxhdpi/ic_launcher.png"
+    local existing_icon=""
+    if [[ "${target}" == "portal" && -f "${GAMES_ROOT}/icon.png" ]]; then
+        existing_icon="${GAMES_ROOT}/icon.png"
+    elif [[ -f "${GAMES_ROOT}/${target}/icon.png" ]]; then
+        existing_icon="${GAMES_ROOT}/${target}/icon.png"
+    fi
+
+    if [[ -n "${existing_icon}" ]]; then
+        python3 -c "
+from PIL import Image
+src = Image.open('${existing_icon}')
+src.resize((48, 48), Image.Resampling.LANCZOS).save('${build_dir}/res/mipmap-mdpi/ic_launcher.png', 'PNG')
+src.resize((72, 72), Image.Resampling.LANCZOS).save('${build_dir}/res/mipmap-hdpi/ic_launcher.png', 'PNG')
+src.resize((96, 96), Image.Resampling.LANCZOS).save('${build_dir}/res/mipmap-xhdpi/ic_launcher.png', 'PNG')
+src.resize((144, 144), Image.Resampling.LANCZOS).save('${build_dir}/res/mipmap-xxhdpi/ic_launcher.png', 'PNG')
+"
+    else
+        generate_icon "${target}" "${build_dir}/res/mipmap-mdpi/ic_launcher.png"
+        cp "${build_dir}/res/mipmap-mdpi/ic_launcher.png" "${build_dir}/res/mipmap-hdpi/ic_launcher.png"
+        cp "${build_dir}/res/mipmap-mdpi/ic_launcher.png" "${build_dir}/res/mipmap-xhdpi/ic_launcher.png"
+        cp "${build_dir}/res/mipmap-mdpi/ic_launcher.png" "${build_dir}/res/mipmap-xxhdpi/ic_launcher.png"
+    fi
 
     # 4. Copy Web Assets
     if [[ "${target}" == "portal" ]]; then
