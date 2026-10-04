@@ -1,0 +1,423 @@
+/* ==========================================================================
+   Connect Four (4-in-a-Row) - 1974 Retro Tactile Board Styling
+   ========================================================================== */
+
+:root {
+  --bg-dark: #0a0d14;
+  --panel-bg: #141923;
+  --rack-blue: #004b93;
+  --rack-border: #00366b;
+  --rack-shadow: #002244;
+  --slot-bg: #090e18;
+  --disc-red: #e63946;
+  --disc-red-shadow: #9b111e;
+  --disc-yellow: #ffb703;
+  --disc-yellow-shadow: #c78000;
+  --text-main: #f0f6fc;
+  --text-muted: #8b949e;
+  --font-mono: 'Courier New', monospace;
+  --c4-cell-size: 44px;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  background: radial-gradient(circle at 50% 25%, #151e33 0%, var(--bg-dark) 100%);
+  color: var(--text-main);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding: max(16px, env(safe-area-inset-top, 16px)) 12px 24px;
+}
+
+.c4-console {
+  width: 100%;
+  max-width: 440px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* Console Header */
+.console-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.title-group {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.console-title {
+  font-size: 1.25rem;
+  font-weight: 900;
+  letter-spacing: 1px;
+  color: #fff;
+  margin: 0;
+}
+
+.badge-year {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  background: rgba(255, 183, 3, 0.15);
+  color: #ffb703;
+  padding: 2px 6px;
+  border-radius: 4px;
+  border: 1px solid rgba(255, 183, 3, 0.3);
+}
+
+.icon-btn {
+  background: #1c2331;
+  border: 1px solid #2d3748;
+  color: #fff;
+  padding: 5px 10px;
+  border-radius: 6px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+.icon-btn:hover {
+  background: #2a3449;
+}
+
+/* Metrics Dashboard */
+.metrics-panel {
+  display: grid;
+  grid-template-columns: 1fr 1.3fr 1fr;
+  gap: 8px;
+  background: #0f131c;
+  border: 2px solid #212838;
+  border-radius: 10px;
+  padding: 8px 12px;
+  align-items: center;
+}
+
+.metric-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.metric-label {
+  font-size: 0.65rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  letter-spacing: 0.5px;
+}
+
+.metric-val {
+  font-family: var(--font-mono);
+  font-size: 1.3rem;
+  font-weight: 900;
+  color: #fff;
+}
+
+.p1-box .metric-label { color: #e63946; }
+.p2-box .metric-label { color: #ffb703; }
+
+.turn-badge {
+  font-size: 0.75rem;
+  font-weight: 800;
+  padding: 4px 10px;
+  border-radius: 12px;
+  text-align: center;
+  transition: all 0.2s ease;
+}
+
+.turn-badge.p1 {
+  background: rgba(230, 57, 70, 0.2);
+  color: #ff6b6b;
+  border: 1px solid #e63946;
+}
+
+.turn-badge.p2 {
+  background: rgba(255, 183, 3, 0.2);
+  color: #ffb703;
+  border: 1px solid #ffb703;
+}
+
+/* Control Selectors */
+.controls-bar {
+  display: flex;
+  gap: 8px;
+}
+
+.select-wrapper {
+  flex: 1;
+}
+
+.styled-select {
+  width: 100%;
+  background: #161c28;
+  border: 1px solid #2a3447;
+  color: #f0f6fc;
+  padding: 7px 10px;
+  border-radius: 6px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  outline: none;
+  cursor: pointer;
+}
+
+/* Column Drop Preview Indicator */
+.col-drop-preview {
+  display: grid;
+  grid-template-columns: repeat(7, var(--c4-cell-size));
+  gap: 6px;
+  justify-content: center;
+  height: 20px;
+}
+
+.preview-slot {
+  width: var(--c4-cell-size);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.9rem;
+  color: transparent;
+  transition: all 0.15s ease;
+}
+
+.preview-slot.active.p1 {
+  color: #ff6b6b;
+  transform: translateY(3px);
+  filter: drop-shadow(0 0 6px rgba(230, 57, 70, 0.8));
+}
+
+.preview-slot.active.p2 {
+  color: #ffd166;
+  transform: translateY(3px);
+  filter: drop-shadow(0 0 6px rgba(255, 183, 3, 0.8));
+}
+
+/* Arena & Plastic Rack */
+.arena-well {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.c4-frame {
+  background: linear-gradient(180deg, #005bb5 0%, var(--rack-blue) 40%, var(--rack-border) 100%);
+  border: 4px solid #002e5b;
+  border-radius: 16px;
+  padding: 10px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.6), inset 0 2px 4px rgba(255, 255, 255, 0.25);
+  display: flex;
+  justify-content: center;
+}
+
+.c4-board {
+  display: grid;
+  grid-template-columns: repeat(7, var(--c4-cell-size));
+  grid-template-rows: repeat(6, var(--c4-cell-size));
+  gap: 6px;
+  background: var(--rack-border);
+  padding: 8px;
+  border-radius: 12px;
+  box-shadow: inset 0 3px 8px rgba(0, 0, 0, 0.7);
+  justify-content: center;
+}
+
+.c4-slot {
+  width: var(--c4-cell-size);
+  height: var(--c4-cell-size);
+  background: var(--slot-bg);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: inset 0 4px 6px rgba(0, 0, 0, 0.9), 0 1px 2px rgba(255, 255, 255, 0.15);
+  cursor: pointer;
+  position: relative;
+}
+
+.c4-slot:hover {
+  background: #0d1627;
+}
+
+/* Discs */
+.c4-disc {
+  width: 90%;
+  height: 90%;
+  border-radius: 50%;
+  transition: transform 0.2s ease-out;
+  position: relative;
+}
+
+.disc-empty {
+  opacity: 0;
+}
+
+.disc-p1 {
+  background: radial-gradient(circle at 35% 35%, #ff7b88 0%, var(--disc-red) 55%, var(--disc-red-shadow) 100%);
+  box-shadow: inset 0 0 0 3px rgba(0, 0, 0, 0.2), 0 3px 6px rgba(0, 0, 0, 0.4);
+  animation: dropIn 0.22s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.disc-p2 {
+  background: radial-gradient(circle at 35% 35%, #ffe680 0%, var(--disc-yellow) 55%, var(--disc-yellow-shadow) 100%);
+  box-shadow: inset 0 0 0 3px rgba(0, 0, 0, 0.2), 0 3px 6px rgba(0, 0, 0, 0.4);
+  animation: dropIn 0.22s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+@keyframes dropIn {
+  from {
+    transform: translateY(-80px) scale(0.9);
+    opacity: 0.6;
+  }
+  to {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+  }
+}
+
+/* Winning Disc Glow */
+.disc-winner {
+  animation: pulseWin 0.7s infinite alternate ease-in-out !important;
+  box-shadow: 0 0 14px 4px #ffffff, inset 0 0 8px rgba(255, 255, 255, 0.9) !important;
+  z-index: 2;
+}
+
+@keyframes pulseWin {
+  0% {
+    transform: scale(0.96);
+    filter: brightness(1.2);
+  }
+  100% {
+    transform: scale(1.08);
+    filter: brightness(1.6);
+  }
+}
+
+/* Overlay */
+.game-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(10, 13, 20, 0.88);
+  backdrop-filter: blur(4px);
+  border-radius: 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  z-index: 10;
+}
+
+.overlay-title {
+  font-size: 1.6rem;
+  font-weight: 900;
+  letter-spacing: 2px;
+  color: #ffb703;
+  text-shadow: 0 0 12px rgba(255, 183, 3, 0.6);
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, #00f0ff 0%, #0077ff 100%);
+  color: #000;
+  border: none;
+  font-weight: 800;
+  font-size: 0.95rem;
+  padding: 10px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0, 240, 255, 0.4);
+}
+
+/* Status Banner */
+.status-banner {
+  text-align: center;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #38bdf8;
+  background: #111722;
+  border: 1px solid #1f2937;
+  padding: 8px 12px;
+  border-radius: 8px;
+  min-height: 38px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.status-banner.thinking {
+  color: #ffd166;
+  border-color: #e3a018;
+  animation: pulseThinking 1s infinite alternate ease-in-out;
+}
+
+@keyframes pulseThinking {
+  0% { opacity: 0.7; }
+  100% { opacity: 1; }
+}
+
+/* Actions Row */
+.actions-row {
+  display: flex;
+  gap: 8px;
+}
+
+.action-btn {
+  flex: 1;
+  background: #1c2331;
+  border: 1px solid #2d3748;
+  color: #f0f6fc;
+  font-weight: 700;
+  font-size: 0.82rem;
+  padding: 10px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.action-btn:hover {
+  background: #2a3449;
+  border-color: #4a5568;
+}
+
+/* Mobile Responsive Optimizations */
+@media (max-width: 480px) {
+  :root {
+    --c4-cell-size: 42px;
+  }
+
+  body {
+    padding: max(12px, env(safe-area-inset-top, 12px)) 8px 16px;
+  }
+
+  .c4-console {
+    gap: 8px;
+  }
+
+  .c4-frame {
+    padding: 6px;
+  }
+
+  .c4-board {
+    gap: 4px;
+    padding: 4px;
+  }
+
+  .col-drop-preview {
+    gap: 4px;
+  }
+}

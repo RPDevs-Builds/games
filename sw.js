@@ -2,13 +2,17 @@
  * Master Arcade Suite Service Worker
  */
 
-const CACHE_NAME = 'rpdevs-arcade-suite-v1';
+const CACHE_NAME = 'rpdevs-arcade-suite-v2';
 const ASSETS = [
   './',
   './index.html',
   './portal.css',
   './portal.js',
   './manifest.json',
+  './arcade_vault.js',
+  './gamepad.js',
+  './crt.css',
+  './crt.js',
   './lightsout/index.html',
   './lightsout/style.css',
   './snake/index.html',
@@ -20,9 +24,12 @@ const ASSETS = [
   './2048/index.html',
   './2048/style.css',
   './dotsandboxes/index.html',
-  './dotsandboxes/style.css'
+  './dotsandboxes/style.css',
+  './sokoban/index.html',
+  './sokoban/style.css',
+  './connectfour/index.html',
+  './connectfour/style.css'
 ];
-
 
 self.addEventListener('install', (e) => {
   e.waitUntil(

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <title>Sokoban (倉庫番) - 1982 Warehouse Classic</title>
+  <meta name="description" content="Authentic 1982 Sokoban discrete grid warehouse puzzle with deadlock detection assistant, XSB levels, and Web Audio.">
+  <link rel="manifest" href="manifest.json">
+  <link rel="stylesheet" href="crt.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="warehouse-console">
+    <!-- Header -->
+    <header class="console-header">
+      <div class="title-group">
+        <h1 class="console-title">📦 SOKOBAN</h1>
+        <span class="badge-year">1982</span>
+      </div>
+      <div class="header-actions">
+        <button id="btn-sound" class="icon-btn">🔊 Sound</button>
+      </div>
+    </header>
+
+    <!-- Scoreboard Dashboard -->
+    <section class="metrics-panel">
+      <div class="metric-box">
+        <span class="metric-label">MOVES</span>
+        <span id="stat-moves" class="metric-val">0</span>
+      </div>
+      <div class="metric-box">
+        <span class="metric-label">PUSHES</span>
+        <span id="stat-pushes" class="metric-val">0</span>
+      </div>
+      <div class="metric-box">
+        <span class="metric-label">TARGETS</span>
+        <span class="metric-val" style="color: #e3a018;">★</span>
+      </div>
+    </section>
+
+    <!-- Control Selectors -->
+    <div class="controls-bar">
+      <div class="select-wrapper">
+        <select id="select-level" class="styled-select" aria-label="Level Select"></select>
+      </div>
+      <div class="select-wrapper">
+        <button id="btn-deadlock" class="styled-select" title="Toggle Corner & 2x2 Deadlock Warnings">⚠️ Assist: ON</button>
+      </div>
+    </div>
+
+    <!-- Interactive Grid Arena -->
+    <main class="arena-well">
+      <div id="warehouse-grid" class="warehouse-grid" role="grid" aria-label="Sokoban Warehouse Maze">
+        <!-- Rendered dynamically by ui.js -->
+      </div>
+
+      <div id="game-overlay" class="game-overlay" style="display: none;">
+        <div id="overlay-msg" class="overlay-title">LEVEL COMPLETE!</div>
+        <div class="overlay-actions">
+          <button id="btn-next-level" class="btn-primary">Next Level ➔</button>
+          <button onclick="document.getElementById('btn-reset').click()" class="btn-secondary">Replay</button>
+        </div>
+      </div>
+    </main>
+
+    <!-- Status Banner -->
+    <div id="status-banner" class="status-banner" role="status">Push crates onto gold targets.</div>
+
+    <!-- Quick Action Row -->
+    <div class="actions-row">
+      <button id="btn-undo" class="action-btn">↩️ Undo (U)</button>
+      <button id="btn-reset" class="action-btn">🔄 Reset (R)</button>
+    </div>
+
+    <!-- Mobile Virtual D-Pad -->
+    <div class="keypad-zone">
+      <div></div>
+      <button id="btn-up" class="pad-btn" aria-label="Up">▲</button>
+      <div></div>
+      <button id="btn-left" class="pad-btn" aria-label="Left">◀</button>
+      <button id="btn-down" class="pad-btn" aria-label="Down">▼</button>
+      <button id="btn-right" class="pad-btn" aria-label="Right">▶</button>
+    </div>
+  </div>
+
+  <script type="module">
+    import { SokobanUI } from './src/ui.js';
+    window.addEventListener('DOMContentLoaded', () => new SokobanUI());
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('./sw.js').catch(() => {});
+    }
+  </script>
+</body>
+</html>

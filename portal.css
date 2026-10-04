@@ -81,6 +81,40 @@ body {
   letter-spacing: 1.5px;
 }
 
+.marquee-actions {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 12px;
+  flex-wrap: wrap;
+}
+
+.arcade-action-btn {
+  background: #1c212e;
+  border: 1px solid #30394d;
+  color: #f0f6fc;
+  font-size: 0.8rem;
+  font-weight: 700;
+  padding: 6px 14px;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+}
+
+.arcade-action-btn:hover {
+  background: #252d3f;
+  border-color: #00f0ff;
+  color: #00f0ff;
+  box-shadow: 0 0 10px rgba(0, 240, 255, 0.3);
+}
+
+.arcade-action-btn.active {
+  background: rgba(0, 240, 255, 0.15);
+  border-color: #00f0ff;
+  color: #00f0ff;
+}
+
 .coin-badge {
   display: inline-block;
   background: rgba(255, 230, 0, 0.15);
@@ -409,7 +443,7 @@ body {
     text-overflow: ellipsis;
   }
 
-  /* Hide long body text on mobile to ensure all 6 games populate without massive scrolling */
+  /* Hide long body text on mobile to ensure all 8 games populate without massive scrolling */
   .game-desc,
   .card-tags,
   .desktop-only {

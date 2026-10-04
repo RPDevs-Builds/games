@@ -1,0 +1,39 @@
+/* ==========================================================================
+   RPDevs Master Retro CRT Shader & Phosphor Bloom Overlay
+   ========================================================================== */
+
+body.crt-active {
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* Subtle CRT Barrel Vignette and Phosphor Scanlines */
+body.crt-active::before {
+  content: " ";
+  display: block;
+  position: fixed;
+  inset: 0;
+  background: 
+    linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%),
+    linear-gradient(90deg, rgba(255, 0, 0, 0.03), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.03));
+  z-index: 99990;
+  background-size: 100% 3px, 6px 100%;
+  pointer-events: none;
+}
+
+/* CRT Vignette & Screen Curvature Border */
+body.crt-active::after {
+  content: " ";
+  display: block;
+  position: fixed;
+  inset: 0;
+  background: radial-gradient(circle at 50% 50%, transparent 65%, rgba(0, 0, 0, 0.6) 100%);
+  box-shadow: inset 0 0 100px rgba(0, 0, 0, 0.7);
+  pointer-events: none;
+  z-index: 99991;
+}
+
+/* Phosphor Bloom on Highlights */
+body.crt-active * {
+  text-shadow: 0 0 1px rgba(255, 255, 255, 0.2);
+}

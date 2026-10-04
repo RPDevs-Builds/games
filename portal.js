@@ -2,6 +2,9 @@
  * RPDevs Master Arcade Portal Controller
  */
 
+import { arcadeVault } from './arcade_vault.js';
+import { retroCRT } from './crt.js';
+
 const GAMES_DATA = [
   {
     id: 'lightsout',
@@ -68,6 +71,28 @@ const GAMES_DATA = [
     tags: ['Lucas 1889', 'Combinatorial Math', 'AI Opponent', 'PWA Offline', 'Terminal CLI'],
     url: './dotsandboxes/index.html',
     rulesUrl: './dotsandboxes/RULES.md'
+  },
+  {
+    id: 'sokoban',
+    title: 'Sokoban',
+    year: '1982',
+    icon: '📦',
+    category: 'logic',
+    desc: 'Discrete warehouse keeper classic with 60 levels, deadlock detection assistant, tap-to-move pathfinding, and industrial synth audio.',
+    tags: ['Thinking Rabbit 1982', 'Deadlock Detection', 'PWA Offline', 'Terminal CLI'],
+    url: './sokoban/index.html',
+    rulesUrl: './sokoban/RULES.md'
+  },
+  {
+    id: 'connectfour',
+    title: 'Connect Four',
+    year: '1974',
+    icon: '🔴🟡',
+    category: 'retro',
+    desc: 'Iconic 1974 Milton Bradley vertical drop strategy game featuring Minimax AI with Alpha-Beta pruning, 2-player pass-and-play, and tactile plastic audio.',
+    tags: ['Milton Bradley 1974', 'Minimax Alpha-Beta', 'Tactile Audio', 'PWA Offline', 'Terminal CLI'],
+    url: './connectfour/index.html',
+    rulesUrl: './connectfour/RULES.md'
   }
 ];
 
@@ -80,22 +105,45 @@ class ArcadePortal {
     this.activeFilter = 'all';
 
     this.bindEvents();
+    this.bindArcadeControls();
     this.render();
   }
 
   bindEvents() {
-    this.searchInput.addEventListener('input', (e) => {
-      this.render(e.target.value.toLowerCase());
-    });
+    if (this.searchInput) {
+      this.searchInput.addEventListener('input', (e) => {
+        this.render(e.target.value.toLowerCase());
+      });
+    }
 
     this.filterButtons.forEach(btn => {
       btn.addEventListener('click', () => {
         this.filterButtons.forEach(b => b.classList.remove('active'));
         btn.classList.add('active');
         this.activeFilter = btn.dataset.filter;
-        this.render(this.searchInput.value.toLowerCase());
+        this.render(this.searchInput ? this.searchInput.value.toLowerCase() : '');
       });
     });
+  }
+
+  bindArcadeControls() {
+    const btnVault = document.getElementById('btn-vault');
+    if (btnVault) {
+      btnVault.onclick = () => {
+        arcadeVault.showModal();
+      };
+    }
+
+    const btnCRT = document.getElementById('btn-crt');
+    if (btnCRT) {
+      btnCRT.onclick = () => {
+        const isCRT = retroCRT.toggle();
+        btnCRT.classList.toggle('active', isCRT);
+      };
+      if (retroCRT.enabled) {
+        btnCRT.classList.add('active');
+      }
+    }
   }
 
   render(searchTerm = '') {

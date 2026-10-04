@@ -1,0 +1,16 @@
+{
+  "name": "Connect Four 1974",
+  "short_name": "Connect 4",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#0a0d14",
+  "theme_color": "#004b93",
+  "description": "Tactile 1974 vertical disc drop puzzle with Minimax Alpha-Beta AI.",
+  "icons": [
+    {
+      "src": "icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    }
+  ]
+}
