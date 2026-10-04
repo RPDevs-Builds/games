@@ -154,14 +154,18 @@ class FroggerUI {
 
     const portalLink = document.getElementById('btn-portal');
     if (portalLink) {
-      if (window.location.protocol === 'file:') {
-        portalLink.addEventListener('click', (e) => {
-          e.preventDefault();
-          if (window.arcadeVault) {
-            window.arcadeVault.showModal();
-          }
-        });
-      }
+      portalLink.addEventListener('click', (e) => {
+        e.preventDefault();
+        if (window.arcadeVault && typeof window.arcadeVault.goToArcade === 'function') {
+          window.arcadeVault.goToArcade('frogger');
+        } else if (window.location.pathname.includes('/frogger/') || window.location.protocol !== 'file:') {
+          window.location.href = '../index.html';
+        } else if (window.AndroidArcade && typeof window.AndroidArcade.launchArcade === 'function') {
+          window.AndroidArcade.launchArcade();
+        } else {
+          window.location.href = "intent:#Intent;package=com.rpdevs.games.arcade;action=android.intent.action.MAIN;category=android.intent.category.LAUNCHER;end";
+        }
+      });
     }
   }
 

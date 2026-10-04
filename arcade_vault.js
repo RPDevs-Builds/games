@@ -298,6 +298,53 @@ export class ArcadeVault {
     }, 4500);
   }
 
+  showToast(title, message, icon = '🏛️') {
+    const toast = document.createElement('div');
+    toast.className = 'arcade-achievement-toast';
+    toast.innerHTML = `
+      <div class="ach-icon">${icon}</div>
+      <div class="ach-content">
+        <div class="ach-header" style="color: #00f0ff;">${title}</div>
+        <div class="ach-title" style="color: #fff; font-size: 0.85rem;">${message}</div>
+      </div>
+    `;
+    document.body.appendChild(toast);
+
+    setTimeout(() => toast.classList.add('visible'), 50);
+    setTimeout(() => {
+      toast.classList.remove('visible');
+      setTimeout(() => toast.remove(), 400);
+    }, 3500);
+  }
+
+  goToArcade(currentGame = '') {
+    // 1. If running inside Master Arcade portal or web environment with parent index.html
+    const hasParentPortal = (currentGame && window.location.pathname.includes('/' + currentGame + '/')) ||
+                            window.location.pathname.match(/\/(frogger|asteroids|spaceinvaders|mazechaser|fallingblocks|snake|pong|breakout|dotsandboxes|lightsout|connectfour|sokoban|wordle|simon|minesweeper|game2048)\//) ||
+                            (window.location.protocol !== 'file:' && window.location.pathname !== '/' && window.location.pathname !== '/index.html');
+
+    if (hasParentPortal) {
+      window.location.href = '../index.html';
+      return;
+    }
+
+    // 2. If running inside standalone Android APK with AndroidArcade bridge
+    if (typeof window !== 'undefined' && window.AndroidArcade && typeof window.AndroidArcade.launchArcade === 'function') {
+      const launched = window.AndroidArcade.launchArcade();
+      if (launched) return;
+    }
+
+    // 3. Fallback: Try Android intent URI to launch RPDevs Arcade app
+    try {
+      window.location.href = "intent:#Intent;package=com.rpdevs.games.arcade;action=android.intent.action.MAIN;category=android.intent.category.LAUNCHER;end";
+      return;
+    } catch (e) {
+      // ignore
+    }
+
+    this.showToast('RPDevs Master Arcade', 'Install the Master Arcade app to access all 16 games!');
+  }
+
   getTotalGamesPlayed() {
     return Object.values(this.state.gamesPlayed).reduce((a, b) => a + b, 0);
   }
