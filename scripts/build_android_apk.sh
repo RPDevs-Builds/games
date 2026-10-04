@@ -392,6 +392,7 @@ EOF
 
     <uses-sdk android:minSdkVersion="21" android:targetSdkVersion="34" />
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.VIBRATE" />
 
     <queries>
         <package android:name="com.rpdevs.games.arcade" />
@@ -490,6 +491,22 @@ public class MainActivity extends Activity {
             @JavascriptInterface
             public boolean isStandalone() {
                 return !"com.rpdevs.games.arcade".equals(getPackageName());
+            }
+
+            @JavascriptInterface
+            public void vibrate(long milliseconds) {
+                try {
+                    android.os.Vibrator v = (android.os.Vibrator) getSystemService(android.content.Context.VIBRATOR_SERVICE);
+                    if (v != null && v.hasVibrator()) {
+                        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+                            v.vibrate(android.os.VibrationEffect.createOneShot(milliseconds, android.os.VibrationEffect.DEFAULT_AMPLITUDE));
+                        } else {
+                            v.vibrate(milliseconds);
+                        }
+                    }
+                } catch (Exception e) {
+                    android.util.Log.e("ArcadeBridge", "Vibrate error: " + e.getMessage());
+                }
             }
         }, "AndroidArcade");
 

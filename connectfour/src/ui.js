@@ -178,9 +178,11 @@ export class ConnectFourUI {
     if (!res) return;
 
     this.audio.playDrop(player);
+    if (window.arcadeVault) window.arcadeVault.vibrate(15);
     this.render();
 
     if (res.winner) {
+      if (window.arcadeVault) window.arcadeVault.vibrate([40, 50, 40, 50, 80]);
       this.handleGameOver(res.winner);
       return;
     }

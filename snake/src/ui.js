@@ -59,10 +59,10 @@ export class SnakeUI {
       }
     });
 
-    document.getElementById('btn-up').onclick = () => { if (this.engine.setDirection(DIRECTION.UP)) this.audio.playTurn(); };
-    document.getElementById('btn-down').onclick = () => { if (this.engine.setDirection(DIRECTION.DOWN)) this.audio.playTurn(); };
-    document.getElementById('btn-left').onclick = () => { if (this.engine.setDirection(DIRECTION.LEFT)) this.audio.playTurn(); };
-    document.getElementById('btn-right').onclick = () => { if (this.engine.setDirection(DIRECTION.RIGHT)) this.audio.playTurn(); };
+    document.getElementById('btn-up').onclick = () => { if (this.engine.setDirection(DIRECTION.UP)) { this.audio.playTurn(); arcadeVault.vibrate(10); } };
+    document.getElementById('btn-down').onclick = () => { if (this.engine.setDirection(DIRECTION.DOWN)) { this.audio.playTurn(); arcadeVault.vibrate(10); } };
+    document.getElementById('btn-left').onclick = () => { if (this.engine.setDirection(DIRECTION.LEFT)) { this.audio.playTurn(); arcadeVault.vibrate(10); } };
+    document.getElementById('btn-right').onclick = () => { if (this.engine.setDirection(DIRECTION.RIGHT)) { this.audio.playTurn(); arcadeVault.vibrate(10); } };
     document.getElementById('btn-pause').onclick = () => this.togglePause();
     document.getElementById('btn-restart').onclick = () => this.start();
     const btnSound = document.getElementById('btn-sound');
@@ -164,6 +164,7 @@ export class SnakeUI {
     if (res.event.startsWith('collision')) {
       clearInterval(this.loopId);
       this.audio.playGameOver();
+      arcadeVault.vibrate([60, 40, 100]);
       arcadeVault.recordScore('snake', this.engine.score);
       if (this.engine.score > this.highScore) {
         this.highScore = this.engine.score;
@@ -174,6 +175,7 @@ export class SnakeUI {
       this.overlay.style.display = 'flex';
     } else if (res.event === 'eat') {
       this.audio.playEat();
+      arcadeVault.vibrate(20);
       this.scoreEl.textContent = res.score;
       arcadeVault.recordScore('snake', res.score);
       // Progressive speed increase

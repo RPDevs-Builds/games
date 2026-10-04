@@ -156,6 +156,7 @@ export class LightCyclesUI {
           this.audio.startEngineHum();
           this.engine.setDirection(1, dir);
           this.audio.playTurn();
+          arcadeVault.vibrate(10);
         }, { passive: false });
       }
     });
@@ -212,6 +213,7 @@ export class LightCyclesUI {
 
   handleGameOver() {
     this.audio.playDeRezExplosion();
+    arcadeVault.vibrate([70, 40, 110]);
     this.overlayEl.style.display = 'flex';
 
     if (this.engine.winner === 1) {

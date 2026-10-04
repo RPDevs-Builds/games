@@ -364,6 +364,7 @@ export class LightsOutUI {
 
     this.engine.toggle(r, c);
     this.audio.playToggle(r, c);
+    arcadeVault.vibrate(12);
     this.storage.recordMove();
     this.updateBoardView();
     this.focusR = r;
@@ -371,6 +372,7 @@ export class LightsOutUI {
 
     // Check win condition
     if (this.engine.isSolved()) {
+      arcadeVault.vibrate([40, 50, 40, 50, 80]);
       this.handleVictory();
     }
   }

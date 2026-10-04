@@ -147,6 +147,7 @@ export class MissileCommandUI {
     const fired = this.engine.fireInterceptor(this.crosshairX, this.crosshairY, preferredSilo);
     if (fired) {
       this.audio.playLaunch();
+      arcadeVault.vibrate(10);
     }
   }
 
@@ -162,12 +163,14 @@ export class MissileCommandUI {
 
     if (this.engine.explosions.length > prevExplosionCount) {
       this.audio.playExplosion(false);
+      arcadeVault.vibrate(25);
     }
 
     this.render();
 
     if (this.engine.gameOver && this.overlayEl.style.display !== 'flex') {
       this.audio.playGameOver();
+      arcadeVault.vibrate([80, 50, 120]);
       this.overlayTitleEl.textContent = 'THE END';
       this.overlayMsgEl.textContent = `All cities destroyed! Final Score: ${this.engine.score}`;
       this.overlayEl.style.display = 'flex';

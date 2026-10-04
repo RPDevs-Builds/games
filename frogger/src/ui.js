@@ -41,7 +41,14 @@ class FroggerUI {
       onLevel: (lvl) => this.updateLevel(lvl),
       onTime: (t) => {},
       onGameOver: (s) => this.handleGameOver(s),
-      onSound: (snd) => this.audio.play(snd),
+      onSound: (snd) => {
+        this.audio.play(snd);
+        if (window.arcadeVault) {
+          if (snd === 'hop') window.arcadeVault.vibrate(8);
+          else if (snd === 'home' || snd === 'fly') window.arcadeVault.vibrate([25, 30, 40]);
+          else if (snd === 'squash' || snd === 'plunk') window.arcadeVault.vibrate([50, 40, 80]);
+        }
+      },
       onAchievement: (ach) => this.handleAchievement(ach)
     });
 

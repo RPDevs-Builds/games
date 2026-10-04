@@ -100,10 +100,12 @@ export class OthelloUI {
     const result = this.engine.playMove(r, c);
     if (!result.success) {
       this.audio.playInvalidMove();
+      if (window.arcadeVault) window.arcadeVault.vibrate(30);
       return;
     }
 
     this.audio.playDiscPlace();
+    if (window.arcadeVault) window.arcadeVault.vibrate(15);
     result.flips.forEach((_, idx) => {
       this.audio.playDiscFlip(idx * 0.05);
     });

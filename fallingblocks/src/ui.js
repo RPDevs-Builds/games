@@ -278,12 +278,14 @@ export class FallingBlocksUI {
   hardDrop() {
     const res = this.engine.hardDrop();
     audio.hardDrop();
+    if (window.arcadeVault) window.arcadeVault.vibrate(20);
     this.handleLock(res.clearedLines);
   }
 
   hold() {
     if (this.engine.hold()) {
       audio.hold();
+      if (window.arcadeVault) window.arcadeVault.vibrate(10);
       this.updateHUD();
     }
   }
@@ -291,6 +293,13 @@ export class FallingBlocksUI {
   handleLock(clearedLines) {
     if (clearedLines > 0) {
       audio.clearLine(clearedLines);
+      if (window.arcadeVault) {
+        if (clearedLines === 4) {
+          window.arcadeVault.vibrate([40, 50, 40, 50, 80]);
+        } else {
+          window.arcadeVault.vibrate(30 + clearedLines * 10);
+        }
+      }
       if (clearedLines === 4 && window.ArcadeVault) {
         window.ArcadeVault.unlockBadge('blocks_tetris');
       }
@@ -304,6 +313,7 @@ export class FallingBlocksUI {
 
     if (this.engine.gameOver) {
       audio.gameOver();
+      if (window.arcadeVault) window.arcadeVault.vibrate([60, 40, 100]);
       this.onGameOver();
     }
   }

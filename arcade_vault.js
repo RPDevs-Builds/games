@@ -5,7 +5,7 @@
 
 export const ACHIEVEMENTS = [
   { id: 'arcade_initiate', title: 'Arcade Initiate', icon: '🎟️', desc: 'Play your first game in the RPDevs Retro Arcade.' },
-  { id: 'grandmaster', title: 'Grandmaster of the Arcade', icon: '👑', desc: 'Play at least once across all 16 classic arcade games.' },
+  { id: 'grandmaster', title: 'Grandmaster of the Arcade', icon: '👑', desc: 'Play at least once across all 19 classic arcade games.' },
   { id: 'lightsout_apprentice', title: 'Illuminator', icon: '💡', desc: 'Solve your first Lights Out puzzle.' },
   { id: 'lightsout_expert', title: 'Master of GF(2)', icon: '⚡', desc: 'Solve a 5×5 or larger Lights Out puzzle.' },
   { id: 'snake_charmer', title: 'Snake Charmer', icon: '🐍', desc: 'Reach a score of at least 10 in Retro Snake.' },
@@ -93,6 +93,39 @@ export class ArcadeVault {
       localStorage.setItem('rpdevs_arcade_master_volume', vol.toString());
     } catch {
       // ignore
+    }
+  }
+
+  isHapticsEnabled() {
+    try {
+      const val = localStorage.getItem('rpdevs_arcade_haptics_enabled');
+      return val === null ? true : val === 'true';
+    } catch {
+      return true;
+    }
+  }
+
+  setHapticsEnabled(enabled) {
+    try {
+      localStorage.setItem('rpdevs_arcade_haptics_enabled', enabled ? 'true' : 'false');
+    } catch {
+      // ignore
+    }
+  }
+
+  vibrate(pattern = 15) {
+    if (!this.isHapticsEnabled()) return;
+    try {
+      if (typeof window !== 'undefined' && window.AndroidArcade && typeof window.AndroidArcade.vibrate === 'function') {
+        const ms = Array.isArray(pattern) ? pattern[0] : (typeof pattern === 'number' ? pattern : 15);
+        window.AndroidArcade.vibrate(ms);
+        return;
+      }
+      if (typeof window !== 'undefined' && 'vibrate' in navigator) {
+        navigator.vibrate(pattern);
+      }
+    } catch {
+      // ignore unsupported or permissions policy block
     }
   }
 
@@ -254,6 +287,8 @@ export class ArcadeVault {
       if (score >= 3000) this.unlock('invaders_score_3000');
     } else if (gameId === 'frogger') {
       if (score >= 2000) this.unlock('frogger_score_2000');
+    } else if (gameId === 'missilecommand') {
+      if (score >= 5000) this.unlock('missile_defender');
     }
 
     this.saveState();
@@ -274,6 +309,7 @@ export class ArcadeVault {
 
     this.state.unlockedAchievements[achId] = new Date().toISOString();
     this.saveState();
+    this.vibrate([40, 60, 80]);
     this.showAchievementToast(ach);
   }
 
@@ -293,7 +329,7 @@ export class ArcadeVault {
   }
 
   checkArcadeWideAchievements() {
-    const required = ['lightsout', 'snake', 'simon', 'minesweeper', 'game2048', 'dotsandboxes', 'sokoban', 'connectfour', 'breakout', 'pong', 'fallingblocks', 'mazechaser', 'asteroids', 'wordle', 'spaceinvaders', 'frogger'];
+    const required = ['lightsout', 'snake', 'simon', 'minesweeper', 'game2048', 'dotsandboxes', 'sokoban', 'connectfour', 'breakout', 'pong', 'fallingblocks', 'mazechaser', 'asteroids', 'wordle', 'spaceinvaders', 'frogger', 'othello', 'missilecommand', 'lightcycles'];
     const allPlayed = required.every(id => (this.state.gamesPlayed[id] || 0) > 0);
     if (allPlayed) {
       this.unlock('grandmaster');
@@ -364,7 +400,7 @@ export class ArcadeVault {
       // ignore
     }
 
-    this.showToast('RPDevs Master Arcade', 'Install the Master Arcade app to access all 16 games!');
+    this.showToast('RPDevs Master Arcade', 'Install the Master Arcade app to access all 19 games!');
   }
 
   /**
@@ -490,12 +526,18 @@ export class ArcadeVault {
           }).join('')}
         </div>
 
-        <div style="background: #0d121c; border: 1px solid #273142; border-radius: 8px; padding: 12px; margin-bottom: 16px;">
-          <div style="display: flex; justify-content: space-between; align-items: center; font-size: 0.85rem; font-weight: 700; color: #cbd5e1;">
-            <span>🔊 Master Audio Volume</span>
-            <span id="vault-vol-val" style="color: #00f0ff;">${Math.round(this.getMasterVolume() * 100)}%</span>
+        <div style="background: #0d121c; border: 1px solid #273142; border-radius: 8px; padding: 12px; margin-bottom: 16px; display: flex; flex-direction: column; gap: 12px;">
+          <div>
+            <div style="display: flex; justify-content: space-between; align-items: center; font-size: 0.85rem; font-weight: 700; color: #cbd5e1;">
+              <span>🔊 Master Audio Volume</span>
+              <span id="vault-vol-val" style="color: #00f0ff;">${Math.round(this.getMasterVolume() * 100)}%</span>
+            </div>
+            <input type="range" id="vault-vol-slider" min="0" max="100" value="${Math.round(this.getMasterVolume() * 100)}" style="width: 100%; accent-color: #00f0ff; margin-top: 8px; cursor: pointer;">
           </div>
-          <input type="range" id="vault-vol-slider" min="0" max="100" value="${Math.round(this.getMasterVolume() * 100)}" style="width: 100%; accent-color: #00f0ff; margin-top: 8px; cursor: pointer;">
+          <div style="display: flex; justify-content: space-between; align-items: center; padding-top: 8px; border-top: 1px solid #1c2433; font-size: 0.82rem; font-weight: 600; color: #cbd5e1;">
+            <span>📳 Haptic Feedback (Vibration)</span>
+            <input type="checkbox" id="vault-haptics-toggle" ${this.isHapticsEnabled() ? 'checked' : ''} style="width: 18px; height: 18px; accent-color: #00f0ff; cursor: pointer;">
+          </div>
         </div>
 
         <div class="vault-footer-actions">
@@ -522,6 +564,16 @@ export class ArcadeVault {
         const val = parseInt(e.target.value, 10);
         volVal.textContent = `${val}%`;
         this.setMasterVolume(val / 100);
+      };
+    }
+
+    const hapticsToggle = document.getElementById('vault-haptics-toggle');
+    if (hapticsToggle) {
+      hapticsToggle.onchange = (e) => {
+        this.setHapticsEnabled(e.target.checked);
+        if (e.target.checked) {
+          this.vibrate(25);
+        }
       };
     }
 
@@ -637,6 +689,14 @@ export class ArcadeVault {
       .vault-btn { background: #21262d; border: 1px solid #30363d; color: #c9d1d9; padding: 6px 12px; border-radius: 6px; font-size: 0.75rem; font-weight: 700; cursor: pointer; display: inline-flex; align-items: center; gap: 4px; }
       .vault-btn:hover { background: #30363d; color: #fff; }
       @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+      @media (max-width: 600px) {
+        .arcade-achievement-toast {
+          left: 16px;
+          right: 16px;
+          bottom: 16px;
+          max-width: none;
+        }
+      }
     `;
     document.head.appendChild(style);
   }

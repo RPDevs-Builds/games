@@ -155,7 +155,15 @@ class SpaceInvadersUI {
       onLives: (l) => this.renderLives(l),
       onWave: (w) => this.updateWave(w),
       onGameOver: (s) => this.handleGameOver(s),
-      onSound: (snd) => this.audio.play(snd),
+      onSound: (snd) => {
+        this.audio.play(snd);
+        if (window.arcadeVault) {
+          if (snd === 'shoot') window.arcadeVault.vibrate(10);
+          else if (snd === 'invaderKilled') window.arcadeVault.vibrate(20);
+          else if (snd === 'playerDeath') window.arcadeVault.vibrate([60, 40, 100]);
+          else if (snd === 'ufo') window.arcadeVault.vibrate(15);
+        }
+      },
       onAchievement: (ach) => this.handleAchievement(ach)
     });
 

@@ -205,24 +205,29 @@ export class BreakoutUI {
     const res = this.engine.tick();
     if (res.event === 'brick_hit') {
       this.audio.playBrick(res.brick ? res.brick.row : 7);
+      arcadeVault.vibrate(15);
       this.updateStatsDisplay();
       arcadeVault.recordScore('breakout', this.engine.score);
     } else if (res.event === 'paddle_hit') {
       this.audio.playPaddle();
+      arcadeVault.vibrate(10);
     } else if (res.event === 'wall_hit') {
       this.audio.playWall();
     } else if (res.event === 'life_lost') {
       this.audio.playLifeLost();
+      arcadeVault.vibrate([40, 40, 60]);
       this.updateStatsDisplay();
       if (this.btnLaunch) this.btnLaunch.textContent = '🚀 Launch';
     } else if (res.event === 'game_over') {
       this.audio.playLifeLost();
+      arcadeVault.vibrate([80, 50, 120]);
       this.updateStatsDisplay();
       this.overlayMsgEl.innerHTML = `GAME OVER<br><span style="font-size: 0.9rem; font-weight: normal;">Final Score: ${this.engine.score}</span>`;
       this.overlayEl.style.display = 'flex';
       arcadeVault.recordScore('breakout', this.engine.score);
     } else if (res.event === 'game_won') {
       this.audio.playVictory();
+      arcadeVault.vibrate([40, 60, 40, 60, 100]);
       this.updateStatsDisplay();
       this.overlayMsgEl.innerHTML = `CONGRATULATIONS!<br><span style="font-size: 0.9rem; font-weight: normal;">All Bricks Cleared! Score: ${this.engine.score}</span>`;
       this.overlayEl.style.display = 'flex';
