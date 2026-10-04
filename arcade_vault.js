@@ -5,7 +5,7 @@
 
 export const ACHIEVEMENTS = [
   { id: 'arcade_initiate', title: 'Arcade Initiate', icon: '🎟️', desc: 'Play your first game in the RPDevs Retro Arcade.' },
-  { id: 'grandmaster', title: 'Grandmaster of the Arcade', icon: '👑', desc: 'Play at least once across all 10 classic arcade games.' },
+  { id: 'grandmaster', title: 'Grandmaster of the Arcade', icon: '👑', desc: 'Play at least once across all 13 classic arcade games.' },
   { id: 'lightsout_apprentice', title: 'Illuminator', icon: '💡', desc: 'Solve your first Lights Out puzzle.' },
   { id: 'lightsout_expert', title: 'Master of GF(2)', icon: '⚡', desc: 'Solve a 5×5 or larger Lights Out puzzle.' },
   { id: 'snake_charmer', title: 'Snake Charmer', icon: '🐍', desc: 'Reach a score of at least 10 in Retro Snake.' },
@@ -27,7 +27,12 @@ export const ACHIEVEMENTS = [
   { id: 'blocks_speed', title: 'Terminal Velocity', icon: '⚡', desc: 'Reach Level 10 in Falling Blocks.' },
   { id: 'maze_ghost_hunter', title: 'Ghost Vanquisher', icon: '👻', desc: 'Eat all 4 ghosts on a single energizer in Maze Chaser.' },
   { id: 'maze_fruit_lover', title: 'Fruit Connoisseur', icon: '🍒', desc: 'Eat a bonus fruit in Maze Chaser.' },
-  { id: 'maze_clear', title: 'Labyrinth Champion', icon: '🏆', desc: 'Clear all pellets and win a game of Maze Chaser.' }
+  { id: 'maze_clear', title: 'Labyrinth Champion', icon: '🏆', desc: 'Clear all pellets and win a game of Maze Chaser.' },
+  { id: 'asteroids_first_rock', title: 'Space Cadet', icon: '🪨', desc: 'Destroy your first asteroid in Asteroids.' },
+  { id: 'asteroids_wave_3', title: 'Deep Space Ace', icon: '🚀', desc: 'Reach Wave 3 in Asteroids.' },
+  { id: 'asteroids_saucer_hunter', title: 'UFO Buster', icon: '🛸', desc: 'Shoot down an alien flying saucer in Asteroids.' },
+  { id: 'asteroids_score_5000', title: 'Star Voyager', icon: '⭐', desc: 'Score 5,000+ points in Asteroids.' },
+  { id: 'asteroids_hyperspace', title: 'Quantum Leap', icon: '🌀', desc: 'Survive a hyperspace jump in Asteroids.' }
 ];
 
 export class ArcadeVault {
@@ -87,7 +92,8 @@ export class ArcadeVault {
         breakout: 0,
         pong: 0,
         fallingblocks: 0,
-        mazechaser: 0
+        mazechaser: 0,
+        asteroids: 0
       },
       gamesWon: {
         lightsout: 0,
@@ -101,7 +107,8 @@ export class ArcadeVault {
         breakout: 0,
         pong: 0,
         fallingblocks: 0,
-        mazechaser: 0
+        mazechaser: 0,
+        asteroids: 0
       },
       stats: {},
       highScores: {},
@@ -198,9 +205,19 @@ export class ArcadeVault {
       if (score >= 1024) this.unlock('tile_combiner');
     } else if (gameId === 'breakout') {
       if (score >= 50) this.unlock('brick_breaker');
+    } else if (gameId === 'asteroids') {
+      if (score >= 5000) this.unlock('asteroids_score_5000');
     }
 
     this.saveState();
+  }
+
+  registerPlay(gameId) {
+    this.recordPlay(gameId);
+  }
+
+  recordHighScore(gameId, score) {
+    this.recordScore(gameId, score);
   }
 
   unlock(achId) {
@@ -229,7 +246,7 @@ export class ArcadeVault {
   }
 
   checkArcadeWideAchievements() {
-    const required = ['lightsout', 'snake', 'simon', 'minesweeper', 'game2048', 'dotsandboxes', 'sokoban', 'connectfour', 'breakout', 'pong', 'fallingblocks', 'mazechaser'];
+    const required = ['lightsout', 'snake', 'simon', 'minesweeper', 'game2048', 'dotsandboxes', 'sokoban', 'connectfour', 'breakout', 'pong', 'fallingblocks', 'mazechaser', 'asteroids'];
     const allPlayed = required.every(id => (this.state.gamesPlayed[id] || 0) > 0);
     if (allPlayed) {
       this.unlock('grandmaster');

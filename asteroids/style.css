@@ -1,0 +1,318 @@
+/**
+ * Asteroids 1979 Vector Arcade Cabinet Styling
+ * Authentic Atari vector glowing aesthetics, fully responsive without mobile clipping.
+ */
+
+:root {
+  --bg-primary: #040608;
+  --bg-panel: #0d1117;
+  --bg-well: #020305;
+  --border-color: #21262d;
+  --text-main: #f0f6fc;
+  --text-dim: #8b949e;
+  --accent-cyan: #00f0ff;
+  --accent-green: #39ff14;
+  --accent-purple: #c084fc;
+  --accent-yellow: #facc15;
+  --accent-red: #ff3366;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
+}
+
+body {
+  background-color: var(--bg-primary);
+  color: var(--text-main);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 8px;
+}
+
+.arcade-cabinet {
+  width: 100%;
+  max-width: 500px;
+  background-color: var(--bg-panel);
+  border: 1px solid var(--border-color);
+  border-radius: 14px;
+  padding: 12px;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.75), 0 0 20px rgba(0, 240, 255, 0.08);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* Header */
+.cabinet-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.title-group {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.cabinet-title {
+  font-size: 1.25rem;
+  font-weight: 900;
+  letter-spacing: 1px;
+  color: var(--text-main);
+}
+
+.badge-year {
+  background: rgba(0, 240, 255, 0.15);
+  color: var(--accent-cyan);
+  border: 1px solid rgba(0, 240, 255, 0.35);
+  font-size: 0.7rem;
+  font-weight: 700;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-family: monospace;
+}
+
+.header-actions {
+  display: flex;
+  gap: 6px;
+}
+
+.icon-btn {
+  background: #161b22;
+  border: 1px solid var(--border-color);
+  color: var(--text-dim);
+  padding: 6px 10px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.icon-btn:hover, .icon-btn.active {
+  background: #21262d;
+  color: var(--accent-cyan);
+  border-color: var(--accent-cyan);
+}
+
+/* Metrics Dashboard */
+.metrics-panel {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 6px;
+  background: #090d14;
+  padding: 8px;
+  border-radius: 8px;
+  border: 1px solid var(--border-color);
+}
+
+.metric-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.metric-label {
+  font-size: 0.65rem;
+  font-weight: 700;
+  color: var(--text-dim);
+  letter-spacing: 0.5px;
+}
+
+.metric-val {
+  font-size: 1.15rem;
+  font-weight: 900;
+  color: var(--accent-cyan);
+  font-family: 'Courier New', Courier, monospace;
+}
+
+.lives-box {
+  display: flex;
+  gap: 4px;
+  align-items: center;
+  min-height: 22px;
+}
+
+.life-icon {
+  display: inline-flex;
+  color: #ffffff;
+  filter: drop-shadow(0 0 2px rgba(255, 255, 255, 0.8));
+}
+
+/* Arena & Canvas */
+.arena-well {
+  background: var(--bg-well);
+  border: 2px solid var(--border-color);
+  border-radius: 10px;
+  overflow: hidden;
+  position: relative;
+  box-shadow: inset 0 4px 16px rgba(0, 0, 0, 0.9);
+}
+
+.canvas-wrapper {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+}
+
+#asteroids-canvas {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: contain;
+}
+
+/* Overlay */
+.game-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(4, 6, 10, 0.88);
+  backdrop-filter: blur(4px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 14px;
+  z-index: 10;
+  animation: fadeIn 0.2s ease;
+}
+
+.overlay-title {
+  font-size: 1.4rem;
+  font-weight: 900;
+  letter-spacing: 2px;
+  color: var(--accent-red);
+  text-shadow: 0 0 12px rgba(255, 51, 102, 0.5);
+}
+
+.overlay-sub {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text-main);
+  font-family: monospace;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, var(--accent-cyan), #00a6ff);
+  color: #040608;
+  border: none;
+  padding: 10px 24px;
+  font-size: 0.95rem;
+  font-weight: 800;
+  border-radius: 8px;
+  cursor: pointer;
+  box-shadow: 0 4px 14px rgba(0, 240, 255, 0.4);
+}
+
+/* Control Actions Bar */
+.actions-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+
+.action-btn {
+  background: #161b22;
+  border: 1px solid var(--border-color);
+  color: var(--text-main);
+  padding: 10px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  border-radius: 8px;
+  cursor: pointer;
+  text-decoration: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 6px;
+  transition: all 0.15s ease;
+}
+
+.action-btn:hover {
+  background: #21262d;
+}
+
+/* Virtual Touch Keypad for Mobile */
+.touch-bar {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding-top: 2px;
+}
+
+.touch-group-left,
+.touch-group-right {
+  display: grid;
+  gap: 8px;
+}
+
+.touch-group-left {
+  grid-template-columns: 1fr 1fr;
+}
+
+.touch-group-right {
+  grid-template-columns: 1.2fr 1.2fr 1fr;
+}
+
+.pad-btn {
+  background: #161b22;
+  border: 1px solid var(--border-color);
+  color: #c9d1d9;
+  font-size: 0.88rem;
+  font-weight: 800;
+  padding: 12px 6px;
+  border-radius: 8px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+  transition: background 0.1s, transform 0.05s;
+}
+
+.pad-btn:active {
+  background: #21262d;
+  transform: translateY(2px);
+}
+
+.btn-thrust {
+  color: var(--accent-yellow);
+  border-color: rgba(250, 204, 21, 0.35);
+}
+.btn-thrust:active {
+  background: rgba(250, 204, 21, 0.2);
+  border-color: var(--accent-yellow);
+}
+
+.btn-fire {
+  color: var(--accent-green);
+  border-color: rgba(57, 255, 20, 0.35);
+}
+.btn-fire:active {
+  background: rgba(57, 255, 20, 0.2);
+  border-color: var(--accent-green);
+}
+
+.btn-hyper {
+  color: var(--accent-purple);
+  border-color: rgba(192, 132, 252, 0.35);
+}
+.btn-hyper:active {
+  background: rgba(192, 132, 252, 0.2);
+  border-color: var(--accent-purple);
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}

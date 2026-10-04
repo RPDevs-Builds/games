@@ -137,6 +137,17 @@ const GAMES_DATA = [
     tags: ['Namco 1980', '4 Ghost AI', 'Scatter/Chase', 'Chiptune Audio', 'PWA Offline', 'Terminal CLI'],
     url: './mazechaser/index.html',
     rulesUrl: './mazechaser/RULES.md'
+  },
+  {
+    id: 'asteroids',
+    title: 'Asteroids',
+    year: '1979',
+    icon: '🚀',
+    category: 'retro',
+    desc: 'The legendary 1979 Atari vector space shooter. Features 360° rotational inertia, procedural asteroid splitting, alien saucers, hyperspace, and authentic vector sound synthesis.',
+    tags: ['Atari 1979', 'Vector Physics', 'Procedural Splitting', 'Alien Saucers', 'PWA Offline', 'Terminal CLI'],
+    url: './asteroids/index.html',
+    rulesUrl: './asteroids/RULES.md'
   }
 ];
 
@@ -260,7 +271,7 @@ class ArcadePortal {
       <div class="attract-cabinet-frame">
         <div class="attract-marquee">
           <div class="marquee-neon">★ RPDevs RETRO ARCADE ★</div>
-          <div class="marquee-subtitle">10 ZERO-DEPENDENCY CLASSIC HITS</div>
+          <div class="marquee-subtitle">13 ZERO-DEPENDENCY CLASSIC HITS</div>
         </div>
         <div class="attract-featured">
           <div id="attract-game-icon" class="attract-icon">🏓</div>
