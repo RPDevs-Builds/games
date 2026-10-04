@@ -46,6 +46,29 @@ export class Game2048UI {
     const btnCrt = document.getElementById('btn-crt');
     if (btnCrt) btnCrt.onclick = () => retroCRT.toggle();
 
+    const btnVault = document.getElementById('btn-vault');
+    if (btnVault) {
+      btnVault.onclick = () => {
+        if (window.arcadeVault) window.arcadeVault.showModal();
+      };
+    }
+    const btnPortal = document.getElementById('btn-portal');
+    if (btnPortal) {
+      btnPortal.onclick = (e) => {
+        e.preventDefault();
+        const vault = window.arcadeVault || window.ArcadeVault;
+        if (vault && typeof vault.goToArcade === 'function') {
+          vault.goToArcade('2048');
+        } else if (window.location.pathname.includes('/2048/') || window.location.protocol !== 'file:') {
+          window.location.href = '../index.html';
+        } else if (window.AndroidArcade && typeof window.AndroidArcade.launchArcade === 'function') {
+          window.AndroidArcade.launchArcade();
+        } else {
+          window.location.href = "intent:#Intent;package=com.rpdevs.games.arcade;action=android.intent.action.MAIN;category=android.intent.category.LAUNCHER;end";
+        }
+      };
+    }
+
     // Keyboard
     window.addEventListener('keydown', (e) => {
       switch (e.key) {

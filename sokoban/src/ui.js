@@ -99,6 +99,30 @@ export class SokobanUI {
 
     document.getElementById('btn-undo').onclick = () => this.handleUndo();
     document.getElementById('btn-reset').onclick = () => this.resetLevel();
+
+    const btnVault = document.getElementById('btn-vault');
+    if (btnVault) {
+      btnVault.onclick = () => {
+        if (window.arcadeVault) window.arcadeVault.showModal();
+      };
+    }
+
+    const btnPortal = document.getElementById('btn-portal');
+    if (btnPortal) {
+      btnPortal.onclick = (e) => {
+        e.preventDefault();
+        const vault = window.arcadeVault || window.ArcadeVault;
+        if (vault && typeof vault.goToArcade === 'function') {
+          vault.goToArcade('sokoban');
+        } else if (window.location.pathname.includes('/sokoban/') || window.location.protocol !== 'file:') {
+          window.location.href = '../index.html';
+        } else if (window.AndroidArcade && typeof window.AndroidArcade.launchArcade === 'function') {
+          window.AndroidArcade.launchArcade();
+        } else {
+          window.location.href = "intent:#Intent;package=com.rpdevs.games.arcade;action=android.intent.action.MAIN;category=android.intent.category.LAUNCHER;end";
+        }
+      };
+    }
     const btnSound = document.getElementById('btn-sound');
     if (btnSound) {
       btnSound.textContent = this.audio.muted ? '🔇 Sound' : '🔊 Sound';
