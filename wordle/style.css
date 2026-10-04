@@ -56,11 +56,11 @@ body {
 /* Header */
 .cabinet-header {
   width: 100%;
-  height: 52px;
+  height: 50px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0 12px;
+  padding: 0 8px;
   border-bottom: 1px solid #282832;
   background: #16161b;
   z-index: 10;
@@ -69,19 +69,23 @@ body {
 .header-left, .header-right {
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: 4px;
+  flex-shrink: 0;
 }
 
 .title-group {
   display: flex;
   align-items: center;
-  gap: 6px;
+  justify-content: center;
+  gap: 4px;
+  overflow: hidden;
+  white-space: nowrap;
 }
 
 .cabinet-title {
-  font-size: 1.35rem;
+  font-size: 1.15rem;
   font-weight: 800;
-  letter-spacing: 2px;
+  letter-spacing: 1px;
   color: #fff;
   text-shadow: 0 0 10px rgba(83, 141, 78, 0.4);
 }
@@ -100,8 +104,8 @@ body {
   border: 1px solid #32323e;
   color: #fff;
   border-radius: 6px;
-  padding: 5px 8px;
-  font-size: 0.95rem;
+  padding: 4px 6px;
+  font-size: 0.85rem;
   cursor: pointer;
   text-decoration: none;
   display: inline-flex;
@@ -123,18 +127,19 @@ body {
   background: #22222b;
   border: 1px solid #32323e;
   color: #eee;
-  font-size: 0.75rem;
+  font-size: 0.72rem;
   font-weight: 600;
   border-radius: 6px;
-  padding: 4px 6px;
+  padding: 4px 5px;
   cursor: pointer;
+  max-width: 90px;
 }
 
 .toggle-wrap {
   display: flex;
   align-items: center;
-  gap: 3px;
-  font-size: 0.72rem;
+  gap: 2px;
+  font-size: 0.7rem;
   font-weight: 600;
   color: #bbb;
   cursor: pointer;
@@ -565,62 +570,73 @@ body {
   .key-btn.key-wide { font-size: 0.75rem; }
 }
 
-@media (max-width: 480px) {
-  .cabinet-header {
-    padding: 0 6px;
-    height: 48px;
-  }
-  .header-left, .header-right {
-    gap: 4px;
-  }
-  .cabinet-title {
-    font-size: 1.1rem;
-    letter-spacing: 1px;
+@media (max-width: 600px) {
+  .arcade-cabinet {
+    max-width: 100%;
+    border-left: none;
+    border-right: none;
   }
   .badge-year {
     display: none;
   }
-  .nav-btn, .icon-btn {
-    padding: 4px 6px;
-    font-size: 0.85rem;
+  .cabinet-title {
+    font-size: 1.05rem;
+    letter-spacing: 1px;
   }
   .mode-select {
-    font-size: 0.7rem;
+    max-width: 76px;
+    font-size: 0.68rem;
     padding: 3px 4px;
-    max-width: 82px;
   }
   .toggle-wrap {
-    font-size: 0.68rem;
-  }
-}
-
-@media (max-width: 380px) {
-  .cabinet-header {
-    padding: 0 4px;
-    height: 44px;
-  }
-  .header-left, .header-right {
-    gap: 2px;
-  }
-  .cabinet-title {
-    font-size: 0.95rem;
-    letter-spacing: 0.5px;
+    font-size: 0.65rem;
   }
   .nav-btn, .icon-btn {
     padding: 3px 5px;
     font-size: 0.8rem;
   }
+}
+
+@media (max-width: 420px) {
+  .cabinet-header {
+    padding: 0 4px;
+    height: 46px;
+  }
+  .header-left, .header-right {
+    gap: 3px;
+  }
+  .cabinet-title {
+    font-size: 0.95rem;
+    letter-spacing: 0.5px;
+  }
   .mode-select {
+    max-width: 68px;
     font-size: 0.65rem;
     padding: 2px 3px;
-    max-width: 72px;
   }
   .toggle-wrap .toggle-label {
     display: none;
   }
-  .grid-container { max-width: 310px; gap: 4px; }
+  .grid-container { max-width: 320px; gap: 4px; }
   .grid-row { gap: 4px; }
   .tile { font-size: 1.5rem; }
-  .key-btn { height: 50px; font-size: 0.95rem; }
+  .key-btn { height: 48px; font-size: 0.95rem; }
   .key-btn.key-wide { font-size: 0.72rem; }
+}
+
+@media (max-width: 360px) {
+  .cabinet-header {
+    padding: 0 2px;
+    height: 42px;
+  }
+  .header-left, .header-right {
+    gap: 2px;
+  }
+  .cabinet-title {
+    font-size: 0.85rem;
+  }
+  .nav-btn, .icon-btn {
+    padding: 2px 4px;
+    font-size: 0.75rem;
+  }
 }
