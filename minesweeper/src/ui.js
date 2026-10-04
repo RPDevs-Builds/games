@@ -151,10 +151,13 @@ export class MinesweeperUI {
     if (res.status === 'exploded') {
       this.stopTimer();
       this.audio.playExplode();
+      if (window.arcadeVault) window.arcadeVault.vibrate([70, 50, 110]);
       this.faceBtn.textContent = '😵';
       this.revealAllMines(r, c);
       return;
     }
+
+    if (window.arcadeVault) window.arcadeVault.vibrate(10);
 
     // Update revealed cells
     for (const item of res.revealed) {
@@ -169,6 +172,7 @@ export class MinesweeperUI {
     if (res.status === 'won') {
       this.stopTimer();
       this.audio.playWin();
+      if (window.arcadeVault) window.arcadeVault.vibrate([40, 60, 40, 60, 100]);
       this.faceBtn.textContent = '😎';
       this.flagAllMines();
       arcadeVault.recordWin('minesweeper', { difficulty: this.diffSelect ? this.diffSelect.value : 'beginner' });
@@ -178,6 +182,7 @@ export class MinesweeperUI {
   handleRightClick(r, c) {
     if (this.engine.gameOver || this.engine.gameWon) return;
     this.audio.playClick();
+    if (window.arcadeVault) window.arcadeVault.vibrate(15);
     const isFlagged = this.engine.toggleFlag(r, c);
     const cellEl = this.boardEl.querySelector(`[data-r="${r}"][data-c="${c}"]`);
     if (cellEl) {

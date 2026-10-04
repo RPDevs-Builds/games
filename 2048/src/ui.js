@@ -130,8 +130,10 @@ export class Game2048UI {
 
     if (res.scoreEarned > 0) {
       this.audio.playMerge();
+      if (window.arcadeVault) window.arcadeVault.vibrate(20);
     } else {
       this.audio.playSlide();
+      if (window.arcadeVault) window.arcadeVault.vibrate(8);
     }
 
     this.render();
@@ -143,16 +145,19 @@ export class Game2048UI {
       this.overlayMsg.textContent = 'YOU WIN!';
       this.btnContinue.style.display = 'inline-block';
       this.overlayEl.style.display = 'flex';
+      if (window.arcadeVault) window.arcadeVault.vibrate([40, 60, 40, 60, 100]);
       arcadeVault.recordWin('game2048', maxTile);
     } else if (res.gameOver) {
       this.overlayMsg.textContent = 'GAME OVER!';
       this.btnContinue.style.display = 'none';
       this.overlayEl.style.display = 'flex';
+      if (window.arcadeVault) window.arcadeVault.vibrate([60, 40, 100]);
     }
   }
 
   handleUndo() {
     if (this.engine.undo()) {
+      if (window.arcadeVault) window.arcadeVault.vibrate(12);
       this.overlayEl.style.display = 'none';
       this.render();
     }

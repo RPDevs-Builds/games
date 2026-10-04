@@ -179,21 +179,29 @@ export class SokobanUI {
 
     if (res.moved) {
       if (res.pushed) {
-        if (res.placedOnGoal) this.audio.playGoal();
-        else this.audio.playPush();
+        if (res.placedOnGoal) {
+          this.audio.playGoal();
+          if (window.arcadeVault) window.arcadeVault.vibrate(25);
+        } else {
+          this.audio.playPush();
+          if (window.arcadeVault) window.arcadeVault.vibrate(15);
+        }
       } else {
         this.audio.playStep();
+        if (window.arcadeVault) window.arcadeVault.vibrate(6);
       }
 
       this.lastDeadlocks = res.deadlocks;
       if (res.deadlocks.length > 0 && !res.isWon) {
         this.audio.playDeadlock();
+        if (window.arcadeVault) window.arcadeVault.vibrate([30, 40, 50]);
         this.setStatus(`⚠️ Crate deadlocked! Press Undo (U) to revert.`, 'warn');
       } else {
         this.setStatus(`Push crates onto the gold targets.`);
       }
 
       if (res.isWon) {
+        if (window.arcadeVault) window.arcadeVault.vibrate([40, 60, 40, 60, 100]);
         this.handleVictory();
       }
 

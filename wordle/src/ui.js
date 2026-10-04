@@ -310,6 +310,7 @@ class WordleUI {
       this.showToast('Not enough letters');
       this.shakeActiveRow();
       this.audio.playInvalidBuzz();
+      if (window.arcadeVault) window.arcadeVault.vibrate(30);
       return;
     }
 
@@ -319,6 +320,7 @@ class WordleUI {
       this.showToast(result.message);
       this.shakeActiveRow();
       this.audio.playInvalidBuzz();
+      if (window.arcadeVault) window.arcadeVault.vibrate(35);
       return;
     }
 
@@ -401,6 +403,7 @@ class WordleUI {
 
     // Audio
     this.audio.playVictoryFanfare();
+    if (window.arcadeVault) window.arcadeVault.vibrate([40, 60, 40, 60, 100]);
 
     // Bounce winning row
     const winningRow = this.gridContainer.children[attempts - 1];

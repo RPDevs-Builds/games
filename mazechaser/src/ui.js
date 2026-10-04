@@ -200,10 +200,12 @@ export class MazeUI {
     }
     if (events.energizerEaten) {
       audio.energizer();
+      if (window.arcadeVault) window.arcadeVault.vibrate(25);
       this.updateHUD();
     }
     if (events.ghostEaten) {
       audio.ghostEaten();
+      if (window.arcadeVault) window.arcadeVault.vibrate(35);
       this.updateHUD();
       if (events.ghostEaten.count >= 4 && window.ArcadeVault) {
         window.ArcadeVault.unlockBadge('maze_ghost_hunter');
@@ -211,6 +213,7 @@ export class MazeUI {
     }
     if (events.playerDied) {
       audio.death();
+      if (window.arcadeVault) window.arcadeVault.vibrate([60, 40, 100]);
       this.updateHUD();
       if (this.engine.gameOver) {
         this.onGameOver();
@@ -218,12 +221,14 @@ export class MazeUI {
     }
     if (events.fruitEaten) {
       audio.fruit();
+      if (window.arcadeVault) window.arcadeVault.vibrate(20);
       this.updateHUD();
       if (window.ArcadeVault) {
         window.ArcadeVault.unlockBadge('maze_fruit_lover');
       }
     }
     if (events.gameWon) {
+      if (window.arcadeVault) window.arcadeVault.vibrate([40, 60, 40, 60, 100]);
       this.onGameWon();
     }
 

@@ -258,10 +258,12 @@ export class PongUI {
       result.events.forEach((ev) => {
         if (ev.type === 'bounce_paddle') {
           this.audio.playPaddleHit();
+          if (window.arcadeVault) window.arcadeVault.vibrate(10);
         } else if (ev.type === 'bounce_wall') {
           this.audio.playWallBounce();
         } else if (ev.type === 'point_scored') {
           this.audio.playPointScored();
+          if (window.arcadeVault) window.arcadeVault.vibrate(25);
           this.updateScoreboard();
           this.btnServe.textContent = '🏓 Next Point (Space)';
         } else if (ev.type === 'game_over') {
@@ -269,6 +271,7 @@ export class PongUI {
           const p1Won = ev.winner === 1;
           if (p1Won) {
             this.audio.playVictory();
+            if (window.arcadeVault) window.arcadeVault.vibrate([40, 60, 40, 60, 100]);
             arcadeVault.recordWin('pong', this.engine.scoreP1);
             arcadeVault.unlock('pong_paddle');
             if (this.engine.scoreP2 === 0) {
@@ -276,6 +279,7 @@ export class PongUI {
             }
           } else {
             this.audio.playDefeat();
+            if (window.arcadeVault) window.arcadeVault.vibrate([60, 40, 100]);
           }
 
           const winnerText = this.engine.mode === '2p'

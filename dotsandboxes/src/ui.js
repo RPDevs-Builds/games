@@ -214,16 +214,19 @@ export class DotsAndBoxesUI {
     if (this.isAiTurn || this.engine.gameOver) return;
 
     this.audio.playLineDraw();
+    if (window.arcadeVault) window.arcadeVault.vibrate(10);
     const res = this.engine.makeMove(type, r, c);
     if (!res.success) return;
 
     if (res.boxesCompleted.length > 0) {
       this.audio.playBoxCapture(res.player);
+      if (window.arcadeVault) window.arcadeVault.vibrate(25);
     }
 
     this.render();
 
     if (res.gameOver) {
+      if (window.arcadeVault) window.arcadeVault.vibrate([40, 60, 40, 60, 100]);
       this.handleGameOver();
       return;
     }

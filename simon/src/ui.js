@@ -117,12 +117,14 @@ export class SimonUI {
     if (this.isPlayingDemo) return;
 
     this.flashPad(color, 200);
+    if (window.arcadeVault) window.arcadeVault.vibrate(15);
     const res = this.engine.handlePlayerInput(color);
 
     if (res.status === 'round_complete') {
       const roundStr = res.nextRound.toString().padStart(2, '0');
       this.counterEl.textContent = roundStr;
       this.statusEl.textContent = 'GOOD! NEXT ROUND...';
+      if (window.arcadeVault) window.arcadeVault.vibrate([25, 30, 45]);
       arcadeVault.recordScore('simon', res.nextRound - 1);
       if (this.engine.strict && (res.nextRound - 1) >= 15) {
         arcadeVault.unlock('simon_genius');
@@ -130,6 +132,7 @@ export class SimonUI {
       setTimeout(() => this.playSequence(), 800);
     } else if (res.status === 'error') {
       this.audio.playError();
+      if (window.arcadeVault) window.arcadeVault.vibrate([60, 40, 100]);
       this.counterEl.textContent = '!!';
       this.statusEl.textContent = `MISTAKE! Final Score: ${res.round - 1}`;
       arcadeVault.recordScore('simon', res.round - 1);

@@ -203,14 +203,31 @@ export class AsteroidsUI {
 
   handleSound(sound, ...args) {
     if (sound === 'heartbeat') this.audio.playHeartbeat(...args);
-    else if (sound === 'fire') this.audio.playFire();
+    else if (sound === 'fire') {
+      this.audio.playFire();
+      if (window.arcadeVault) window.arcadeVault.vibrate(8);
+    }
     else if (sound === 'thrustStart') this.audio.startThrust();
     else if (sound === 'thrustStop') this.audio.stopThrust();
-    else if (sound === 'explosion') this.audio.playExplosion(...args);
+    else if (sound === 'explosion') {
+      this.audio.playExplosion(...args);
+      if (window.arcadeVault) {
+        const type = args[0] || 'large';
+        if (type === 'player') window.arcadeVault.vibrate([60, 40, 100]);
+        else if (type === 'saucer') window.arcadeVault.vibrate(30);
+        else window.arcadeVault.vibrate(18);
+      }
+    }
     else if (sound === 'saucerStart') this.audio.startSaucer(...args);
     else if (sound === 'saucerStop') this.audio.stopSaucer();
-    else if (sound === 'hyperspace') this.audio.playHyperspace();
-    else if (sound === 'extraLife') this.audio.playExtraLife();
+    else if (sound === 'hyperspace') {
+      this.audio.playHyperspace();
+      if (window.arcadeVault) window.arcadeVault.vibrate(25);
+    }
+    else if (sound === 'extraLife') {
+      this.audio.playExtraLife();
+      if (window.arcadeVault) window.arcadeVault.vibrate([30, 40, 50]);
+    }
   }
 
   handleAchievement(id) {
