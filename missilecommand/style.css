@@ -198,3 +198,23 @@ body {
   font-size: 0.72rem;
   color: #8b949e;
 }
+
+@media (max-width: 480px) {
+  body {
+    padding: 6px;
+  }
+  .console-header {
+    padding: 6px 8px;
+    gap: 6px;
+  }
+  .console-title {
+    font-size: 0.95rem;
+  }
+  .header-actions {
+    gap: 4px;
+  }
+  .icon-btn {
+    padding: 4px 6px;
+    font-size: 0.7rem;
+  }
+}

@@ -136,21 +136,28 @@ body {
 }
 
 .controls-row {
-  display: flex;
-  gap: 8px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 6px;
   width: 100%;
-  justify-content: space-between;
 }
 
 .sub-btn {
   background: #1e2430;
   border: 1px solid #3d4757;
   color: #c9d1d9;
-  padding: 6px 12px;
+  padding: 6px 4px;
   border-radius: 6px;
-  font-size: 0.75rem;
+  font-size: 0.72rem;
   font-weight: 700;
   cursor: pointer;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 @media (max-width: 480px) {
@@ -164,6 +171,14 @@ body {
   }
   .screen-frame {
     padding: 8px;
+  }
+  .controls-row {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 5px;
+  }
+  .sub-btn {
+    padding: 5px 2px;
+    font-size: 0.68rem;
   }
   .keypad {
     gap: 6px;

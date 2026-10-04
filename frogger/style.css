@@ -217,8 +217,8 @@ body {
 /* Control Actions Bar */
 .actions-row {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 8px;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 6px;
 }
 
 .action-btn {
@@ -301,18 +301,59 @@ body {
 @media (max-width: 480px) {
   body {
     padding: 4px;
+    align-items: flex-start;
   }
   .arcade-cabinet {
-    padding: 8px;
-    gap: 8px;
+    padding: 6px;
+    gap: 6px;
+    max-height: 100vh;
+  }
+  .cabinet-header {
+    padding: 0 2px;
+  }
+  .cabinet-title {
+    font-size: 1rem;
+  }
+  .metrics-panel {
+    padding: 4px 6px;
+    gap: 4px;
+  }
+  .metric-val {
+    font-size: 1rem;
+  }
+  .arena-well {
+    max-height: 48vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .canvas-wrapper {
+    max-height: 48vh;
+    width: auto;
+    aspect-ratio: 11 / 14;
+    height: 100%;
+  }
+  .action-btn {
+    padding: 6px 4px;
+    font-size: 0.72rem;
+  }
+  .touch-bar {
+    padding: 2px 0;
+  }
+  .dpad-container {
+    gap: 2px;
+  }
+  .dpad-middle {
+    gap: 2px;
   }
   .dpad-btn {
-    width: 60px;
-    height: 52px;
-    font-size: 1.3rem;
+    width: 46px;
+    height: 40px;
+    font-size: 1.1rem;
+    border-radius: 6px;
   }
   .dpad-center {
-    width: 52px;
-    height: 52px;
+    width: 40px;
+    height: 40px;
   }
 }

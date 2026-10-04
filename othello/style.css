@@ -266,3 +266,23 @@ body {
   box-shadow: 0 0 6px rgba(0, 240, 255, 0.6);
   pointer-events: none;
 }
+
+@media (max-width: 480px) {
+  body {
+    padding: 6px;
+  }
+  .console-header {
+    padding: 6px 8px;
+    gap: 6px;
+  }
+  .console-title {
+    font-size: 0.95rem;
+  }
+  .header-actions {
+    gap: 4px;
+  }
+  .icon-btn {
+    padding: 4px 6px;
+    font-size: 0.7rem;
+  }
+}
