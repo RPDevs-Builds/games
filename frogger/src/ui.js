@@ -9,6 +9,7 @@ import { FroggerAudio } from './audio.js';
 import { arcadeVault } from '../arcade_vault.js';
 import { retroCRT } from '../crt.js';
 import { arcadeGamepad } from '../gamepad.js';
+import { ArcadeMenu } from '../../arcade_menu.js';
 
 if (typeof window !== 'undefined') {
   if (!window.arcadeVault) window.arcadeVault = arcadeVault;
@@ -18,9 +19,15 @@ if (typeof window !== 'undefined') {
 
 class FroggerUI {
   constructor() {
+    this.audio = new FroggerAudio();
+    this.menu = new ArcadeMenu({
+      gameId: 'frogger',
+      title: 'Frogger',
+      year: '1981',
+      audio: this.audio
+    });
     this.canvas = document.getElementById('frogger-canvas');
     this.ctx = this.canvas.getContext('2d');
-    this.audio = new FroggerAudio();
 
     // DOM Elements
     this.scoreEl = document.getElementById('stat-score');

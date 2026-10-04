@@ -3,6 +3,7 @@ import { SnakeAudio } from './audio.js';
 import { arcadeVault } from '../arcade_vault.js';
 import { arcadeGamepad } from '../gamepad.js';
 import { retroCRT } from '../crt.js';
+import { ArcadeMenu } from '../../arcade_menu.js';
 
 export class SnakeUI {
   constructor() {
@@ -18,12 +19,42 @@ export class SnakeUI {
     this.highScore = parseInt(localStorage.getItem('snake_highscore') || '0', 10);
     this.highScoreEl.textContent = this.highScore;
 
+    this.speedMode = 'normal'; // normal, fast, relax
     this.tickRate = 130;
     this.loopId = null;
     this.paused = false;
 
+    this.initMenu();
     this.bindEvents();
     this.draw();
+  }
+
+  initMenu() {
+    this.menu = new ArcadeMenu({
+      gameId: 'snake',
+      title: 'Retro Snake',
+      year: '1997',
+      audio: this.audio,
+      gameOptions: [
+        {
+          id: 'opt-snake-speed',
+          label: 'Game Speed',
+          type: 'select',
+          value: this.speedMode,
+          options: [
+            { value: 'relax', label: 'Relaxed (Slow)' },
+            { value: 'normal', label: 'Classic Nokia (Normal)' },
+            { value: 'fast', label: 'Hyper (Fast)' }
+          ],
+          onChange: (val) => {
+            this.speedMode = val;
+            if (val === 'relax') this.tickRate = 175;
+            else if (val === 'fast') this.tickRate = 90;
+            else this.tickRate = 130;
+          }
+        }
+      ]
+    });
   }
 
   bindEvents() {

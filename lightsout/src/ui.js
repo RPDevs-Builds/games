@@ -9,6 +9,7 @@ import { GameStorage } from './storage.js';
 import { arcadeVault } from '../arcade_vault.js';
 import { arcadeGamepad } from '../gamepad.js';
 import { retroCRT } from '../crt.js';
+import { ArcadeMenu } from '../../arcade_menu.js';
 
 // Pre-defined campaign levels (guaranteed solvable puzzles with target par moves)
 const CAMPAIGN_LEVELS = [
@@ -44,6 +45,7 @@ export class LightsOutUI {
     this.isSolving = false;
 
     this.cacheElements();
+    this.initMenu();
     this.bindEvents();
     this.applyTheme(this.storage.getTheme());
     this.checkUrlForPuzzle();
@@ -73,6 +75,65 @@ export class LightsOutUI {
         }
       };
     }
+  }
+
+  initMenu() {
+    this.menu = new ArcadeMenu({
+      gameId: 'lightsout',
+      title: 'Lights Out',
+      year: '1995',
+      audio: this.audio,
+      gameOptions: [
+        {
+          id: 'opt-lo-mode',
+          label: 'Game Mode',
+          type: 'select',
+          value: this.currentMode,
+          options: [
+            { value: 'random', label: 'Random Puzzle' },
+            { value: 'campaign', label: 'Campaign Levels' },
+            { value: 'custom', label: 'Custom Board' }
+          ],
+          onChange: (val) => {
+            if (this.modeSelector) {
+              this.modeSelector.value = val;
+              this.modeSelector.dispatchEvent(new Event('change'));
+            }
+          }
+        },
+        {
+          id: 'opt-lo-diff',
+          label: 'Difficulty',
+          type: 'select',
+          value: this.currentDifficulty,
+          options: [
+            { value: 'easy', label: 'Easy (Fewer Moves)' },
+            { value: 'medium', label: 'Medium (Standard)' },
+            { value: 'hard', label: 'Hard (Complex)' }
+          ],
+          onChange: (val) => {
+            if (this.diffSelector) {
+              this.diffSelector.value = val;
+              this.diffSelector.dispatchEvent(new Event('change'));
+            }
+          }
+        },
+        {
+          id: 'opt-lo-theme',
+          label: 'Visual Theme',
+          type: 'select',
+          value: this.storage ? this.storage.getTheme() : 'retro',
+          options: [
+            { value: 'retro', label: '1995 Retro Handheld' },
+            { value: 'cyberpunk', label: 'Cyberpunk Neon' },
+            { value: 'minimal', label: 'Modern Minimalist' }
+          ],
+          onChange: (val) => {
+            this.applyTheme(val);
+          }
+        }
+      ]
+    });
   }
 
   cacheElements() {

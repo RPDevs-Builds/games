@@ -2,6 +2,7 @@ import { SimonEngine } from './engine.js';
 import { SimonAudio } from './audio.js';
 import { arcadeVault } from '../arcade_vault.js';
 import { retroCRT } from '../crt.js';
+import { ArcadeMenu } from '../../arcade_menu.js';
 
 export class SimonUI {
   constructor() {
@@ -20,7 +21,32 @@ export class SimonUI {
     this.btnSound = document.getElementById('btn-sound');
 
     this.isPlayingDemo = false;
+    this.initMenu();
     this.bindEvents();
+    arcadeVault.recordPlay('simon');
+  }
+
+  initMenu() {
+    this.menu = new ArcadeMenu({
+      gameId: 'simon',
+      title: 'Simon',
+      year: '1978',
+      audio: this.audio,
+      gameOptions: [
+        {
+          id: 'opt-simon-strict',
+          label: 'Strict Mode (Game Over on mistake)',
+          type: 'checkbox',
+          value: this.engine.strict,
+          onChange: (val) => {
+            this.engine.strict = !!val;
+            if (this.btnStrict) {
+              this.btnStrict.style.background = this.engine.strict ? '#e74c3c' : '#30363d';
+            }
+          }
+        }
+      ]
+    });
   }
 
   bindEvents() {

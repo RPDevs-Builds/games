@@ -371,6 +371,7 @@ src.resize((144, 144), Image.Resampling.LANCZOS).save('${build_dir}/res/mipmap-x
         cp "${GAMES_ROOT}/manifest.json" "${build_dir}/assets/www/"
         [[ -f "${GAMES_ROOT}/sw.js" ]] && cp "${GAMES_ROOT}/sw.js" "${build_dir}/assets/www/"
         cp "${GAMES_ROOT}/arcade_vault.js" "${build_dir}/assets/www/" 2>/dev/null || true
+        cp "${GAMES_ROOT}/arcade_menu.js" "${build_dir}/assets/www/" 2>/dev/null || true
         cp "${GAMES_ROOT}/gamepad.js" "${build_dir}/assets/www/" 2>/dev/null || true
         cp "${GAMES_ROOT}/crt.css" "${build_dir}/assets/www/" 2>/dev/null || true
         cp "${GAMES_ROOT}/crt.js" "${build_dir}/assets/www/" 2>/dev/null || true
@@ -398,6 +399,7 @@ src.resize((144, 144), Image.Resampling.LANCZOS).save('${build_dir}/res/mipmap-x
         cp -L "${src_dir}/"*.json "${build_dir}/assets/www/" 2>/dev/null || true
         cp -r -L "${src_dir}/src" "${build_dir}/assets/www/" 2>/dev/null || true
         [[ -f "${src_dir}/RULES.md" ]] && cp "${src_dir}/RULES.md" "${build_dir}/assets/www/"
+        [[ -f "${GAMES_ROOT}/arcade_menu.js" ]] && cp "${GAMES_ROOT}/arcade_menu.js" "${build_dir}/assets/www/"
     fi
 
     # 5. AndroidManifest.xml

@@ -8,6 +8,7 @@ import { ConnectFourAudio } from './audio.js';
 import { arcadeVault } from '../arcade_vault.js';
 import { arcadeGamepad } from '../gamepad.js';
 import { retroCRT } from '../crt.js';
+import { ArcadeMenu } from '../../arcade_menu.js';
 
 export class ConnectFourUI {
   constructor() {
@@ -36,6 +37,47 @@ export class ConnectFourUI {
     this.overlayMsgEl = document.getElementById('overlay-msg');
     this.selectModeEl = document.getElementById('select-mode');
     this.selectDiffEl = document.getElementById('select-diff');
+
+    this.menu = new ArcadeMenu({
+      gameId: 'connectfour',
+      title: 'Connect Four (1974)',
+      year: '1974',
+      gameOptions: [
+        {
+          id: 'opt-c4-mode',
+          label: 'Game Mode',
+          type: 'select',
+          options: [
+            { value: 'ai', label: '🤖 vs Computer' },
+            { value: 'pvp', label: '👥 2 Players (Local)' }
+          ],
+          value: this.mode,
+          onChange: (val) => {
+            this.mode = val;
+            localStorage.setItem('c4_mode', this.mode);
+            this.resetGame();
+          }
+        },
+        {
+          id: 'opt-c4-diff',
+          label: 'AI Difficulty',
+          type: 'select',
+          options: [
+            { value: 'easy', label: 'Easy AI' },
+            { value: 'medium', label: 'Medium AI' },
+            { value: 'hard', label: 'Hard AI (Deep)' }
+          ],
+          value: this.difficulty,
+          onChange: (val) => {
+            this.difficulty = val;
+            localStorage.setItem('c4_difficulty', this.difficulty);
+          }
+        }
+      ],
+      onAudioToggle: (muted) => {
+        this.audio.muted = muted;
+      }
+    });
 
     this.initControls();
     this.bindEvents();

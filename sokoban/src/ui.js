@@ -7,6 +7,7 @@ import { SokobanAudio } from './audio.js';
 import { arcadeVault } from '../arcade_vault.js';
 import { arcadeGamepad } from '../gamepad.js';
 import { retroCRT } from '../crt.js';
+import { ArcadeMenu } from '../../arcade_menu.js';
 
 export class SokobanUI {
   constructor() {
@@ -28,10 +29,59 @@ export class SokobanUI {
     this.lastDeadlocks = [];
 
     this.initLevelSelect();
+    this.initMenu();
     this.bindEvents();
     this.render();
 
     arcadeVault.recordPlay('sokoban');
+  }
+
+  initMenu() {
+    let solved = {};
+    try {
+      solved = JSON.parse(localStorage.getItem('sokoban_solved') || '{}');
+    } catch {
+      solved = {};
+    }
+
+    const levelOptions = SOKOBAN_LEVELS.map((_, idx) => ({
+      value: String(idx),
+      label: `Level ${idx + 1} ${solved[idx] ? '★' : ''}`
+    }));
+
+    this.menu = new ArcadeMenu({
+      gameId: 'sokoban',
+      title: 'Sokoban',
+      year: '1982',
+      audio: this.audio,
+      gameOptions: [
+        {
+          id: 'opt-soko-level',
+          label: 'Select Level',
+          type: 'select',
+          value: String(this.currentLevelIdx),
+          options: levelOptions,
+          onChange: (val) => {
+            const idx = parseInt(val, 10);
+            if (this.levelSelect) this.levelSelect.value = idx;
+            this.loadLevel(idx);
+          }
+        },
+        {
+          id: 'opt-soko-deadlock',
+          label: 'Deadlock Assist (Warnings)',
+          type: 'checkbox',
+          value: this.showDeadlocks,
+          onChange: (val) => {
+            this.showDeadlocks = !!val;
+            if (this.btnDeadlock) {
+              this.btnDeadlock.textContent = this.showDeadlocks ? '⚠️ Assist: ON' : '⚠️ Assist: OFF';
+            }
+            this.render();
+          }
+        }
+      ]
+    });
   }
 
   initLevelSelect() {

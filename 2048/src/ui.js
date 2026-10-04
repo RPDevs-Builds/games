@@ -2,6 +2,7 @@ import { Game2048Engine } from './engine.js';
 import { Game2048Audio } from './audio.js';
 import { arcadeVault } from '../arcade_vault.js';
 import { retroCRT } from '../crt.js';
+import { ArcadeMenu } from '../../arcade_menu.js';
 
 export class Game2048UI {
   constructor() {
@@ -20,9 +21,19 @@ export class Game2048UI {
     this.bestScore = parseInt(localStorage.getItem('2048_best') || '0', 10);
     this.bestEl.textContent = this.bestScore;
 
+    this.initMenu();
     this.bindEvents();
     this.render();
     arcadeVault.recordPlay('game2048');
+  }
+
+  initMenu() {
+    this.menu = new ArcadeMenu({
+      gameId: '2048',
+      title: '2048',
+      year: '2014',
+      audio: this.audio
+    });
   }
 
   bindEvents() {

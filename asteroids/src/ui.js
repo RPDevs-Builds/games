@@ -9,6 +9,7 @@ import { AsteroidsAudio } from './audio.js';
 import { arcadeVault } from '../arcade_vault.js';
 import { retroCRT } from '../crt.js';
 import { arcadeGamepad } from '../gamepad.js';
+import { ArcadeMenu } from '../../arcade_menu.js';
 
 if (typeof window !== 'undefined') {
   if (!window.arcadeVault) window.arcadeVault = arcadeVault;
@@ -18,6 +19,12 @@ if (typeof window !== 'undefined') {
 
 export class AsteroidsUI {
   constructor() {
+    this.menu = new ArcadeMenu({
+      gameId: 'asteroids',
+      title: 'Asteroids',
+      year: '1979',
+      audio: null // Will attach audio after construction
+    });
     this.canvas = document.getElementById('asteroids-canvas');
     this.ctx = this.canvas.getContext('2d');
 
@@ -34,6 +41,7 @@ export class AsteroidsUI {
     this.btnCRT = document.getElementById('btn-crt');
 
     this.audio = new AsteroidsAudio();
+    if (this.menu) this.menu.audio = this.audio;
     this.engine = new AsteroidsEngine({
       onScore: (score) => this.handleScoreUpdate(score),
       onLives: (lives) => this.renderLives(lives),

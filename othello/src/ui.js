@@ -7,6 +7,7 @@ import { OthelloEngine, BLACK, WHITE, EMPTY } from './engine.js';
 import { OthelloAudio } from './audio.js';
 import { arcadeVault } from '../arcade_vault.js';
 import { retroCRT } from '../crt.js';
+import { ArcadeMenu } from '../../arcade_menu.js';
 
 export class OthelloUI {
   constructor() {
@@ -17,6 +18,56 @@ export class OthelloUI {
     this.diff = 'medium'; // 'easy', 'medium', 'hard'
     this.showHints = true;
     this.isAiThinking = false;
+
+    this.menu = new ArcadeMenu({
+      gameId: 'othello',
+      title: 'Othello / Reversi (1883)',
+      year: '1883',
+      gameOptions: [
+        {
+          id: 'opt-oth-mode',
+          label: 'Opponent Mode',
+          type: 'select',
+          options: [
+            { value: 'ai', label: '🤖 vs Computer' },
+            { value: 'pvp', label: '👥 2 Players (Local)' }
+          ],
+          value: this.mode,
+          onChange: (val) => {
+            this.mode = val;
+            this.startNewGame();
+          }
+        },
+        {
+          id: 'opt-oth-diff',
+          label: 'AI Difficulty',
+          type: 'select',
+          options: [
+            { value: 'easy', label: 'Easy' },
+            { value: 'medium', label: 'Medium' },
+            { value: 'hard', label: 'Hard (Deep Evaluation)' }
+          ],
+          value: this.diff,
+          onChange: (val) => {
+            this.diff = val;
+            this.startNewGame();
+          }
+        },
+        {
+          id: 'opt-oth-hints',
+          label: 'Valid Move Hints',
+          type: 'checkbox',
+          checked: this.showHints,
+          onChange: (checked) => {
+            this.showHints = checked;
+            this.render();
+          }
+        }
+      ],
+      onAudioToggle: (muted) => {
+        this.audio.muted = muted;
+      }
+    });
 
     this.cacheElements();
     this.bindEvents();
@@ -45,16 +96,20 @@ export class OthelloUI {
   bindEvents() {
     this.btnNewEl.onclick = () => this.startNewGame();
 
-    this.selectModeEl.onchange = (e) => {
-      this.mode = e.target.value;
-      this.selectDiffEl.disabled = (this.mode === 'pvp');
-      this.startNewGame();
-    };
+    if (this.selectModeEl) {
+      this.selectModeEl.onchange = (e) => {
+        this.mode = e.target.value;
+        if (this.selectDiffEl) this.selectDiffEl.disabled = (this.mode === 'pvp');
+        this.startNewGame();
+      };
+    }
 
-    this.selectDiffEl.onchange = (e) => {
-      this.diff = e.target.value;
-      this.startNewGame();
-    };
+    if (this.selectDiffEl) {
+      this.selectDiffEl.onchange = (e) => {
+        this.diff = e.target.value;
+        this.startNewGame();
+      };
+    }
 
     if (this.btnHintsEl) {
       this.btnHintsEl.onclick = () => {

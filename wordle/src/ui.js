@@ -31,7 +31,50 @@ class WordleUI {
     this.shareBtn = document.getElementById('share-btn');
     this.toastEl = document.getElementById('toast');
 
+    this.initMenu();
     this.init();
+  }
+
+  initMenu() {
+    if (window.ArcadeMenu) {
+      this.menu = new window.ArcadeMenu({
+        gameId: 'wordle',
+        title: 'Wordle',
+        year: '2021',
+        audio: this.audio,
+        gameOptions: [
+          {
+            id: 'opt-wordle-mode',
+            label: 'Game Mode',
+            type: 'select',
+            value: this.modeSelector ? this.modeSelector.value : 'daily',
+            options: [
+              { value: 'daily', label: 'Daily Word Challenge' },
+              { value: 'practice', label: 'Endless Practice Mode' }
+            ],
+            onChange: (val) => {
+              if (this.modeSelector) {
+                this.modeSelector.value = val;
+                this.startNewGame(val);
+              }
+            }
+          },
+          {
+            id: 'opt-wordle-hard',
+            label: 'Hard Mode (Strict Clues)',
+            type: 'checkbox',
+            value: this.hardModeCheckbox ? this.hardModeCheckbox.checked : false,
+            onChange: (val) => {
+              if (this.hardModeCheckbox) {
+                this.hardModeCheckbox.checked = !!val;
+                this.engine.hardMode = !!val;
+                this.showToast(val ? 'Hard Mode Enabled' : 'Hard Mode Disabled');
+              }
+            }
+          }
+        ]
+      });
+    }
   }
 
   init() {

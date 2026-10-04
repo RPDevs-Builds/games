@@ -6,10 +6,18 @@
 
 import { FallingBlocksEngine, COLS, ROWS, SHAPES } from './engine.js';
 import { audio } from './audio.js';
+import { ArcadeMenu } from '../../arcade_menu.js';
 
 export class FallingBlocksUI {
   constructor() {
     this.engine = new FallingBlocksEngine();
+
+    this.menu = new ArcadeMenu({
+      gameId: 'fallingblocks',
+      title: 'Falling Blocks',
+      year: '1984',
+      audio: audio
+    });
 
     // Canvases
     this.canvas = document.getElementById('game-canvas');

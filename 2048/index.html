@@ -11,8 +11,19 @@
 </head>
 <body>
   <div class="game-container">
+    <!-- Header -->
+    <header class="arcade-unified-header" style="margin-bottom: 8px;">
+      <a href="../index.html" id="btn-portal" class="arcade-btn-icon" title="Arcade Portal" aria-label="Arcade Portal">🏛️</a>
+      <h1 class="arcade-header-title">🔢 2048</h1>
+      <div class="arcade-header-actions">
+        <button id="btn-help" class="arcade-btn-icon" title="How to Play" aria-label="How to Play">❓</button>
+        <button id="btn-options" class="arcade-btn-icon" title="Options" aria-label="Options">⚙️</button>
+        <button id="btn-vault" class="arcade-btn-icon" title="Vault & Trophies" aria-label="Vault">🏆</button>
+      </div>
+    </header>
+
     <div class="header-row">
-      <div class="game-title">2048</div>
+      <div style="font-size: 0.9rem; color: #776e65; font-weight: bold;">Merge tiles to reach <strong>2048!</strong></div>
       <div class="scores-container">
         <div class="score-box">
           <span class="score-label">SCORE</span>
@@ -25,16 +36,9 @@
       </div>
     </div>
 
-    <div class="controls-row">
-      <div style="font-size: 0.85rem; color: #776e65;">Join numbers & reach <strong>2048!</strong></div>
-      <div style="display: flex; gap: 6px; flex-wrap: wrap;">
-        <button id="btn-sound" class="btn" style="padding: 6px 10px;">🔊</button>
-        <button id="btn-crt" class="btn" style="padding: 6px 10px;">📺</button>
-        <button id="btn-undo" class="btn" style="padding: 6px 10px;">↩️ Undo</button>
-        <button id="btn-new" class="btn" style="padding: 6px 12px;">New Game</button>
-        <button id="btn-vault" class="btn" style="padding: 6px 10px;" title="Vault">🏆</button>
-        <a href="../index.html" id="btn-portal" class="btn" style="padding: 6px 10px; text-decoration: none; display: inline-flex; align-items: center;" title="Arcade">🏛️</a>
-      </div>
+    <div class="controls-row" style="margin-bottom: 12px; display: flex; gap: 8px; justify-content: space-between;">
+      <button id="btn-undo" class="btn" style="padding: 8px 16px; flex: 1;">↩️ Undo</button>
+      <button id="btn-new" class="btn" style="padding: 8px 16px; flex: 1;">New Game</button>
     </div>
 
     <!-- Board -->

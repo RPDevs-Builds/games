@@ -11,15 +11,19 @@
 </head>
 <body>
   <div class="c4-console">
-    <!-- Header -->
-    <header class="console-header">
-      <div class="title-group">
-        <h1 class="console-title">🔴 CONNECT 4 🟡</h1>
-        <span class="badge-year">1974</span>
+    <!-- Unified Header -->
+    <header class="arcade-unified-header">
+      <div class="header-left">
+        <a href="../index.html" id="btn-portal" class="icon-nav-btn" aria-label="Arcade Portal" title="Arcade Portal">🏛️</a>
       </div>
-      <div class="header-actions">
-        <button id="btn-sound" class="icon-btn">🔊 Sound</button>
-        <button id="btn-crt" class="icon-btn">📺 CRT</button>
+      <div class="title-group">
+        <h1 class="header-game-title">🔴 CONNECT 4 🟡</h1>
+        <span class="header-badge-year">1974</span>
+      </div>
+      <div class="header-right">
+        <button id="btn-help" class="icon-nav-btn" aria-label="How to Play" title="How to Play">❓</button>
+        <button id="btn-options" class="icon-nav-btn" aria-label="Options" title="Game Options">⚙️</button>
+        <button id="btn-vault" class="icon-nav-btn" aria-label="Arcade Vault" title="Vault & Achievements">🏆</button>
       </div>
     </header>
 
@@ -37,23 +41,6 @@
         <span id="score-p2" class="metric-val">0</span>
       </div>
     </section>
-
-    <!-- Game Config Controls -->
-    <div class="controls-bar">
-      <div class="select-wrapper">
-        <select id="select-mode" class="styled-select" aria-label="Game Mode">
-          <option value="ai">🤖 vs Computer</option>
-          <option value="pvp">👥 2 Players (Local)</option>
-        </select>
-      </div>
-      <div class="select-wrapper">
-        <select id="select-diff" class="styled-select" aria-label="AI Difficulty">
-          <option value="easy">Easy AI</option>
-          <option value="medium" selected>Medium AI</option>
-          <option value="hard">Hard AI (Deep)</option>
-        </select>
-      </div>
-    </div>
 
     <!-- Drop Preview Row -->
     <div id="col-drop-preview" class="col-drop-preview" aria-hidden="true">
@@ -89,8 +76,6 @@
     <div class="actions-row">
       <button id="btn-undo" class="action-btn">↩️ Undo (U)</button>
       <button id="btn-reset" class="action-btn">🔄 New Game (R)</button>
-      <button id="btn-vault" class="action-btn">🏆 Vault</button>
-      <a href="../index.html" id="btn-portal" class="action-btn">🏛️ Arcade</a>
     </div>
   </div>
 

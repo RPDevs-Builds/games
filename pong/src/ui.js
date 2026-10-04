@@ -8,11 +8,59 @@ import { PongAudio } from './audio.js';
 import { arcadeVault } from '../arcade_vault.js';
 import { arcadeGamepad } from '../gamepad.js';
 import { retroCRT } from '../crt.js';
+import { ArcadeMenu } from '../../arcade_menu.js';
 
 export class PongUI {
   constructor() {
-    this.engine = new PongEngine('1p', 'medium');
+    this.mode = '1p';
+    this.diff = 'medium';
+    this.engine = new PongEngine(this.mode, this.diff);
     this.audio = new PongAudio();
+
+    this.menu = new ArcadeMenu({
+      gameId: 'pong',
+      title: 'Pong (1972 Atari)',
+      year: '1972',
+      gameOptions: [
+        {
+          id: 'opt-pong-mode',
+          label: 'Opponent Mode',
+          type: 'select',
+          options: [
+            { value: '1p', label: '1-Player (vs CPU)' },
+            { value: '2p', label: '2-Player (Local)' }
+          ],
+          value: this.mode,
+          onChange: (mode) => {
+            this.mode = mode;
+            this.engine.setMode(mode);
+            if (this.labelP2El) {
+              this.labelP2El.textContent = mode === '2p' ? 'PLAYER 2' : 'CPU (AI)';
+            }
+            this.restartGame();
+          }
+        },
+        {
+          id: 'opt-pong-diff',
+          label: 'AI Difficulty',
+          type: 'select',
+          options: [
+            { value: 'easy', label: 'Easy AI' },
+            { value: 'medium', label: 'Medium AI' },
+            { value: 'impossible', label: 'Impossible AI' }
+          ],
+          value: this.diff,
+          onChange: (diff) => {
+            this.diff = diff;
+            this.engine.setDifficulty(diff);
+            this.restartGame();
+          }
+        }
+      ],
+      onAudioToggle: (muted) => {
+        this.audio.muted = muted;
+      }
+    });
 
     this.canvas = document.getElementById('pong-canvas');
     this.ctx = this.canvas.getContext('2d');

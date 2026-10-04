@@ -6,10 +6,17 @@
 
 import { MazeEngine, COLS, ROWS, DIRS } from './engine.js';
 import { audio } from './audio.js';
+import { ArcadeMenu } from '../../arcade_menu.js';
 
 export class MazeUI {
   constructor() {
     this.engine = new MazeEngine();
+    this.menu = new ArcadeMenu({
+      gameId: 'mazechaser',
+      title: 'Maze Chaser',
+      year: '1980',
+      audio: audio
+    });
     this.canvas = document.getElementById('game-canvas');
     this.ctx = this.canvas.getContext('2d');
 

@@ -2,10 +2,16 @@ import { DotsAndBoxesEngine } from './engine.js';
 import { DotsAudio } from './audio.js';
 import { arcadeVault } from '../arcade_vault.js';
 import { retroCRT } from '../crt.js';
+import { ArcadeMenu } from '../../arcade_menu.js';
 
 export class DotsAndBoxesUI {
   constructor() {
-    this.engine = new DotsAndBoxesEngine(3, 3);
+    this.gridRows = 3;
+    this.gridCols = 3;
+    this.mode = 'ai';
+    this.difficulty = 'medium';
+
+    this.engine = new DotsAndBoxesEngine(this.gridRows, this.gridCols);
     this.audio = new DotsAudio();
 
     this.svg = document.getElementById('svg-board');
@@ -16,12 +22,68 @@ export class DotsAndBoxesUI {
     this.cardP2 = document.getElementById('card-p2');
     this.nameP2 = document.getElementById('name-p2');
 
-    this.modeSelect = document.getElementById('select-mode');
-    this.diffSelect = document.getElementById('select-diff');
-    this.sizeSelect = document.getElementById('select-size');
     this.btnRestart = document.getElementById('btn-restart');
     this.btnUndo = document.getElementById('btn-undo');
-    this.btnSound = document.getElementById('btn-sound');
+
+    this.menu = new ArcadeMenu({
+      gameId: 'dotsandboxes',
+      title: 'Dots & Boxes (1889)',
+      year: '1889',
+      gameOptions: [
+        {
+          id: 'opt-db-mode',
+          label: 'Opponent Mode',
+          type: 'select',
+          options: [
+            { value: 'ai', label: '🤖 vs CPU' },
+            { value: 'pvp', label: '👥 2-Player (Local)' }
+          ],
+          value: this.mode,
+          onChange: (val) => {
+            this.mode = val;
+            this.nameP2.textContent = (this.mode === 'ai') ? 'CPU / AI' : 'PLAYER 2';
+            this.startNewGame();
+          }
+        },
+        {
+          id: 'opt-db-diff',
+          label: 'AI Difficulty',
+          type: 'select',
+          options: [
+            { value: 'easy', label: 'Easy' },
+            { value: 'medium', label: 'Medium' },
+            { value: 'hard', label: 'Hard (Chain Strategy)' }
+          ],
+          value: this.difficulty,
+          onChange: (val) => {
+            this.difficulty = val;
+            this.startNewGame();
+          }
+        },
+        {
+          id: 'opt-db-size',
+          label: 'Board Grid Size',
+          type: 'select',
+          options: [
+            { value: '2x2', label: '2×2 (3×3 Dots)' },
+            { value: '3x3', label: '3×3 (4×4 Dots)' },
+            { value: '4x4', label: '4×4 (5×5 Dots)' },
+            { value: '5x5', label: '5×5 (6×6 Dots)' }
+          ],
+          value: `${this.gridRows}x${this.gridCols}`,
+          onChange: (val) => {
+            const [r, c] = val.split('x').map(Number);
+            this.gridRows = r;
+            this.gridCols = c;
+            this.engine = new DotsAndBoxesEngine(r, c);
+            this.startNewGame();
+          }
+        }
+      ],
+      onAudioToggle: (muted) => {
+        this.audio.muted = muted;
+      }
+    });
 
     this.isAiTurn = false;
     this.bindEvents();
@@ -32,52 +94,6 @@ export class DotsAndBoxesUI {
   bindEvents() {
     this.btnRestart.onclick = () => this.startNewGame();
     this.btnUndo.onclick = () => this.handleUndo();
-
-    const btnVault = document.getElementById('btn-vault');
-    if (btnVault) {
-      btnVault.onclick = () => {
-        if (window.arcadeVault) window.arcadeVault.showModal();
-      };
-    }
-
-    const btnPortal = document.getElementById('btn-portal');
-    if (btnPortal) {
-      btnPortal.onclick = (e) => {
-        e.preventDefault();
-        const vault = window.arcadeVault || window.ArcadeVault;
-        if (vault && typeof vault.goToArcade === 'function') {
-          vault.goToArcade('dotsandboxes');
-        } else if (window.location.pathname.includes('/dotsandboxes/') || window.location.protocol !== 'file:') {
-          window.location.href = '../index.html';
-        } else if (window.AndroidArcade && typeof window.AndroidArcade.launchArcade === 'function') {
-          window.AndroidArcade.launchArcade();
-        } else {
-          window.location.href = "intent:#Intent;package=com.rpdevs.games.arcade;action=android.intent.action.MAIN;category=android.intent.category.LAUNCHER;end";
-        }
-      };
-    }
-    this.btnSound.textContent = this.audio.muted ? '🔇 Sound' : '🔊 Sound';
-    this.btnSound.onclick = () => {
-      const muted = this.audio.toggleMute();
-      this.btnSound.textContent = muted ? '🔇 Sound' : '🔊 Sound';
-    };
-    const btnCrt = document.getElementById('btn-crt');
-    if (btnCrt) btnCrt.onclick = () => retroCRT.toggle();
-
-    this.sizeSelect.onchange = (e) => {
-      const [r, c] = e.target.value.split('x').map(Number);
-      this.engine = new DotsAndBoxesEngine(r, c);
-      this.startNewGame();
-    };
-
-    this.modeSelect.onchange = () => {
-      const isVsAi = this.modeSelect.value === 'ai';
-      this.diffSelect.style.display = isVsAi ? 'inline-block' : 'none';
-      this.nameP2.textContent = isVsAi ? 'CPU / AI' : 'PLAYER 2';
-      this.startNewGame();
-    };
-
-    this.diffSelect.onchange = () => this.startNewGame();
   }
 
   startNewGame() {

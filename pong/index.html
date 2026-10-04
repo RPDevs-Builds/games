@@ -11,30 +11,21 @@
 </head>
 <body>
   <div class="arcade-cabinet">
-    <!-- Header -->
-    <header class="cabinet-header">
-      <div class="title-group">
-        <h1 class="cabinet-title">🏓 PONG</h1>
-        <span class="badge-year">1972</span>
+    <!-- Unified Header -->
+    <header class="arcade-unified-header">
+      <div class="header-left">
+        <a href="../index.html" id="btn-portal" class="icon-nav-btn" aria-label="Arcade Portal" title="Arcade Portal">🏛️</a>
       </div>
-      <div class="header-actions">
-        <button id="btn-sound" class="icon-btn">🔊 Sound</button>
-        <button id="btn-crt" class="icon-btn">📺 CRT</button>
+      <div class="title-group">
+        <h1 class="header-game-title">🏓 PONG</h1>
+        <span class="header-badge-year">1972</span>
+      </div>
+      <div class="header-right">
+        <button id="btn-help" class="icon-nav-btn" aria-label="How to Play" title="How to Play">❓</button>
+        <button id="btn-options" class="icon-nav-btn" aria-label="Options" title="Game Options">⚙️</button>
+        <button id="btn-vault" class="icon-nav-btn" aria-label="Arcade Vault" title="Vault & Achievements">🏆</button>
       </div>
     </header>
-
-    <!-- Configuration & Mode Selectors -->
-    <div class="config-bar">
-      <select id="select-mode" class="arcade-select" aria-label="Game Mode">
-        <option value="1p">1-Player (vs CPU)</option>
-        <option value="2p">2-Player (Local)</option>
-      </select>
-      <select id="select-diff" class="arcade-select" aria-label="Difficulty">
-        <option value="easy">Easy AI</option>
-        <option value="medium" selected>Medium AI</option>
-        <option value="impossible">Impossible AI</option>
-      </select>
-    </div>
 
     <!-- Scoreboard Dashboard -->
     <section class="metrics-panel">
@@ -68,8 +59,6 @@
     <div class="actions-row">
       <button id="btn-serve" class="action-btn btn-highlight">🏓 Serve (Space)</button>
       <button id="btn-restart" class="action-btn">🔄 Reset (R)</button>
-      <button id="btn-vault" class="action-btn">🏆 Vault</button>
-      <a href="../index.html" id="btn-portal" class="action-btn">🏛️ Arcade</a>
     </div>
 
     <!-- Virtual Touch Keypad for Mobile -->

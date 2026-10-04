@@ -12,14 +12,13 @@
 <body>
   <div class="warehouse-console">
     <!-- Header -->
-    <header class="console-header">
-      <div class="title-group">
-        <h1 class="console-title">📦 SOKOBAN</h1>
-        <span class="badge-year">1982</span>
-      </div>
-      <div class="header-actions">
-        <button id="btn-sound" class="icon-btn">🔊 Sound</button>
-        <button id="btn-crt" class="icon-btn">📺 CRT</button>
+    <header class="arcade-unified-header">
+      <a href="../index.html" id="btn-portal" class="arcade-btn-icon" title="Arcade Portal" aria-label="Arcade Portal">🏛️</a>
+      <h1 class="arcade-header-title">📦 SOKOBAN</h1>
+      <div class="arcade-header-actions">
+        <button id="btn-help" class="arcade-btn-icon" title="How to Play" aria-label="How to Play">❓</button>
+        <button id="btn-options" class="arcade-btn-icon" title="Options" aria-label="Options">⚙️</button>
+        <button id="btn-vault" class="arcade-btn-icon" title="Vault & Trophies" aria-label="Vault">🏆</button>
       </div>
     </header>
 
@@ -39,8 +38,8 @@
       </div>
     </section>
 
-    <!-- Control Selectors -->
-    <div class="controls-bar">
+    <!-- Control Selectors hidden, managed via unified Options modal -->
+    <div class="controls-bar" style="display: none;">
       <div class="select-wrapper">
         <select id="select-level" class="styled-select" aria-label="Level Select"></select>
       </div>
@@ -71,8 +70,6 @@
     <div class="actions-row">
       <button id="btn-undo" class="action-btn">↩️ Undo (U)</button>
       <button id="btn-reset" class="action-btn">🔄 Reset (R)</button>
-      <button id="btn-vault" class="action-btn">🏆 Vault</button>
-      <a href="../index.html" id="btn-portal" class="action-btn">🏛️ Arcade</a>
     </div>
 
     <!-- Mobile Virtual D-Pad -->

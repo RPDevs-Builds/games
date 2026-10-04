@@ -9,6 +9,7 @@ import { SpaceInvadersAudio } from './audio.js';
 import { arcadeVault } from '../arcade_vault.js';
 import { retroCRT } from '../crt.js';
 import { arcadeGamepad } from '../gamepad.js';
+import { ArcadeMenu } from '../../arcade_menu.js';
 
 if (typeof window !== 'undefined') {
   if (!window.arcadeVault) window.arcadeVault = arcadeVault;
@@ -130,6 +131,12 @@ class SpaceInvadersUI {
     this.canvas = document.getElementById('invaders-canvas');
     this.ctx = this.canvas.getContext('2d');
     this.audio = new SpaceInvadersAudio();
+    this.menu = new ArcadeMenu({
+      gameId: 'spaceinvaders',
+      title: 'Space Invaders',
+      year: '1978',
+      audio: this.audio
+    });
 
     // DOM Elements
     this.scoreEl = document.getElementById('stat-score');

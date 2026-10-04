@@ -8,6 +8,7 @@ import { MissileCommandAudio } from './audio.js';
 import { arcadeVault } from '../arcade_vault.js';
 import { retroCRT } from '../crt.js';
 import { arcadeGamepad } from '../gamepad.js';
+import { ArcadeMenu } from '../../arcade_menu.js';
 
 export class MissileCommandUI {
   constructor() {
@@ -16,6 +17,15 @@ export class MissileCommandUI {
 
     this.crosshairX = ARENA_WIDTH / 2;
     this.crosshairY = ARENA_HEIGHT / 2;
+
+    this.menu = new ArcadeMenu({
+      gameId: 'missilecommand',
+      title: 'Missile Command (1980)',
+      year: '1980',
+      onAudioToggle: (muted) => {
+        this.audio.muted = muted;
+      }
+    });
 
     this.cacheElements();
     this.bindEvents();

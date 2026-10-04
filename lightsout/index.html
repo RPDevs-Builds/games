@@ -15,21 +15,23 @@
 <body class="theme-retro">
 
   <!-- Application Header -->
-  <header class="app-header">
-    <div class="brand-title">
-      <span>💡 Lights Out</span>
-      <span class="brand-badge">1995 CLASSIC</span>
-    </div>
-    <div class="quick-actions">
-      <button id="btn-portal" class="icon-btn" title="Back to Arcade">🏛️ <span class="btn-text">Arcade</span></button>
-      <button id="btn-vault" class="icon-btn" title="Arcade Vault">🏆 <span class="btn-text">Vault</span></button>
-      <button id="btn-audio" class="icon-btn" title="Toggle Sound">🔊 <span class="btn-text">Mute</span></button>
-      <button id="btn-crt" class="icon-btn" title="Toggle CRT Filter">📺 <span class="btn-text">CRT</span></button>
-      <button id="btn-theme" class="icon-btn" title="Toggle Theme">🕹️ <span class="btn-text">Retro</span></button>
-      <button id="btn-stats" class="icon-btn" title="Player Stats">📊 <span class="btn-text">Stats</span></button>
-      <button id="btn-rules" class="icon-btn" title="How to Play">❓ <span class="btn-text">Rules</span></button>
+  <header class="arcade-unified-header" style="width: 100%; max-width: 480px; margin: 0 auto 10px;">
+    <a href="../index.html" id="btn-portal" class="arcade-btn-icon" title="Arcade Portal" aria-label="Arcade Portal">🏛️</a>
+    <h1 class="arcade-header-title">💡 LIGHTS OUT</h1>
+    <div class="arcade-header-actions">
+      <button id="btn-help" class="arcade-btn-icon" title="How to Play" aria-label="How to Play">❓</button>
+      <button id="btn-options" class="arcade-btn-icon" title="Options" aria-label="Options">⚙️</button>
+      <button id="btn-vault" class="arcade-btn-icon" title="Vault & Trophies" aria-label="Vault">🏆</button>
     </div>
   </header>
+  <!-- Hidden legacy quick actions container for element references -->
+  <div style="display: none;">
+    <button id="btn-audio"></button>
+    <button id="btn-crt"></button>
+    <button id="btn-theme"></button>
+    <button id="btn-stats"></button>
+    <button id="btn-rules"></button>
+  </div>
 
   <!-- Handheld Console Device -->
   <main class="handheld-console">

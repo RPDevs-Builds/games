@@ -11,16 +11,16 @@
 </head>
 <body>
   <div class="win-window">
-    <div class="win-titlebar">
-      <span>💣 Minesweeper</span>
-      <span style="font-size: 0.75rem; cursor: pointer;">✕</span>
-    </div>
-    <div class="win-menubar">
-      <span class="menu-item" id="btn-portal" style="font-weight: bold; cursor: pointer;">🏛️ Arcade</span>
-      <span class="menu-item" id="btn-vault" style="font-weight: bold; cursor: pointer;">🏆 Vault</span>
-      <span class="menu-item" id="menu-sound">🔊 Sound</span>
-      <span class="menu-item" id="menu-crt">📺 CRT</span>
-    </div>
+    <!-- Header -->
+    <header class="arcade-unified-header" style="margin-bottom: 8px;">
+      <a href="../index.html" id="btn-portal" class="arcade-btn-icon" title="Arcade Portal" aria-label="Arcade Portal">🏛️</a>
+      <h1 class="arcade-header-title">💣 MINESWEEPER</h1>
+      <div class="arcade-header-actions">
+        <button id="btn-help" class="arcade-btn-icon" title="How to Play" aria-label="How to Play">❓</button>
+        <button id="btn-options" class="arcade-btn-icon" title="Options" aria-label="Options">⚙️</button>
+        <button id="btn-vault" class="arcade-btn-icon" title="Vault & Trophies" aria-label="Vault">🏆</button>
+      </div>
+    </header>
 
     <!-- Dashboard -->
     <div class="win-dashboard">
@@ -34,13 +34,14 @@
       <div id="minefield" class="minefield"></div>
     </div>
 
-    <div class="difficulty-bar">
-      <select id="select-diff" class="styled-diff">
+    <div class="difficulty-bar" style="justify-content: center;">
+      <!-- Hidden diff select for backwards compatibility -->
+      <select id="select-diff" class="styled-diff" style="display: none;">
         <option value="beginner" selected>Beginner (9x9)</option>
         <option value="intermediate">Intermediate (16x16)</option>
         <option value="expert">Expert (16x30)</option>
       </select>
-      <button id="btn-flag-mode" class="styled-flag-btn">🚩 Flag: OFF</button>
+      <button id="btn-flag-mode" class="styled-flag-btn" style="flex: 1; max-width: 200px;">🚩 Flag: OFF</button>
     </div>
   </div>
 

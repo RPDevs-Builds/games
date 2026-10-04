@@ -8,6 +8,7 @@ import { LightCyclesAudio } from './audio.js';
 import { arcadeVault } from '../arcade_vault.js';
 import { retroCRT } from '../crt.js';
 import { arcadeGamepad } from '../gamepad.js';
+import { ArcadeMenu } from '../../arcade_menu.js';
 
 export class LightCyclesUI {
   constructor() {
@@ -18,6 +19,33 @@ export class LightCyclesUI {
     this.diff = 'medium';
     this.fps = 20; // 20 updates per second base speed
     this.lastUpdate = 0;
+
+    this.menu = new ArcadeMenu({
+      gameId: 'lightcycles',
+      title: 'Tron Light Cycles (1982)',
+      year: '1982',
+      gameOptions: [
+        {
+          id: 'opt-lc-mode',
+          label: 'Opponent Mode',
+          type: 'select',
+          options: [
+            { value: 'ai', label: '🤖 vs Computer' },
+            { value: 'pvp', label: '👥 2 Players (Local)' }
+          ],
+          value: this.mode,
+          onChange: (val) => {
+            this.mode = val;
+            const sel = document.getElementById('select-mode');
+            if (sel) sel.value = val;
+            this.restart();
+          }
+        }
+      ],
+      onAudioToggle: (muted) => {
+        this.audio.muted = muted;
+      }
+    });
 
     this.cacheElements();
     this.bindEvents();

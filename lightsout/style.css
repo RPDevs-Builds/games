@@ -393,8 +393,8 @@ body.theme-cyber .light-btn.is-on {
 /* Console Bottom Controls */
 .console-actions {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 8px;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 6px;
 }
 
 .action-btn {

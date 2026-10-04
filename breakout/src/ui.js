@@ -8,11 +8,19 @@ import { BreakoutAudio } from './audio.js';
 import { arcadeVault } from '../arcade_vault.js';
 import { arcadeGamepad } from '../gamepad.js';
 import { retroCRT } from '../crt.js';
+import { ArcadeMenu } from '../../arcade_menu.js';
 
 export class BreakoutUI {
   constructor() {
     this.engine = new BreakoutEngine();
     this.audio = new BreakoutAudio();
+
+    this.menu = new ArcadeMenu({
+      gameId: 'breakout',
+      title: 'Breakout',
+      year: '1976',
+      audio: this.audio
+    });
 
     this.canvas = document.getElementById('breakout-canvas');
     this.ctx = this.canvas.getContext('2d');

@@ -2,9 +2,11 @@ import { MinesweeperEngine } from './engine.js';
 import { MinesweeperAudio } from './audio.js';
 import { arcadeVault } from '../arcade_vault.js';
 import { retroCRT } from '../crt.js';
+import { ArcadeMenu } from '../../arcade_menu.js';
 
 export class MinesweeperUI {
   constructor() {
+    this.diffMode = 'beginner';
     this.engine = new MinesweeperEngine(9, 9, 10);
     this.audio = new MinesweeperAudio();
     this.boardEl = document.getElementById('minefield');
@@ -18,9 +20,40 @@ export class MinesweeperUI {
     this.timer = null;
     this.seconds = 0;
 
+    this.initMenu();
     this.bindEvents();
     this.render();
     arcadeVault.recordPlay('minesweeper');
+  }
+
+  initMenu() {
+    this.menu = new ArcadeMenu({
+      gameId: 'minesweeper',
+      title: 'Minesweeper',
+      year: '1989',
+      audio: this.audio,
+      gameOptions: [
+        {
+          id: 'opt-mines-diff',
+          label: 'Grid Difficulty',
+          type: 'select',
+          value: this.diffMode,
+          options: [
+            { value: 'beginner', label: 'Beginner (9x9 - 10 mines)' },
+            { value: 'intermediate', label: 'Intermediate (16x16 - 40 mines)' },
+            { value: 'expert', label: 'Expert (16x30 - 99 mines)' }
+          ],
+          onChange: (val) => {
+            this.diffMode = val;
+            if (this.diffSelect) this.diffSelect.value = val;
+            if (val === 'beginner') this.engine = new MinesweeperEngine(9, 9, 10);
+            else if (val === 'intermediate') this.engine = new MinesweeperEngine(16, 16, 40);
+            else if (val === 'expert') this.engine = new MinesweeperEngine(16, 30, 99);
+            this.startNewGame();
+          }
+        }
+      ]
+    });
   }
 
   bindEvents() {

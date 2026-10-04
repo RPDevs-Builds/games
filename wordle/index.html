@@ -12,33 +12,28 @@
 <body>
   <div class="arcade-cabinet">
     <!-- Header -->
-    <header class="cabinet-header">
-      <div class="header-left">
-        <a href="../index.html" class="nav-btn" aria-label="Arcade Vault" title="Return to Arcade Vault">🏛️</a>
-        <div class="mode-select-wrap">
-          <select id="mode-selector" class="mode-select" aria-label="Game Mode">
-            <option value="daily">Daily Seed</option>
-            <option value="practice">Practice Mode</option>
-          </select>
-        </div>
-        <label class="toggle-wrap" title="Hard Mode: Revealed hints must be used in subsequent guesses">
-          <input type="checkbox" id="hardmode-checkbox">
-          <span class="toggle-label">Hard</span>
-        </label>
-      </div>
-
-      <div class="title-group">
-        <h1 class="cabinet-title">🔤 WORDLE</h1>
-        <span class="badge-year">2021</span>
-      </div>
-
-      <div class="header-right">
-        <button id="help-btn" class="icon-btn" aria-label="How to Play" title="How to Play">❓</button>
-        <button id="stats-btn" class="icon-btn" aria-label="Statistics" title="Statistics">📊</button>
-        <button id="mute-btn" class="icon-btn" aria-label="Toggle Sound" title="Sound">🔊</button>
-        <button id="btn-crt" class="icon-btn" aria-label="Toggle CRT Scanlines" title="CRT Scanlines">📺</button>
+    <header class="arcade-unified-header" style="margin-bottom: 8px;">
+      <a href="../index.html" id="btn-portal" class="arcade-btn-icon" title="Arcade Portal" aria-label="Arcade Portal">🏛️</a>
+      <h1 class="arcade-header-title">🔤 WORDLE</h1>
+      <div class="arcade-header-actions">
+        <button id="btn-help" class="arcade-btn-icon" title="How to Play" aria-label="How to Play">❓</button>
+        <button id="btn-options" class="arcade-btn-icon" title="Options" aria-label="Options">⚙️</button>
+        <button id="btn-vault" class="arcade-btn-icon" title="Vault & Trophies" aria-label="Vault">🏆</button>
       </div>
     </header>
+
+    <!-- Hidden compatibility elements for existing listeners -->
+    <div style="display: none;">
+      <select id="mode-selector">
+        <option value="daily">Daily Seed</option>
+        <option value="practice">Practice Mode</option>
+      </select>
+      <input type="checkbox" id="hardmode-checkbox">
+      <button id="help-btn"></button>
+      <button id="stats-btn"></button>
+      <button id="mute-btn"></button>
+      <button id="btn-crt"></button>
+    </div>
 
     <!-- Floating Toast Notification -->
     <div id="toast" class="toast" role="status" aria-live="polite"></div>
@@ -146,6 +141,10 @@
   <script type="module" src="arcade_vault.js"></script>
   <script type="module" src="crt.js"></script>
   <script type="module" src="gamepad.js"></script>
+  <script type="module">
+    import { ArcadeMenu } from '../arcade_menu.js';
+    window.ArcadeMenu = ArcadeMenu;
+  </script>
   <script src="words.js"></script>
   <script src="src/engine.js"></script>
   <script src="src/audio.js"></script>
