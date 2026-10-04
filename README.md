@@ -32,13 +32,21 @@ All games in this repository follow strict cross-platform design tenets:
 
 | Game | Directory | Type | Rules | Status | Platforms |
 | :--- | :--- | :--- | :--- | :--- | :--- |
-| **Master Arcade** | [`/`](./) | Central Cabinet Launcher | - | 🟢 Production | Web, PWA, Android, Desktop |
-| **Lights Out** | [`lightsout/`](./lightsout) | Binary Logic / 90s Handheld | [`RULES.md`](./lightsout/RULES.md) | 🟢 Production | Web, PWA, CLI, Android, Desktop |
-| **Retro Snake** | [`snake/`](./snake) | Nokia 3310 Arcade | [`RULES.md`](./snake/RULES.md) | 🟢 Production | Web, PWA, CLI, Android, Desktop |
-| **Simon** | [`simon/`](./simon) | 1978 Handheld Memory | [`RULES.md`](./simon/RULES.md) | 🟢 Production | Web, PWA, CLI, Android, Desktop |
-| **Minesweeper** | [`minesweeper/`](./minesweeper) | Windows 95 Deduction | [`RULES.md`](./minesweeper/RULES.md) | 🟢 Production | Web, PWA, CLI, Android, Desktop |
-| **2048** | [`2048/`](./2048) | Sliding Number Puzzle | [`RULES.md`](./2048/RULES.md) | 🟢 Production | Web, PWA, CLI, Android, Desktop |
-| **Dots & Boxes** | [`dotsandboxes/`](./dotsandboxes) | Combinatorial Strategy | [`RULES.md`](./dotsandboxes/RULES.md) | 🟢 Production | Web, PWA, CLI, Android, Desktop |
+| **Master Arcade** | [`/`](./) | Central Cabinet Launcher (14 Games) | - | 🟢 Production | Web, PWA, Android, Desktop |
+| **Lights Out** | [`lightsout/`](./lightsout) | Binary Logic / 90s Handheld (1995) | [`RULES.md`](./lightsout/RULES.md) | 🟢 Production | Web, PWA, CLI, Android, Desktop |
+| **Retro Snake** | [`snake/`](./snake) | Nokia 3310 Arcade (1997) | [`RULES.md`](./snake/RULES.md) | 🟢 Production | Web, PWA, CLI, Android, Desktop |
+| **Simon** | [`simon/`](./simon) | Handheld Memory (1978) | [`RULES.md`](./simon/RULES.md) | 🟢 Production | Web, PWA, CLI, Android, Desktop |
+| **Minesweeper** | [`minesweeper/`](./minesweeper) | Windows 95 Deduction (1992) | [`RULES.md`](./minesweeper/RULES.md) | 🟢 Production | Web, PWA, CLI, Android, Desktop |
+| **2048** | [`2048/`](./2048) | Sliding Number Puzzle (2014) | [`RULES.md`](./2048/RULES.md) | 🟢 Production | Web, PWA, CLI, Android, Desktop |
+| **Dots & Boxes** | [`dotsandboxes/`](./dotsandboxes) | Combinatorial Strategy (1889) | [`RULES.md`](./dotsandboxes/RULES.md) | 🟢 Production | Web, PWA, CLI, Android, Desktop |
+| **Sokoban** | [`sokoban/`](./sokoban) | Box-Pushing Puzzle (1982) | [`RULES.md`](./sokoban/RULES.md) | 🟢 Production | Web, PWA, CLI, Android, Desktop |
+| **Connect Four** | [`connectfour/`](./connectfour) | Vertical Gravity Grid (1974) | [`RULES.md`](./connectfour/RULES.md) | 🟢 Production | Web, PWA, CLI, Android, Desktop |
+| **Breakout** | [`breakout/`](./breakout) | Paddle & Brick Demolition (1976) | [`RULES.md`](./breakout/RULES.md) | 🟢 Production | Web, PWA, CLI, Android, Desktop |
+| **Pong** | [`pong/`](./pong) | 2D Paddle Tennis Arcade (1972) | [`RULES.md`](./pong/RULES.md) | 🟢 Production | Web, PWA, CLI, Android, Desktop |
+| **Falling Blocks** | [`fallingblocks/`](./fallingblocks) | Tetromino Stacker (1984) | [`RULES.md`](./fallingblocks/RULES.md) | 🟢 Production | Web, PWA, CLI, Android, Desktop |
+| **Maze Chaser** | [`mazechaser/`](./mazechaser) | 4-Ghost Labyrinth Classic (1980) | [`RULES.md`](./mazechaser/RULES.md) | 🟢 Production | Web, PWA, CLI, Android, Desktop |
+| **Asteroids** | [`asteroids/`](./asteroids) | Vector Inertial Space Shooter (1979) | [`RULES.md`](./asteroids/RULES.md) | 🟢 Production | Web, PWA, CLI, Android, Desktop |
+| **Wordle** | [`wordle/`](./wordle) | Deduction Word Guess (1955/2021) | [`RULES.md`](./wordle/RULES.md) | 🟢 Production | Web, PWA, CLI, Android, Desktop |
 
 ---
 
@@ -57,15 +65,18 @@ Open `http://localhost:8080/` in your browser.
 - Minesweeper: `python3 /mnt/sharedroot/projects/games/minesweeper/cli/minesweeper_cli.py`
 - 2048: `python3 /mnt/sharedroot/projects/games/2048/cli/game2048_cli.py`
 - Dots & Boxes: `python3 /mnt/sharedroot/projects/games/dotsandboxes/cli/dotsandboxes_cli.py`
+- Sokoban: `python3 /mnt/sharedroot/projects/games/sokoban/sokoban_cli.py`
+- Connect Four: `python3 /mnt/sharedroot/projects/games/connectfour/connectfour_cli.py`
+- Breakout: `python3 /mnt/sharedroot/projects/games/breakout/breakout_cli.py`
+- Pong: `python3 /mnt/sharedroot/projects/games/pong/pong_cli.py`
+- Falling Blocks: `python3 /mnt/sharedroot/projects/games/fallingblocks/fallingblocks_cli.py`
+- Maze Chaser: `python3 /mnt/sharedroot/projects/games/mazechaser/mazechaser_cli.py`
+- Asteroids: `python3 /mnt/sharedroot/projects/games/asteroids/asteroids_cli.py`
+- Wordle: `python3 /mnt/sharedroot/projects/games/wordle/wordle_cli.py`
 
-### Run All Unit Test Suites
+### Run All Unit Test Suites (92 Tests Across 14 Games)
 ```bash
-python3 /mnt/sharedroot/projects/games/lightsout/test/test_engine.py
-python3 /mnt/sharedroot/projects/games/snake/test/test_snake.py
-python3 /mnt/sharedroot/projects/games/simon/test/test_simon.py
-python3 /mnt/sharedroot/projects/games/minesweeper/test/test_minesweeper.py
-python3 /mnt/sharedroot/projects/games/2048/test/test_2048.py
-python3 /mnt/sharedroot/projects/games/dotsandboxes/test/test_dotsandboxes.py
+for d in */test; do python3 -m unittest discover -s "$d"; done
 ```
 
 ### 📱 Build Native Android APKs
