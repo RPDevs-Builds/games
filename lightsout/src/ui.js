@@ -355,9 +355,7 @@ export class LightsOutUI {
     this.updateStatsDisplay();
   }
 
-  handleCellClick(r, c) {
-    if (this.isSolving) return;
-
+  applyMove(r, c) {
     if (!this.isGameActive && this.currentMode !== 'custom') {
       this.startTimer();
     }
@@ -375,6 +373,11 @@ export class LightsOutUI {
       arcadeVault.vibrate([40, 50, 40, 50, 80]);
       this.handleVictory();
     }
+  }
+
+  handleCellClick(r, c) {
+    if (this.isSolving) return;
+    this.applyMove(r, c);
   }
 
   updateBoardView() {
@@ -459,7 +462,7 @@ export class LightsOutUI {
 
     for (const move of sol.moves) {
       await new Promise(res => setTimeout(res, 280));
-      this.handleCellClick(move.r, move.c);
+      this.applyMove(move.r, move.c);
     }
     this.isSolving = false;
   }
