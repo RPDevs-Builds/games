@@ -4,6 +4,7 @@
 
 import { arcadeVault } from './arcade_vault.js';
 import { retroCRT } from './crt.js';
+import { arcadeGamepad } from './gamepad.js';
 
 const GAMES_DATA = [
   {
@@ -192,8 +193,12 @@ class ArcadePortal {
     this.filterButtons = document.querySelectorAll('.filter-btn');
     this.activeFilter = 'all';
 
+    this.focusedIndex = 0;
+    this.filteredGames = [];
+
     this.bindEvents();
     this.bindArcadeControls();
+    this.initGamepad();
     this.initAttractMode();
     this.render();
   }
@@ -213,6 +218,58 @@ class ArcadePortal {
         this.render(this.searchInput ? this.searchInput.value.toLowerCase() : '');
       });
     });
+  }
+
+  initGamepad() {
+    arcadeGamepad.onButtonDown((btn) => {
+      // Exit attract mode on any button press
+      if (this.attractActive) {
+        this.exitAttractMode();
+        return;
+      }
+
+      if (btn === 'dpad_right' || btn === 'right') {
+        this.navigateFocus(1);
+      } else if (btn === 'dpad_left' || btn === 'left') {
+        this.navigateFocus(-1);
+      } else if (btn === 'dpad_down' || btn === 'down') {
+        this.navigateFocus(2); // assuming 2-column grid layout on standard view
+      } else if (btn === 'dpad_up' || btn === 'up') {
+        this.navigateFocus(-2);
+      } else if (btn === 'a' || btn === 'start') {
+        this.launchFocusedGame();
+      } else if (btn === 'y' || btn === 'select') {
+        arcadeVault.showModal();
+      } else if (btn === 'x') {
+        const isCRT = retroCRT.toggle();
+        const btnCRT = document.getElementById('btn-crt');
+        if (btnCRT) btnCRT.classList.toggle('active', isCRT);
+      }
+    });
+  }
+
+  navigateFocus(delta) {
+    if (!this.filteredGames.length) return;
+    this.focusedIndex = (this.focusedIndex + delta + this.filteredGames.length) % this.filteredGames.length;
+    this.updateCardFocus();
+  }
+
+  updateCardFocus() {
+    const cards = this.gridEl.querySelectorAll('.game-card');
+    cards.forEach((c, idx) => {
+      if (idx === this.focusedIndex) {
+        c.classList.add('gamepad-focused');
+        c.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      } else {
+        c.classList.remove('gamepad-focused');
+      }
+    });
+  }
+
+  launchFocusedGame() {
+    if (this.filteredGames[this.focusedIndex]) {
+      window.location.href = this.filteredGames[this.focusedIndex].url;
+    }
   }
 
   bindArcadeControls() {
@@ -246,9 +303,14 @@ class ArcadePortal {
       return matchesFilter && matchesSearch;
     });
 
-    filtered.forEach(game => {
+    this.filteredGames = filtered;
+    if (this.focusedIndex >= filtered.length) {
+      this.focusedIndex = Math.max(0, filtered.length - 1);
+    }
+
+    filtered.forEach((game, idx) => {
       const card = document.createElement('article');
-      card.className = 'game-card';
+      card.className = 'game-card' + (idx === this.focusedIndex ? ' gamepad-focused' : '');
       card.innerHTML = `
         <div class="card-header">
           <span class="card-icon">${game.icon}</span>

@@ -320,7 +320,7 @@ export class ArcadeVault {
   goToArcade(currentGame = '') {
     // 1. If running inside Master Arcade portal or web environment with parent index.html
     const hasParentPortal = (currentGame && window.location.pathname.includes('/' + currentGame + '/')) ||
-                            window.location.pathname.match(/\/(frogger|asteroids|spaceinvaders|mazechaser|fallingblocks|snake|pong|breakout|dotsandboxes|lightsout|connectfour|sokoban|wordle|simon|minesweeper|game2048)\//) ||
+                            window.location.pathname.match(/\/(frogger|asteroids|spaceinvaders|mazechaser|fallingblocks|snake|pong|breakout|dotsandboxes|lightsout|connectfour|sokoban|wordle|simon|minesweeper|game2048|2048)\//) ||
                             (window.location.protocol !== 'file:' && window.location.pathname !== '/' && window.location.pathname !== '/index.html');
 
     if (hasParentPortal) {
@@ -343,6 +343,30 @@ export class ArcadeVault {
     }
 
     this.showToast('RPDevs Master Arcade', 'Install the Master Arcade app to access all 16 games!');
+  }
+
+  /**
+   * Helper to bind standard Vault (#btn-vault) and Arcade Portal (#btn-portal)
+   * buttons in the current document if they are present.
+   */
+  bindNavigation(currentGame = '') {
+    const btnVault = document.getElementById('btn-vault');
+    if (btnVault && !btnVault._vaultBound) {
+      btnVault._vaultBound = true;
+      btnVault.onclick = (e) => {
+        if (e && e.preventDefault) e.preventDefault();
+        this.showModal();
+      };
+    }
+
+    const btnPortal = document.getElementById('btn-portal');
+    if (btnPortal && !btnPortal._portalBound) {
+      btnPortal._portalBound = true;
+      btnPortal.onclick = (e) => {
+        if (e && e.preventDefault) e.preventDefault();
+        this.goToArcade(currentGame);
+      };
+    }
   }
 
   getTotalGamesPlayed() {
