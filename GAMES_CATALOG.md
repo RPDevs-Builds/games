@@ -54,46 +54,81 @@ This catalog tracks all games in the RPDevs Games base, their release status, pl
 - **Features**: Graph-based topology, bonus turn chain reactions, 3-tier AI opponent (with chain capture & double-cross sacrifice heuristics), vintage blueprint UI, pencil scratch audio.
 - **Platforms**: Web, PWA, Terminal CLI, itch.io, Mobile.
 
+### 7. Sokoban (`sokoban/`)
+- **Genre**: Discrete Warehouse Logic / Box-Pushing Puzzle
+- **Inspiration**: Thinking Rabbit / Hiroyuki Imabayashi (1982)
+- **Base Directory**: [`/mnt/sharedroot/projects/games/sokoban/`](./sokoban)
+- **Rules**: [`RULES.md`](./sokoban/RULES.md)
+- **Features**: 60 curated levels, deadlock detection assistant, tap-to-move pathfinding, industrial synth audio.
+- **Platforms**: Web, PWA, Terminal CLI, itch.io, Mobile.
+
+### 8. Connect Four (`connectfour/`)
+- **Genre**: Vertical Gravity Grid Strategy
+- **Inspiration**: Milton Bradley / Howard Wexler (1974)
+- **Base Directory**: [`/mnt/sharedroot/projects/games/connectfour/`](./connectfour)
+- **Rules**: [`RULES.md`](./connectfour/RULES.md)
+- **Features**: 7x6 gravity grid, minimax AI with alpha-beta pruning, 2-player local pass-and-play, authentic checker drop physics.
+- **Platforms**: Web, PWA, Terminal CLI, itch.io, Mobile.
+
+### 9. Breakout (`breakout/`)
+- **Genre**: Paddle & Brick Demolition Arcade
+- **Inspiration**: Atari / Steve Wozniak & Nolan Bushnell (1976)
+- **Base Directory**: [`/mnt/sharedroot/projects/games/breakout/`](./breakout)
+- **Rules**: [`RULES.md`](./breakout/RULES.md)
+- **Features**: 8 rows of color-coded bricks with authentic progressive ball velocity, deflection angle physics, ceiling bounce paddle reduction, analog paddle control.
+- **Platforms**: Web, PWA, Terminal CLI, itch.io, Mobile.
+
+### 10. Pong (`pong/`)
+- **Genre**: 2D Paddle Tennis Arcade
+- **Inspiration**: Atari / Allan Alcorn (1972)
+- **Base Directory**: [`/mnt/sharedroot/projects/games/pong/`](./pong)
+- **Rules**: [`RULES.md`](./pong/RULES.md)
+- **Features**: Segmented paddle velocity reflection, spin application, adaptive CPU opponent, 2-player local mode, classic monochrome CRT aesthetic.
+- **Platforms**: Web, PWA, Terminal CLI, itch.io, Mobile.
+
+### 11. Falling Blocks (`fallingblocks/`)
+- **Genre**: Tetromino Stacker / Block Alignment
+- **Inspiration**: Alexey Pajitnov (1984)
+- **Base Directory**: [`/mnt/sharedroot/projects/games/fallingblocks/`](./fallingblocks)
+- **Rules**: [`RULES.md`](./fallingblocks/RULES.md)
+- **Features**: 7-bag randomizer, Super Rotation System (SRS) wall kicks, ghost projection, hold queue, next queue, chiptune synth.
+- **Platforms**: Web, PWA, Terminal CLI, itch.io, Mobile.
+
+### 12. Maze Chaser (`mazechaser/`)
+- **Genre**: 4-Ghost Labyrinth Classic
+- **Inspiration**: Namco / Toru Iwatani (1980)
+- **Base Directory**: [`/mnt/sharedroot/projects/games/mazechaser/`](./mazechaser)
+- **Rules**: [`RULES.md`](./mazechaser/RULES.md)
+- **Features**: Authentic 4-ghost distinct AI targeting (Blinky, Pinky, Inky, Clyde), scatter/chase modes, energizer fright mode, fruit bonuses, chiptune sound synthesis.
+- **Platforms**: Web, PWA, Terminal CLI, itch.io, Mobile.
+
+### 13. Asteroids (`asteroids/`)
+- **Genre**: Vector Inertial Space Shooter
+- **Inspiration**: Atari / Lyle Rains & Ed Logg (1979)
+- **Base Directory**: [`/mnt/sharedroot/projects/games/asteroids/`](./asteroids)
+- **Rules**: [`RULES.md`](./asteroids/RULES.md)
+- **Features**: 360° rotational inertia, thruster physics, wraparound boundaries, procedural polygon asteroid splitting, alien saucers, particle debris, hyperspace jump, vector sound synthesis.
+- **Platforms**: Web, PWA, Terminal CLI, itch.io, Mobile.
+
+### 14. Wordle (`wordle/`)
+- **Genre**: Word Deduction Puzzle
+- **Inspiration**: Jotto (1955) / Josh Wardle (2021)
+- **Base Directory**: [`/mnt/sharedroot/projects/games/wordle/`](./wordle)
+- **Rules**: [`RULES.md`](./wordle/RULES.md)
+- **Features**: 100% offline dual dictionary verification (2,315 solutions, 10,657 allowed guesses), 3D flip tiles, Daily Challenge and Practice modes, Hard Mode, shareable emoji scorecard.
+- **Platforms**: Web, PWA, Terminal CLI, itch.io, Mobile.
+
+### 15. Space Invaders (`spaceinvaders/`)
+- **Genre**: Marching Fleet Fixed Shooter Arcade Classic
+- **Inspiration**: Taito / Tomohiro Nishikado (1978)
+- **Base Directory**: [`/mnt/sharedroot/projects/games/spaceinvaders/`](./spaceinvaders)
+- **Rules**: [`RULES.md`](./spaceinvaders/RULES.md)
+- **Features**: 5x11 marching alien fleet with 2-frame animation and dynamic stepping tempo speed curve, single active laser restriction, destructible 4-bunker pixel erosion, mystery saucer UFO spawner, 4-tone descending bass pulse audio synthesis.
+- **Platforms**: Web, PWA, Terminal CLI, itch.io, Mobile.
+
 ---
 
 ## 📦 Automated Release Packages (`dist/`)
-
-### 1. Web & itch.io Standalone Archives (`dist/`)
-- `dist/lightsout_web_release.zip`
-- `dist/snake_web_release.zip`
-- `dist/simon_web_release.zip`
-- `dist/minesweeper_web_release.zip`
-- `dist/2048_web_release.zip`
-- `dist/dotsandboxes_web_release.zip`
-- `dist/arcade_portal_release.zip` (The full arcade suite)
-
-### 2. Standalone Android APKs (`dist/apk/`)
-- `dist/apk/lightsout.apk`
-- `dist/apk/snake.apk`
-- `dist/apk/simon.apk`
-- `dist/apk/minesweeper.apk`
-- `dist/apk/2048.apk`
-- `dist/apk/dotsandboxes.apk`
-- `dist/apk/portal.apk` (All 6 games in master arcade container)
-
-### 3. Native Linux Desktop Bundles (`dist/desktop/`)
-- Portable Archives (`.tar.gz`):
-  - `dist/desktop/rpdevs-lightsout-linux-x86_64.tar.gz`
-  - `dist/desktop/rpdevs-snake-linux-x86_64.tar.gz`
-  - `dist/desktop/rpdevs-simon-linux-x86_64.tar.gz`
-  - `dist/desktop/rpdevs-minesweeper-linux-x86_64.tar.gz`
-  - `dist/desktop/rpdevs-2048-linux-x86_64.tar.gz`
-  - `dist/desktop/rpdevs-dotsandboxes-linux-x86_64.tar.gz`
-  - `dist/desktop/rpdevs-arcade-linux-x86_64.tar.gz`
-- Standard Debian Packages (`.deb`):
-  - `dist/desktop/rpdevs-lightsout_1.0.0_amd64.deb`
-  - `dist/desktop/rpdevs-snake_1.0.0_amd64.deb`
-  - `dist/desktop/rpdevs-simon_1.0.0_amd64.deb`
-  - `dist/desktop/rpdevs-minesweeper_1.0.0_amd64.deb`
-  - `dist/desktop/rpdevs-2048_1.0.0_amd64.deb`
-  - `dist/desktop/rpdevs-dotsandboxes_1.0.0_amd64.deb`
-  - `dist/desktop/rpdevs-arcade_1.0.0_amd64.deb`
-
-
-
-Run `/home/llmuser/projects/.scripts/shell/package_games.sh all` at any time to re-bundle all packages.
+Run `/home/llmuser/projects/.scripts/shell/package_games.sh all` to build all web packages.
+Run `/home/llmuser/projects/.scripts/shell/build_android_apk.sh all` to build all Android APKs.
+Run `/home/llmuser/projects/.scripts/shell/build_desktop_app.sh all` to build all Linux desktop apps.
