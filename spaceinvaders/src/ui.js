@@ -6,6 +6,15 @@
 
 import { SpaceInvadersEngine, WIDTH, HEIGHT } from './engine.js';
 import { SpaceInvadersAudio } from './audio.js';
+import { arcadeVault } from '../arcade_vault.js';
+import { retroCRT } from '../crt.js';
+import { arcadeGamepad } from '../gamepad.js';
+
+if (typeof window !== 'undefined') {
+  if (!window.arcadeVault) window.arcadeVault = arcadeVault;
+  if (!window.retroCRT) window.retroCRT = retroCRT;
+  if (!window.arcadeGamepad) window.arcadeGamepad = arcadeGamepad;
+}
 
 // Bitmaps for procedural sprite drawing
 const SPRITES = {
@@ -261,6 +270,27 @@ class SpaceInvadersUI {
       this.crtBtn.addEventListener('click', () => {
         window.retroCRT.toggle();
       });
+    }
+
+    const vaultBtn = document.getElementById('btn-vault');
+    if (vaultBtn) {
+      vaultBtn.addEventListener('click', () => {
+        if (window.arcadeVault) {
+          window.arcadeVault.showModal();
+        }
+      });
+    }
+
+    const portalLink = document.getElementById('btn-portal');
+    if (portalLink) {
+      if (window.location.protocol === 'file:') {
+        portalLink.addEventListener('click', (e) => {
+          e.preventDefault();
+          if (window.arcadeVault) {
+            window.arcadeVault.showModal();
+          }
+        });
+      }
     }
   }
 

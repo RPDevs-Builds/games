@@ -6,6 +6,15 @@
 
 import { FroggerEngine, WIDTH, HEIGHT, GRID_SIZE, COLS, ROWS } from './engine.js';
 import { FroggerAudio } from './audio.js';
+import { arcadeVault } from '../arcade_vault.js';
+import { retroCRT } from '../crt.js';
+import { arcadeGamepad } from '../gamepad.js';
+
+if (typeof window !== 'undefined') {
+  if (!window.arcadeVault) window.arcadeVault = arcadeVault;
+  if (!window.retroCRT) window.retroCRT = retroCRT;
+  if (!window.arcadeGamepad) window.arcadeGamepad = arcadeGamepad;
+}
 
 class FroggerUI {
   constructor() {
@@ -24,6 +33,7 @@ class FroggerUI {
     this.soundBtn = document.getElementById('btn-sound');
     this.crtBtn = document.getElementById('btn-crt');
     this.restartBtn = document.getElementById('btn-restart');
+    this.vaultBtn = document.getElementById('btn-vault');
 
     this.engine = new FroggerEngine({
       onScore: (s) => this.updateScore(s),
@@ -96,7 +106,7 @@ class FroggerUI {
       const btn = document.getElementById(id);
       if (!btn) return;
       const trigger = (e) => {
-        e.preventDefault();
+        if (e.cancelable) e.preventDefault();
         this.audio.ensureContext();
         this.engine.hop(direction);
       };
@@ -132,6 +142,26 @@ class FroggerUI {
       this.crtBtn.addEventListener('click', () => {
         window.retroCRT.toggle();
       });
+    }
+
+    if (this.vaultBtn) {
+      this.vaultBtn.addEventListener('click', () => {
+        if (window.arcadeVault) {
+          window.arcadeVault.showModal();
+        }
+      });
+    }
+
+    const portalLink = document.getElementById('btn-portal');
+    if (portalLink) {
+      if (window.location.protocol === 'file:') {
+        portalLink.addEventListener('click', (e) => {
+          e.preventDefault();
+          if (window.arcadeVault) {
+            window.arcadeVault.showModal();
+          }
+        });
+      }
     }
   }
 

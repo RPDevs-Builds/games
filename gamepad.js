@@ -11,8 +11,35 @@ export class ArcadeGamepad {
     this.rafId = null;
     this.stickThreshold = 0.5;
     this.stickFired = { up: false, down: false, left: false, right: false };
+    this.buttonDownCallbacks = [];
+    this.buttonUpCallbacks = [];
+    this.axisCallbacks = [];
 
     this.bindEvents();
+  }
+
+  onButtonDown(cb) {
+    if (typeof cb === 'function') this.buttonDownCallbacks.push(cb);
+  }
+
+  onButtonUp(cb) {
+    if (typeof cb === 'function') this.buttonUpCallbacks.push(cb);
+  }
+
+  onAxis(cb) {
+    if (typeof cb === 'function') this.axisCallbacks.push(cb);
+  }
+
+  triggerButtonDown(btn) {
+    for (const cb of this.buttonDownCallbacks) {
+      try { cb(btn); } catch (e) { console.warn('Gamepad callback error:', e); }
+    }
+  }
+
+  triggerButtonUp(btn) {
+    for (const cb of this.buttonUpCallbacks) {
+      try { cb(btn); } catch (e) { console.warn('Gamepad callback error:', e); }
+    }
   }
 
   init() {
@@ -108,6 +135,38 @@ export class ArcadeGamepad {
     if (justPressed(2)) this.dispatchKey('u');      // X -> Undo
     if (justPressed(3)) this.dispatchKey('r');      // Y -> Restart
     if (justPressed(9)) this.dispatchKey(' ');      // Start -> Pause
+
+    // Custom Named Callbacks
+    const BTN_NAMES = {
+      0: 'a',
+      1: 'b',
+      2: 'x',
+      3: 'y',
+      8: 'select',
+      9: 'start',
+      12: 'dpad_up',
+      13: 'dpad_down',
+      14: 'dpad_left',
+      15: 'dpad_right'
+    };
+
+    for (const [idx, name] of Object.entries(BTN_NAMES)) {
+      const i = parseInt(idx, 10);
+      if (isPressed(i) && !prev[i]) {
+        this.triggerButtonDown(name);
+      } else if (!isPressed(i) && prev[i]) {
+        this.triggerButtonUp(name);
+      }
+    }
+
+    if (this.axisCallbacks.length > 0) {
+      for (const cb of this.axisCallbacks) {
+        try {
+          cb('x', stickX);
+          cb('y', stickY);
+        } catch (e) {}
+      }
+    }
 
     // Record button states
     for (let b = 0; b < gp.buttons.length; b++) {

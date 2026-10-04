@@ -6,6 +6,15 @@
 
 import { AsteroidsEngine, WIDTH, HEIGHT } from './engine.js';
 import { AsteroidsAudio } from './audio.js';
+import { arcadeVault } from '../arcade_vault.js';
+import { retroCRT } from '../crt.js';
+import { arcadeGamepad } from '../gamepad.js';
+
+if (typeof window !== 'undefined') {
+  if (!window.arcadeVault) window.arcadeVault = arcadeVault;
+  if (!window.retroCRT) window.retroCRT = retroCRT;
+  if (!window.arcadeGamepad) window.arcadeGamepad = arcadeGamepad;
+}
 
 export class AsteroidsUI {
   constructor() {
@@ -117,6 +126,27 @@ export class AsteroidsUI {
     this.btnRestart?.addEventListener('click', () => this.restart());
     this.btnSound?.addEventListener('click', () => this.toggleSound());
     this.btnCRT?.addEventListener('click', () => this.toggleCRT());
+
+    const vaultBtn = document.getElementById('btn-vault');
+    if (vaultBtn) {
+      vaultBtn.addEventListener('click', () => {
+        if (window.arcadeVault) {
+          window.arcadeVault.showModal();
+        }
+      });
+    }
+
+    const portalLink = document.getElementById('btn-portal');
+    if (portalLink) {
+      if (window.location.protocol === 'file:') {
+        portalLink.addEventListener('click', (e) => {
+          e.preventDefault();
+          if (window.arcadeVault) {
+            window.arcadeVault.showModal();
+          }
+        });
+      }
+    }
   }
 
   bindTouch() {
