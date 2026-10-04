@@ -137,6 +137,6 @@ This catalog tracks all games in the RPDevs Games base, their release status, pl
 ---
 
 ## 📦 Automated Release Packages (`dist/`)
-Run `/home/llmuser/projects/.scripts/shell/package_games.sh all` to build all web packages.
-Run `/home/llmuser/projects/.scripts/shell/build_android_apk.sh all` to build all Android APKs.
-Run `/home/llmuser/projects/.scripts/shell/build_desktop_app.sh all` to build all Linux desktop apps.
+Run `./scripts/package_games.sh all` to build all web packages.
+Run `./scripts/build_android_apk.sh all` to build all Android APKs.
+Run `./scripts/build_desktop_app.sh all` to build all Linux desktop apps.

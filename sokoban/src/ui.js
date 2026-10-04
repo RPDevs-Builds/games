@@ -36,7 +36,12 @@ export class SokobanUI {
 
   initLevelSelect() {
     this.levelSelect.innerHTML = '';
-    const solved = JSON.parse(localStorage.getItem('sokoban_solved') || '{}');
+    let solved = {};
+    try {
+      solved = JSON.parse(localStorage.getItem('sokoban_solved') || '{}');
+    } catch {
+      solved = {};
+    }
 
     SOKOBAN_LEVELS.forEach((_, idx) => {
       const opt = document.createElement('option');
@@ -203,9 +208,12 @@ export class SokobanUI {
     this.audio.playWin();
     this.setStatus(`🎉 Level ${this.currentLevelIdx + 1} Solved!`, 'win');
 
-    const solved = JSON.parse(localStorage.getItem('sokoban_solved') || '{}');
-    solved[this.currentLevelIdx] = true;
-    localStorage.setItem('sokoban_solved', JSON.stringify(solved));
+    let solved = {};
+    try {
+      solved = JSON.parse(localStorage.getItem('sokoban_solved') || '{}');
+      solved[this.currentLevelIdx] = true;
+      localStorage.setItem('sokoban_solved', JSON.stringify(solved));
+    } catch {}
     this.initLevelSelect();
 
     arcadeVault.recordWin('sokoban', { level: this.currentLevelIdx + 1 });

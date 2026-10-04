@@ -3,7 +3,7 @@
 # Script: package_games.sh
 # Purpose: Validates, bundles, and creates standalone web zip packages for itch.io,
 #          PWA hosting, or static web distribution across the games suite.
-# Usage: /home/llmuser/projects/.scripts/shell/package_games.sh [game_name|all]
+# Usage: ./scripts/package_games.sh [game_name|all]
 # ==============================================================================
 
 set -euo pipefail

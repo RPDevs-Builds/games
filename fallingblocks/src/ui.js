@@ -107,6 +107,24 @@ export class FallingBlocksUI {
       });
     }
 
+    // Arcade Navigation Link
+    const backBtn = document.querySelector('.btn-back');
+    if (backBtn) {
+      backBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        const vault = window.arcadeVault || window.ArcadeVault;
+        if (vault && typeof vault.goToArcade === 'function') {
+          vault.goToArcade('fallingblocks');
+        } else if (window.location.pathname.includes('/fallingblocks/') || window.location.protocol !== 'file:') {
+          window.location.href = '../index.html';
+        } else if (window.AndroidArcade && typeof window.AndroidArcade.launchArcade === 'function') {
+          window.AndroidArcade.launchArcade();
+        } else {
+          window.location.href = "intent:#Intent;package=com.rpdevs.games.arcade;action=android.intent.action.MAIN;category=android.intent.category.LAUNCHER;end";
+        }
+      });
+    }
+
     // Touch swipe gestures on main canvas
     let touchStartX = 0;
     let touchStartY = 0;

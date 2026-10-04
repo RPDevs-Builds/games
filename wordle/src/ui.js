@@ -164,6 +164,24 @@ class WordleUI {
     this.shareBtn.addEventListener('click', () => {
       this.shareScorecard();
     });
+
+    // Arcade Navigation Link
+    const navBtn = document.querySelector('.cabinet-header .nav-btn');
+    if (navBtn) {
+      navBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        const vault = window.arcadeVault || window.ArcadeVault;
+        if (vault && typeof vault.goToArcade === 'function') {
+          vault.goToArcade('wordle');
+        } else if (window.location.pathname.includes('/wordle/') || window.location.protocol !== 'file:') {
+          window.location.href = '../index.html';
+        } else if (window.AndroidArcade && typeof window.AndroidArcade.launchArcade === 'function') {
+          window.AndroidArcade.launchArcade();
+        } else {
+          window.location.href = "intent:#Intent;package=com.rpdevs.games.arcade;action=android.intent.action.MAIN;category=android.intent.category.LAUNCHER;end";
+        }
+      });
+    }
   }
 
   updateSoundIcon() {

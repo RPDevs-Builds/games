@@ -20,9 +20,10 @@ All games in this repository follow strict cross-platform design tenets:
    - **Native Linux Desktop**: Standalone WebKitGTK desktop packages (`.tar.gz` and `.deb`) in `dist/desktop/`.
    - **Terminal / CLI**: Direct console-playable versions for SSH sessions and headless servers.
 3. **Packaging & Distribution Scripts**:
-   - Web / itch.io: `/home/llmuser/projects/.scripts/shell/package_games.sh all`
-   - Android APKs: `/home/llmuser/projects/.scripts/shell/build_android_apk.sh all`
-   - Linux Desktop: `/home/llmuser/projects/.scripts/shell/build_desktop_app.sh all`
+   - Web / itch.io: `./scripts/package_games.sh all`
+   - Android APKs: `./scripts/build_android_apk.sh all`
+   - Linux Desktop: `./scripts/build_desktop_app.sh all`
+   - App Icon Generation: `python3 scripts/generate_game_icons.py`
 4. **CI/CD Deployment**:
    - Automatic GitHub Pages publishing via `.github/workflows/deploy.yml`.
 
@@ -87,10 +88,10 @@ for d in */test; do python3 -m unittest discover -s "$d"; done
 Direct SDK compilation with zero Gradle or npm overhead:
 ```bash
 # Build a single game APK
-/home/llmuser/projects/.scripts/shell/build_android_apk.sh dotsandboxes
+./scripts/build_android_apk.sh dotsandboxes
 
 # Build the complete suite + master arcade hub APKs
-/home/llmuser/projects/.scripts/shell/build_android_apk.sh all
+./scripts/build_android_apk.sh all
 ```
 Output files are written to `dist/apk/` (e.g. `dist/apk/portal.apk`).
 
@@ -98,10 +99,10 @@ Output files are written to `dist/apk/` (e.g. `dist/apk/portal.apk`).
 Direct WebKitGTK desktop bundles (portable tarballs and standard `.deb` packages):
 ```bash
 # Build a single game desktop bundle
-/home/llmuser/projects/.scripts/shell/build_desktop_app.sh lightsout
+./scripts/build_desktop_app.sh lightsout
 
 # Build all games + master arcade hub desktop packages
-/home/llmuser/projects/.scripts/shell/build_desktop_app.sh all
+./scripts/build_desktop_app.sh all
 ```
 Output files are written to `dist/desktop/` (e.g. `rpdevs-lightsout_1.0.0_amd64.deb`).
 

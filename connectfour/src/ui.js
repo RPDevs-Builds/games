@@ -19,8 +19,12 @@ export class ConnectFourUI {
     this.selectedCol = 3; // for keyboard / gamepad
     this.isAIThinking = false;
 
-    // Load stats
-    this.stats = JSON.parse(localStorage.getItem('c4_stats') || '{"p1":0,"p2":0,"draws":0}');
+    // Load stats safely
+    try {
+      this.stats = JSON.parse(localStorage.getItem('c4_stats') || '{"p1":0,"p2":0,"draws":0}');
+    } catch {
+      this.stats = { p1: 0, p2: 0, draws: 0 };
+    }
 
     this.boardEl = document.getElementById('c4-board');
     this.colDropPreviewEl = document.getElementById('col-drop-preview');
@@ -252,7 +256,9 @@ export class ConnectFourUI {
       this.overlayMsgEl.textContent = 'STALEMATE DRAW!';
     }
 
-    localStorage.setItem('c4_stats', JSON.stringify(this.stats));
+    try {
+      localStorage.setItem('c4_stats', JSON.stringify(this.stats));
+    } catch {}
     this.updateStatsDisplay();
     this.render();
 

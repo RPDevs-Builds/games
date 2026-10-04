@@ -7,10 +7,10 @@ const ASSETS = [
   './src/engine.js',
   './src/audio.js',
   './src/ui.js',
-  '../crt.css',
-  '../crt.js',
-  '../arcade_vault.js',
-  '../gamepad.js'
+  './crt.css',
+  './crt.js',
+  './arcade_vault.js',
+  './gamepad.js'
 ];
 
 self.addEventListener('install', (e) => {
