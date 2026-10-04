@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <title>Space Invaders - 1978 Taito Arcade Classic</title>
+  <meta name="description" content="Authentic 1978 Space Invaders arcade classic with marching alien fleet, accelerating 4-tone heartbeat, destructible bunkers, mystery saucer, and Web Audio.">
+  <link rel="manifest" href="manifest.json">
+  <link rel="stylesheet" href="crt.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="arcade-cabinet">
+    <!-- Header -->
+    <header class="cabinet-header">
+      <div class="title-group">
+        <h1 class="cabinet-title">👾 SPACE INVADERS</h1>
+        <span class="badge-year">1978</span>
+      </div>
+      <div class="header-actions">
+        <button id="btn-sound" class="icon-btn">🔊 Sound</button>
+        <button id="btn-crt" class="icon-btn">📺 CRT</button>
+      </div>
+    </header>
+
+    <!-- Scoreboard Dashboard -->
+    <section class="metrics-panel">
+      <div class="metric-box">
+        <span class="metric-label">SCORE</span>
+        <span id="stat-score" class="metric-val">0</span>
+      </div>
+      <div class="metric-box">
+        <span class="metric-label">HIGH</span>
+        <span id="stat-high-score" class="metric-val">0</span>
+      </div>
+      <div class="metric-box">
+        <span class="metric-label">WAVE</span>
+        <span id="stat-wave" class="metric-val">1</span>
+      </div>
+      <div class="metric-box">
+        <span class="metric-label">LIVES</span>
+        <div id="lives-container" class="lives-box"></div>
+      </div>
+    </section>
+
+    <!-- Canvas Arcade Arena -->
+    <main class="arena-well">
+      <div class="canvas-wrapper">
+        <canvas id="invaders-canvas"></canvas>
+        <div id="game-overlay" class="game-overlay" style="display: none;">
+          <div id="overlay-title" class="overlay-title">GAME OVER</div>
+          <div id="overlay-score" class="overlay-sub">FINAL SCORE: 0</div>
+          <div class="overlay-actions">
+            <button id="btn-play-again" onclick="document.getElementById('btn-restart').click()" class="btn-primary">Play Again (Space) ➔</button>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- Control Actions Bar -->
+    <div class="actions-row">
+      <button id="btn-restart" class="action-btn">🔄 Reset (R)</button>
+      <a href="../index.html" class="action-btn">🏛️ Arcade Vault</a>
+    </div>
+
+    <!-- Mobile Virtual Touch Controls -->
+    <div class="touch-bar">
+      <button id="btn-touch-left" class="pad-btn" aria-label="Move Left">◀ LEFT</button>
+      <button id="btn-touch-right" class="pad-btn" aria-label="Move Right">RIGHT ▶</button>
+      <button id="btn-touch-fire" class="pad-btn btn-fire" aria-label="Fire Laser">⚡ FIRE</button>
+    </div>
+  </div>
+
+  <!-- Shared Arcade Infrastructure -->
+  <script src="arcade_vault.js"></script>
+  <script src="crt.js"></script>
+  <script src="gamepad.js"></script>
+  <script type="module" src="src/ui.js"></script>
+  <script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('sw.js').catch(() => {});
+    }
+  </script>
+</body>
+</html>

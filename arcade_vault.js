@@ -5,7 +5,7 @@
 
 export const ACHIEVEMENTS = [
   { id: 'arcade_initiate', title: 'Arcade Initiate', icon: '🎟️', desc: 'Play your first game in the RPDevs Retro Arcade.' },
-  { id: 'grandmaster', title: 'Grandmaster of the Arcade', icon: '👑', desc: 'Play at least once across all 14 classic arcade games.' },
+  { id: 'grandmaster', title: 'Grandmaster of the Arcade', icon: '👑', desc: 'Play at least once across all 15 classic arcade games.' },
   { id: 'lightsout_apprentice', title: 'Illuminator', icon: '💡', desc: 'Solve your first Lights Out puzzle.' },
   { id: 'lightsout_expert', title: 'Master of GF(2)', icon: '⚡', desc: 'Solve a 5×5 or larger Lights Out puzzle.' },
   { id: 'snake_charmer', title: 'Snake Charmer', icon: '🐍', desc: 'Reach a score of at least 10 in Retro Snake.' },
@@ -37,7 +37,12 @@ export const ACHIEVEMENTS = [
   { id: 'wordle_streak_5', title: 'Lexical Streak', icon: '🔥', desc: 'Achieve a 5-game winning streak in Wordle.' },
   { id: 'wordle_genius', title: 'Genius Guesser', icon: '🧠', desc: 'Guess the secret word in 2 tries or fewer.' },
   { id: 'wordle_hard_mode', title: 'Hardcore Linguist', icon: '⚡', desc: 'Win a Wordle game in Hard Mode.' },
-  { id: 'wordle_clutch', title: 'Phew!', icon: '🎯', desc: 'Guess the secret word on the 6th and final attempt.' }
+  { id: 'wordle_clutch', title: 'Phew!', icon: '🎯', desc: 'Guess the secret word on the 6th and final attempt.' },
+  { id: 'invaders_first_kill', title: 'Alien Hunter', icon: '👾', desc: 'Destroy your first invader in Space Invaders.' },
+  { id: 'invaders_ufo_hunter', title: 'Mystery Raider', icon: '🛸', desc: 'Shoot down a Mystery Flying Saucer in Space Invaders.' },
+  { id: 'invaders_wave_clear', title: 'Fleet Annihilator', icon: '🏆', desc: 'Completely clear a wave of 55 aliens in Space Invaders.' },
+  { id: 'invaders_score_3000', title: 'Earth Defender', icon: '⭐', desc: 'Score 3,000+ points in Space Invaders.' },
+  { id: 'invaders_bunker_master', title: 'Iron Fortress', icon: '🛡️', desc: 'Clear a wave with all 4 bunkers surviving in Space Invaders.' }
 ];
 
 export class ArcadeVault {
@@ -99,7 +104,8 @@ export class ArcadeVault {
         fallingblocks: 0,
         mazechaser: 0,
         asteroids: 0,
-        wordle: 0
+        wordle: 0,
+        spaceinvaders: 0
       },
       gamesWon: {
         lightsout: 0,
@@ -115,7 +121,8 @@ export class ArcadeVault {
         fallingblocks: 0,
         mazechaser: 0,
         asteroids: 0,
-        wordle: 0
+        wordle: 0,
+        spaceinvaders: 0
       },
       stats: {},
       highScores: {},
@@ -214,6 +221,8 @@ export class ArcadeVault {
       if (score >= 50) this.unlock('brick_breaker');
     } else if (gameId === 'asteroids') {
       if (score >= 5000) this.unlock('asteroids_score_5000');
+    } else if (gameId === 'spaceinvaders') {
+      if (score >= 3000) this.unlock('invaders_score_3000');
     }
 
     this.saveState();
@@ -253,7 +262,7 @@ export class ArcadeVault {
   }
 
   checkArcadeWideAchievements() {
-    const required = ['lightsout', 'snake', 'simon', 'minesweeper', 'game2048', 'dotsandboxes', 'sokoban', 'connectfour', 'breakout', 'pong', 'fallingblocks', 'mazechaser', 'asteroids', 'wordle'];
+    const required = ['lightsout', 'snake', 'simon', 'minesweeper', 'game2048', 'dotsandboxes', 'sokoban', 'connectfour', 'breakout', 'pong', 'fallingblocks', 'mazechaser', 'asteroids', 'wordle', 'spaceinvaders'];
     const allPlayed = required.every(id => (this.state.gamesPlayed[id] || 0) > 0);
     if (allPlayed) {
       this.unlock('grandmaster');

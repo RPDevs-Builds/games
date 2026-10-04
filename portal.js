@@ -159,6 +159,17 @@ const GAMES_DATA = [
     tags: ['Word Deduction', 'Daily Seed', '3D Flip Tiles', 'Hard Mode', 'PWA Offline', 'Terminal CLI'],
     url: './wordle/index.html',
     rulesUrl: './wordle/RULES.md'
+  },
+  {
+    id: 'spaceinvaders',
+    title: 'Space Invaders',
+    year: '1978',
+    icon: '👾',
+    category: 'retro',
+    desc: 'The legendary 1978 Taito arcade grandfather. Features 5x11 marching alien fleet, accelerating 4-tone heartbeat, destructible pixel-erosion bunkers, mystery flying saucer, and single-shot discipline.',
+    tags: ['Taito 1978', 'Marching Fleet', 'Destructible Bunkers', 'UFO Saucer', 'PWA Offline', 'Terminal CLI'],
+    url: './spaceinvaders/index.html',
+    rulesUrl: './spaceinvaders/RULES.md'
   }
 ];
 
