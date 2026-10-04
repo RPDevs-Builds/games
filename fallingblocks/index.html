@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Falling Blocks (1984) - RPDevs Retro Arcade</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="crt.css">
+  <link rel="manifest" href="manifest.json">
+</head>
+<body class="crt-enabled">
+  <div class="game-wrapper">
+    <!-- Header -->
+    <header class="game-header">
+      <div class="header-left">
+        <a href="../index.html" class="btn-back" title="Back to Arcade">◀ Arcade</a>
+        <h1 class="game-title">🧱 BLOCKS <span class="year-badge">1984</span></h1>
+      </div>
+      <div class="header-actions">
+        <button id="btn-sound" class="btn-tool" aria-label="Toggle Sound">🔊 Sound</button>
+        <button id="btn-crt" class="btn-tool" aria-label="Toggle CRT Filter">📺 CRT</button>
+      </div>
+    </header>
+
+    <!-- Main Game Area -->
+    <main class="playfield-container">
+      <!-- Left Column: Hold & Stats -->
+      <aside class="side-panel left-panel">
+        <div class="panel-box hold-box">
+          <span class="panel-label">HOLD (C)</span>
+          <canvas id="hold-canvas"></canvas>
+          <button id="btn-hold" class="btn-touch-action">HOLD</button>
+        </div>
+
+        <div class="panel-box stats-box">
+          <div class="stat-item">
+            <span class="stat-title">SCORE</span>
+            <span id="stat-score" class="stat-val">0</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-title">LEVEL</span>
+            <span id="stat-level" class="stat-val">1</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-title">LINES</span>
+            <span id="stat-lines" class="stat-val">0</span>
+          </div>
+        </div>
+      </aside>
+
+      <!-- Center: Main 10x20 Matrix Canvas -->
+      <div class="canvas-wrapper">
+        <canvas id="game-canvas"></canvas>
+
+        <!-- Pause Overlay -->
+        <div id="pause-overlay" class="overlay" style="display: none;">
+          <div class="overlay-card">
+            <h2>⏸ PAUSED</h2>
+            <p>Game is paused</p>
+            <button id="btn-resume" class="btn-modal-action">Resume</button>
+          </div>
+        </div>
+
+        <!-- Game Over Overlay -->
+        <div id="game-over-overlay" class="overlay" style="display: none;">
+          <div class="overlay-card">
+            <h2>💥 GAME OVER</h2>
+            <p class="final-score-text">Final Score: <span id="final-score">0</span></p>
+            <button id="btn-restart" class="btn-modal-action">Play Again</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right Column: Next Piece Queue -->
+      <aside class="side-panel right-panel">
+        <div class="panel-box next-box">
+          <span class="panel-label">NEXT</span>
+          <canvas id="next-canvas"></canvas>
+        </div>
+
+        <div class="panel-box quick-actions">
+          <button id="btn-pause" class="btn-tool-sm">⏸ Pause</button>
+          <button id="btn-reset" class="btn-tool-sm">🔄 Reset</button>
+        </div>
+      </aside>
+    </main>
+
+    <!-- On-screen Touch Controls for Mobile -->
+    <section class="touch-controls">
+      <div class="touch-row dpad-row">
+        <button id="btn-rot-ccw" class="btn-ctrl rotate-btn" aria-label="Rotate CCW">⟲ CCW</button>
+        <button id="btn-left" class="btn-ctrl nav-btn" aria-label="Move Left">◀</button>
+        <button id="btn-down" class="btn-ctrl nav-btn" aria-label="Soft Drop">▼</button>
+        <button id="btn-right" class="btn-ctrl nav-btn" aria-label="Move Right">▶</button>
+        <button id="btn-rot-cw" class="btn-ctrl rotate-btn" aria-label="Rotate CW">⟳ CW</button>
+      </div>
+      <div class="touch-row drop-row">
+        <button id="btn-drop" class="btn-ctrl hard-drop-btn" aria-label="Hard Drop">⤓ HARD DROP (SPACE) ⤓</button>
+      </div>
+    </section>
+  </div>
+
+  <!-- Shared Arcade Infrastructure -->
+  <script src="arcade_vault.js"></script>
+  <script src="crt.js"></script>
+  <script src="gamepad.js"></script>
+  <script type="module" src="src/ui.js"></script>
+  <script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('sw.js').catch(err => console.log('SW registration skipped:', err));
+    }
+  </script>
+</body>
+</html>

@@ -21,7 +21,10 @@ export const ACHIEVEMENTS = [
   { id: 'brick_breaker', title: 'Demolition Specialist', icon: '🧱', desc: 'Score 50+ points in Breakout.' },
   { id: 'breakout_champion', title: 'Breakout Champion', icon: '🏆', desc: 'Clear all bricks and achieve victory in Breakout.' },
   { id: 'pong_paddle', title: 'Table Tennis Prodigy', icon: '🏓', desc: 'Win a match of Pong against the CPU.' },
-  { id: 'pong_shutout', title: 'Clean Sweep', icon: '⭐', desc: 'Achieve a shutout victory in Pong without conceding a point.' }
+  { id: 'pong_shutout', title: 'Clean Sweep', icon: '⭐', desc: 'Achieve a shutout victory in Pong without conceding a point.' },
+  { id: 'blocks_tetris', title: 'Four-Line Triumph', icon: '🧱', desc: 'Clear 4 lines at once with a single piece in Falling Blocks.' },
+  { id: 'blocks_century', title: 'Centurion Stacker', icon: '💯', desc: 'Clear 100 total lines in Falling Blocks.' },
+  { id: 'blocks_speed', title: 'Terminal Velocity', icon: '⚡', desc: 'Reach Level 10 in Falling Blocks.' }
 ];
 
 export class ArcadeVault {
@@ -79,7 +82,8 @@ export class ArcadeVault {
         sokoban: 0,
         connectfour: 0,
         breakout: 0,
-        pong: 0
+        pong: 0,
+        fallingblocks: 0
       },
       gamesWon: {
         lightsout: 0,
@@ -91,8 +95,10 @@ export class ArcadeVault {
         sokoban: 0,
         connectfour: 0,
         breakout: 0,
-        pong: 0
+        pong: 0,
+        fallingblocks: 0
       },
+      stats: {},
       highScores: {},
       unlockedAchievements: {}
     };
@@ -202,8 +208,23 @@ export class ArcadeVault {
     this.showAchievementToast(ach);
   }
 
+  unlockBadge(achId) {
+    this.unlock(achId);
+  }
+
+  getStat(key) {
+    if (!this.state.stats) this.state.stats = {};
+    return this.state.stats[key] !== undefined ? this.state.stats[key] : null;
+  }
+
+  setStat(key, val) {
+    if (!this.state.stats) this.state.stats = {};
+    this.state.stats[key] = val;
+    this.saveState();
+  }
+
   checkArcadeWideAchievements() {
-    const required = ['lightsout', 'snake', 'simon', 'minesweeper', 'game2048', 'dotsandboxes', 'sokoban', 'connectfour', 'breakout', 'pong'];
+    const required = ['lightsout', 'snake', 'simon', 'minesweeper', 'game2048', 'dotsandboxes', 'sokoban', 'connectfour', 'breakout', 'pong', 'fallingblocks'];
     const allPlayed = required.every(id => (this.state.gamesPlayed[id] || 0) > 0);
     if (allPlayed) {
       this.unlock('grandmaster');

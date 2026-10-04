@@ -1,0 +1,15 @@
+{
+  "name": "Falling Blocks (1984)",
+  "short_name": "FallingBlocks",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#080a10",
+  "theme_color": "#00f0f0",
+  "icons": [
+    {
+      "src": "../portal_icon.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    }
+  ]
+}

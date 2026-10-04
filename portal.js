@@ -115,6 +115,17 @@ const GAMES_DATA = [
     tags: ['Atari 1972', 'Paddle Physics', 'Local 2P', 'PWA Offline', 'Terminal CLI'],
     url: './pong/index.html',
     rulesUrl: './pong/RULES.md'
+  },
+  {
+    id: 'fallingblocks',
+    title: 'Falling Blocks',
+    year: '1984',
+    icon: '🧱',
+    category: 'retro',
+    desc: 'The iconic 1984 tetromino stacker. Features 7-bag RNG, SRS wall kicks, ghost piece projection, hold queue, next piece preview, and 8-bit chiptune audio.',
+    tags: ['Classic 1984', '7-Bag RNG', 'SRS Kicks', '8-Bit Audio', 'PWA Offline', 'Terminal CLI'],
+    url: './fallingblocks/index.html',
+    rulesUrl: './fallingblocks/RULES.md'
   }
 ];
 
