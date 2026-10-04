@@ -565,7 +565,59 @@ body {
   .key-btn.key-wide { font-size: 0.75rem; }
 }
 
+@media (max-width: 480px) {
+  .cabinet-header {
+    padding: 0 6px;
+    height: 48px;
+  }
+  .header-left, .header-right {
+    gap: 4px;
+  }
+  .cabinet-title {
+    font-size: 1.1rem;
+    letter-spacing: 1px;
+  }
+  .badge-year {
+    display: none;
+  }
+  .nav-btn, .icon-btn {
+    padding: 4px 6px;
+    font-size: 0.85rem;
+  }
+  .mode-select {
+    font-size: 0.7rem;
+    padding: 3px 4px;
+    max-width: 82px;
+  }
+  .toggle-wrap {
+    font-size: 0.68rem;
+  }
+}
+
 @media (max-width: 380px) {
+  .cabinet-header {
+    padding: 0 4px;
+    height: 44px;
+  }
+  .header-left, .header-right {
+    gap: 2px;
+  }
+  .cabinet-title {
+    font-size: 0.95rem;
+    letter-spacing: 0.5px;
+  }
+  .nav-btn, .icon-btn {
+    padding: 3px 5px;
+    font-size: 0.8rem;
+  }
+  .mode-select {
+    font-size: 0.65rem;
+    padding: 2px 3px;
+    max-width: 72px;
+  }
+  .toggle-wrap .toggle-label {
+    display: none;
+  }
   .grid-container { max-width: 310px; gap: 4px; }
   .grid-row { gap: 4px; }
   .tile { font-size: 1.5rem; }

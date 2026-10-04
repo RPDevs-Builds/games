@@ -130,6 +130,8 @@ export class SokobanUI {
         const muted = this.audio.toggleMute();
         e.target.textContent = muted ? '🔇 Sound' : '🔊 Sound';
       };
+    }
+
     const btnCrt = document.getElementById('btn-crt');
     if (btnCrt) btnCrt.onclick = () => retroCRT.toggle();
 
