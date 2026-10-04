@@ -35,7 +35,6 @@ export class ConnectFourUI {
 
     this.initControls();
     this.bindEvents();
-    this.bindGamepad();
     this.updateStatsDisplay();
     this.render();
 
@@ -113,14 +112,6 @@ export class ConnectFourUI {
       this.overlayEl.style.display = 'none';
       this.resetGame();
     };
-  }
-
-  bindGamepad() {
-    arcadeGamepad.onButtonDown('left', () => this.shiftSelectedCol(-1));
-    arcadeGamepad.onButtonDown('right', () => this.shiftSelectedCol(1));
-    arcadeGamepad.onButtonDown('a', () => this.handleColumnClick(this.selectedCol));
-    arcadeGamepad.onButtonDown('y', () => this.handleUndo());
-    arcadeGamepad.onButtonDown('select', () => this.resetGame());
   }
 
   shiftSelectedCol(delta) {
